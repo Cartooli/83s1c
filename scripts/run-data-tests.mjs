@@ -8,6 +8,8 @@ import { parseArgs } from 'node:util';
 import { isMainModule } from './lib/main-module.mjs';
 
 const timingPath = new URL('./shared/data-test-durations.json', import.meta.url);
+// 83s1c fork: tests that need upstream infra this fork removed. Each entry names its reason.
+const forkSkipped = JSON.parse(readFileSync(new URL('./fork/skipped-tests.json', import.meta.url), 'utf8'));
 
 // CI builds dist/ and public/pro/ once, in the unit-built-output job, instead of
 // in every unit shard. A suite goes to that job when its source names the built
@@ -79,7 +81,7 @@ export async function main(args) {
       .map((file) => file.split(sep).join('/'));
     if (!matches.length) throw new Error(`No test files match ${pattern}`);
     return matches;
-  }))], values['built-output']);
+  }))].filter((file) => !Object.hasOwn(forkSkipped, file)), values['built-output']);
   if (!files.length) throw new Error(`No test files remain for --built-output=${values['built-output']}`);
   const durations = JSON.parse(readFileSync(timingPath, 'utf8'));
   if (total > files.length) throw new Error('Shard count exceeds the test file count');
