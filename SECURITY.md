@@ -12,11 +12,15 @@ Only the latest version on the `main` branch is actively maintained and receives
 
 **Please do NOT report security vulnerabilities through public GitHub issues.**
 
-If you discover a security vulnerability in World Monitor, please report it responsibly:
+If you discover a security vulnerability in 83s1c, please report it responsibly:
 
-1. **GitHub Private Vulnerability Reporting**: Use [GitHub's private vulnerability reporting](https://github.com/koala73/worldmonitor/security/advisories/new) to submit your report directly through the repository.
+1. **GitHub Private Vulnerability Reporting**: Use [GitHub's private vulnerability reporting](https://github.com/Cartooli/83s1c/security/advisories/new) on this repository.
 
-2. **Direct Contact**: Alternatively, reach out to the repository owner [@koala73](https://github.com/koala73) directly through GitHub.
+2. **Direct Contact**: Alternatively, reach out to the repository owner [@Cartooli](https://github.com/Cartooli) directly through GitHub.
+
+83s1c is a fork of [World Monitor](https://github.com/koala73/worldmonitor). If the issue is in
+upstream code and also affects World Monitor, please report it upstream as well, through
+[World Monitor's private vulnerability reporting](https://github.com/koala73/worldmonitor/security/advisories/new).
 
 ### What to Include
 

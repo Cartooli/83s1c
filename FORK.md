@@ -120,6 +120,18 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
   `public/favico/finance/*` replaced with 83s1c icons generated from
   `src/config/fork/assets/*.svg`. `LICENSE` and copyright headers untouched.
 
+### 2026-10-19 — M3: security gates
+
+- `middleware.ts`: removed API surfaces listed in fork-owned `src/config/fork/removed-routes.ts`
+  answer 404 before their handlers (billing, accounts, hosted-MCP OAuth, Pro
+  notifications/briefs/widgets, upstream ops, desktop downloads).
+- `src/config/fork/vite-brand-plugin.ts`: prunes upstream SEO/docs/agent static files from
+  `dist/` (`PRUNED_PUBLIC_PATHS`) and rebrands links outside scripts on every page.
+- `SECURITY.md`: reports go to Cartooli/83s1c private vulnerability reporting; upstream issues
+  also go upstream.
+- Branch protection on `main` (PR required, required checks, no force-push or deletion).
+- Evidence: `docs/fork/SECURITY-EVIDENCE.md`; tests: `tests/fork-fail-closed.test.mts`.
+
 ## Merge procedure
 
 See `docs/fork/ENV-AND-INFRA.md` §8. In short:

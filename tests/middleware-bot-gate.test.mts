@@ -134,7 +134,8 @@ describe('middleware bot gate / keyed API clients', () => {
   });
 });
 
-describe('middleware bot gate / carousel allowlist', () => {
+// 83s1c fork: the brief carousel (/api/brief/) is a removed Pro surface; middleware answers 404 (src/config/fork/removed-routes.ts).
+describe.skip('middleware bot gate / carousel allowlist', () => {
   it('passes TelegramBot through on the carousel route (the PR #3196 fix)', () => {
     const res = call(CAROUSEL_PATH, TELEGRAM_BOT_UA);
     assert.equal(res, undefined, 'Telegram must be able to fetch carousel images');
@@ -233,7 +234,8 @@ describe('middleware bot gate / carousel allowlist', () => {
 // BOT_UA regex being narrowed, or PUBLIC_API_PATHS being reorganized) can't
 // silently drop an entry.
 
-describe('middleware PUBLIC_API_PATHS — secret-authed internal endpoints bypass UA gate', () => {
+// 83s1c fork: cases use /api/version, a removed desktop-updater route; middleware answers 404 (src/config/fork/removed-routes.ts).
+describe.skip('middleware PUBLIC_API_PATHS — secret-authed internal endpoints bypass UA gate', () => {
   // UAs that would normally 403 on any other API route.
   const EMPTY_UA = '';
   const UNDICI_UA = 'undici';          // Too short (<10 chars) — triggers short-UA 403.
@@ -323,7 +325,8 @@ describe('middleware /api/llms.txt — AI crawlers reach the agent-discovery fil
 // public/api/, so it lives in the /api/* namespace where BOT_UA 403s crawlers
 // unless this path is on PUBLIC_API_PATHS.
 
-describe('middleware /api/download.md — markdown-URL-fallback crawlers reach the twin', () => {
+// 83s1c fork: /api/download is a removed desktop route; middleware answers 404 (src/config/fork/removed-routes.ts).
+describe.skip('middleware /api/download.md — markdown-URL-fallback crawlers reach the twin', () => {
   const CRAWLER_UAS = [
     { label: 'ClaudeBot', ua: 'Mozilla/5.0 (compatible; ClaudeBot/1.0; +claudebot@anthropic.com)' },
     { label: 'python-requests', ua: 'python-requests/2.31' },
@@ -347,7 +350,8 @@ describe('middleware /api/download.md — markdown-URL-fallback crawlers reach t
 
 // The protocol is site-wide `/{page}` → `/{page}.md`, not one sampled URL.
 // GET/HEAD /api/**/*.md must pass the bot gate; POST must not inherit that bypass.
-describe('middleware /api/*.md — site-wide markdown URL-fallback twins bypass the bot gate', () => {
+// 83s1c fork: cases use /api/download.md, a removed desktop route; middleware answers 404 (src/config/fork/removed-routes.ts).
+describe.skip('middleware /api/*.md — site-wide markdown URL-fallback twins bypass the bot gate', () => {
   const CRAWLER_UAS = [
     { label: 'ClaudeBot', ua: 'Mozilla/5.0 (compatible; ClaudeBot/1.0; +claudebot@anthropic.com)' },
     { label: 'python-requests', ua: 'python-requests/2.31' },
@@ -382,7 +386,8 @@ describe('middleware /api/*.md — site-wide markdown URL-fallback twins bypass 
 // the endpoint did not exist. DELETE (cache purge) stays protected by the
 // endpoint's own auth — the middleware bypass only skips UA filtering.
 
-describe('middleware /api/product-catalog — agents reach the public pricing catalog', () => {
+// 83s1c fork: Pro pricing catalog is a removed surface; middleware answers 404 (src/config/fork/removed-routes.ts).
+describe.skip('middleware /api/product-catalog — agents reach the public pricing catalog', () => {
   const CRAWLER_UAS = [
     { label: 'ClaudeBot', ua: 'Mozilla/5.0 (compatible; ClaudeBot/1.0; +claudebot@anthropic.com)' },
     { label: 'GPTBot', ua: 'Mozilla/5.0 (compatible; GPTBot/1.1; +https://openai.com/gptbot)' },
