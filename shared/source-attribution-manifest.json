@@ -455,9 +455,6 @@
       "status": "terms-review",
       "references": [
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "scripts/seed-cyber-threats.mjs"
         }
       ]
@@ -471,9 +468,6 @@
       "attribution": "adsb.lol; preserve ODbL attribution and link to https://adsb.lol/.",
       "status": "reviewed",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "scripts/seed-military-flights.mjs"
         },
@@ -525,9 +519,6 @@
       "attribution": "Credit api.aviationstack.com and link to the original upstream API/dataset.",
       "status": "terms-review",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "scripts/seed-aviation.mjs"
         }
@@ -623,15 +614,10 @@
       "host": "api.coingecko.com",
       "provider": "api.coingecko.com",
       "kind": "structured",
-      "observed": true,
+      "observed": false,
       "license": "Provider terms for this upstream API/dataset; verify before redistribution",
       "attribution": "Credit api.coingecko.com and link to the original upstream API/dataset.",
-      "status": "terms-review",
-      "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "host": "api.coinpaprika.com",
@@ -644,9 +630,6 @@
       "references": [
         {
           "path": "scripts/_seed-utils.mjs"
-        },
-        {
-          "path": "scripts/ais-relay.cjs"
         },
         {
           "path": "server/worldmonitor/market/v1/_shared.ts"
@@ -768,9 +751,6 @@
       "status": "terms-review",
       "references": [
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "scripts/lib/company-monitoring-exa.mjs"
         },
         {
@@ -807,9 +787,6 @@
       "attribution": "Firecrawl; link to the retrieved source page.",
       "status": "terms-review",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "scripts/seed-grocery-basket.mjs"
         }
@@ -862,13 +839,7 @@
           "path": "api/_github-release.js"
         },
         {
-          "path": "scripts/dispatch-stale-railway-reconcile.mjs"
-        },
-        {
           "path": "scripts/freeze-github-stars.mjs"
-        },
-        {
-          "path": "scripts/resolve-railway-reconcile-control.mjs"
         },
         {
           "path": "scripts/seed-research.mjs"
@@ -1136,15 +1107,10 @@
       "host": "api.scrapecreators.com",
       "provider": "api.scrapecreators.com",
       "kind": "structured",
-      "observed": true,
+      "observed": false,
       "license": "Provider terms for this upstream API/dataset; verify before redistribution",
       "attribution": "Credit api.scrapecreators.com and link to the original upstream API/dataset.",
-      "status": "terms-review",
-      "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "host": "api.search.brave.com",
@@ -1155,9 +1121,6 @@
       "attribution": "Brave Search; link to the result and original publisher.",
       "status": "terms-review",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "server/worldmonitor/market/v1/stock-news-search.ts"
         }
@@ -1235,9 +1198,6 @@
       "status": "terms-review",
       "references": [
         {
-          "path": "scripts/notification-relay.cjs"
-        },
-        {
           "path": "scripts/seed-digest-notifications.mjs"
         }
       ]
@@ -1274,15 +1234,10 @@
       "host": "api.tzevaadom.co.il",
       "provider": "api.tzevaadom.co.il",
       "kind": "structured",
-      "observed": true,
+      "observed": false,
       "license": "Provider terms for this upstream API/dataset; verify before redistribution",
       "attribution": "Credit api.tzevaadom.co.il and link to the original upstream API/dataset.",
-      "status": "terms-review",
-      "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "host": "api.unhcr.org",
@@ -1307,9 +1262,6 @@
       "attribution": "Credit api.usaspending.gov and link to the original upstream API/dataset.",
       "status": "terms-review",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "scripts/seed-usa-spending.mjs"
         }
@@ -1404,9 +1356,6 @@
           "path": "scripts/_demographics-capability-source.mjs"
         },
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "scripts/seed-bis-lbs.mjs"
         },
         {
@@ -1475,13 +1424,7 @@
           "path": "scripts/_widget-data-policy.cjs"
         },
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "scripts/audit-resilience-cohorts.mjs"
-        },
-        {
-          "path": "scripts/capture-seed-recovery.mjs"
         },
         {
           "path": "scripts/check-seed-freshness.mjs"
@@ -1533,9 +1476,6 @@
         },
         {
           "path": "src/app/desktop-updater.ts"
-        },
-        {
-          "path": "src/mcp-grant-main.ts"
         },
         {
           "path": "src/services/runtime.ts"
@@ -2002,9 +1942,6 @@
       "status": "terms-review",
       "references": [
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "src/components/PizzIntIndicator.ts"
         }
       ]
@@ -2310,9 +2247,6 @@
       "status": "excluded",
       "references": [
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "server/_shared/brief-carousel-render.ts"
         }
       ]
@@ -2330,15 +2264,10 @@
       "host": "celestrak.org",
       "provider": "celestrak.org",
       "kind": "structured",
-      "observed": true,
+      "observed": false,
       "license": "Provider terms for this upstream API/dataset; verify before redistribution",
       "attribution": "Credit celestrak.org and link to the original upstream API/dataset.",
-      "status": "terms-review",
-      "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "host": "chainwire.org",
@@ -2758,15 +2687,10 @@
       "host": "corridorrisk.io",
       "provider": "corridorrisk.io",
       "kind": "structured",
-      "observed": true,
+      "observed": false,
       "license": "Provider terms for this upstream API/dataset; verify before redistribution",
       "attribution": "Credit corridorrisk.io and link to the original upstream API/dataset.",
-      "status": "terms-review",
-      "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "host": "cp24.com",
@@ -2842,9 +2766,6 @@
       "attribution": "Credit customer-api.wingbits.com and link to the original upstream API/dataset.",
       "status": "terms-review",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "scripts/seed-military-flights.mjs"
         },
@@ -3142,9 +3063,6 @@
       "status": "terms-review",
       "references": [
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "scripts/seed-aviation.mjs"
         },
         {
@@ -3215,9 +3133,6 @@
       "attribution": "Credit dev.events and link to the original upstream API/dataset.",
       "status": "terms-review",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "scripts/seed-research.mjs"
         },
@@ -4524,9 +4439,6 @@
           "path": "api/symbol-search.ts"
         },
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "scripts/seed-earnings-calendar.mjs"
         },
         {
@@ -4726,9 +4638,6 @@
       "references": [
         {
           "path": "scripts/_forecast-market-settlements.mjs"
-        },
-        {
-          "path": "scripts/ais-relay.cjs"
         },
         {
           "path": "scripts/seed-prediction-markets.mjs"
@@ -6109,9 +6018,6 @@
       "references": [
         {
           "path": "api/product-catalog.js"
-        },
-        {
-          "path": "scripts/ais-relay.cjs"
         }
       ]
     },
@@ -6227,9 +6133,6 @@
       "attribution": "Excluded from the provider count: local-only URL.",
       "status": "excluded",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "server/worldmonitor/research/v1/list-tech-events.ts"
         },
@@ -6956,15 +6859,12 @@
     {
       "host": "news.usni.org",
       "provider": "news.usni.org",
-      "kind": "feed+structured",
+      "kind": "feed",
       "observed": true,
       "license": "Provider terms for this upstream API/dataset; verify before redistribution",
       "attribution": "Credit news.usni.org and link to the original upstream API/dataset.",
       "status": "terms-review",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "server/worldmonitor/news/v1/_feeds.ts"
         },
@@ -7155,15 +7055,10 @@
       "host": "oauth.reddit.com",
       "provider": "oauth.reddit.com",
       "kind": "structured",
-      "observed": true,
+      "observed": false,
       "license": "Provider terms for this upstream API/dataset; verify before redistribution",
       "attribution": "Credit oauth.reddit.com and link to the original upstream API/dataset.",
-      "status": "terms-review",
-      "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "host": "oauth2.googleapis.com",
@@ -7406,9 +7301,6 @@
       "attribution": "Credit opensky-network.org and link to the original upstream API/dataset.",
       "status": "terms-review",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "scripts/seed-military-flights.mjs"
         },
@@ -7775,15 +7667,10 @@
       "host": "pro-api.coingecko.com",
       "provider": "pro-api.coingecko.com",
       "kind": "structured",
-      "observed": true,
+      "observed": false,
       "license": "Provider terms for this upstream API/dataset; verify before redistribution",
       "attribution": "Credit pro-api.coingecko.com and link to the original upstream API/dataset.",
-      "status": "terms-review",
-      "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "host": "production.dataviz.cnn.io",
@@ -7984,9 +7871,6 @@
           "path": "scripts/_yahoo-sector-valuations.cjs"
         },
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "scripts/seed-commodity-quotes.mjs"
         },
         {
@@ -8096,9 +7980,6 @@
       "status": "terms-review",
       "references": [
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "scripts/fetch-country-boundary-overrides.mjs"
         },
         {
@@ -8141,9 +8022,6 @@
       "attribution": "Excluded from the external-provider count: not an ingested upstream dataset.",
       "status": "excluded",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "src/services/story-share.ts"
         }
@@ -9393,9 +9271,6 @@
           "path": "api/telegram-feed.js"
         },
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "server/worldmonitor/leads/v1/register-interest.ts"
         },
         {
@@ -9649,9 +9524,6 @@
       "references": [
         {
           "path": "api/product-catalog.js"
-        },
-        {
-          "path": "scripts/ais-relay.cjs"
         }
       ]
     },
@@ -10276,9 +10148,6 @@
       "status": "terms-review",
       "references": [
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "scripts/seed-ucdp-events.mjs"
         }
       ]
@@ -10386,9 +10255,6 @@
       "status": "terms-review",
       "references": [
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "scripts/seed-cyber-threats.mjs"
         }
       ]
@@ -10421,9 +10287,6 @@
       "references": [
         {
           "path": "scripts/_proxy-utils.cjs"
-        },
-        {
-          "path": "scripts/ais-relay.cjs"
         }
       ]
     },
@@ -12612,9 +12475,6 @@
       "status": "terms-review",
       "references": [
         {
-          "path": "scripts/ais-relay.cjs"
-        },
-        {
           "path": "src/components/AviationCommandBar.ts"
         },
         {
@@ -13421,15 +13281,10 @@
       "host": "www.newyorkfed.org",
       "provider": "www.newyorkfed.org",
       "kind": "structured",
-      "observed": true,
+      "observed": false,
       "license": "Provider terms for this upstream API/dataset; verify before redistribution",
       "attribution": "Credit www.newyorkfed.org and link to the original upstream API/dataset.",
-      "status": "terms-review",
-      "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "host": "www.nfx.com",
@@ -13573,15 +13428,10 @@
       "host": "www.oref.org.il",
       "provider": "www.oref.org.il",
       "kind": "structured",
-      "observed": true,
+      "observed": false,
       "license": "Provider terms for this upstream API/dataset; verify before redistribution",
       "attribution": "Credit www.oref.org.il and link to the original upstream API/dataset.",
-      "status": "terms-review",
-      "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "host": "www.oryxspioenkop.com",
@@ -13640,9 +13490,6 @@
       "attribution": "Credit www.pizzint.watch and link to the original upstream API/dataset.",
       "status": "terms-review",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "scripts/seed-conflict-intel.mjs"
         },
@@ -13856,15 +13703,10 @@
       "host": "www.reddit.com",
       "provider": "www.reddit.com",
       "kind": "structured",
-      "observed": true,
+      "observed": false,
       "license": "Provider terms for this upstream API/dataset; verify before redistribution",
       "attribution": "Credit www.reddit.com and link to the original upstream API/dataset.",
-      "status": "terms-review",
-      "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "host": "www.replicatestatus.com",
@@ -14429,9 +14271,6 @@
       "attribution": "Credit www.techmeme.com and link to the original feed publisher.",
       "status": "terms-review",
       "references": [
-        {
-          "path": "scripts/ais-relay.cjs"
-        },
         {
           "path": "scripts/seed-research.mjs"
         },
@@ -15135,9 +14974,6 @@
           "path": "scripts/measure-desktop-mainthread.mjs"
         },
         {
-          "path": "scripts/notification-relay.cjs"
-        },
-        {
           "path": "scripts/seo-indexnow-submit.mjs"
         },
         {
@@ -15178,9 +15014,6 @@
         },
         {
           "path": "src/embed/embed-url.ts"
-        },
-        {
-          "path": "src/plugin-country-main.ts"
         },
         {
           "path": "src/services/country-brief-host-transport.ts"
