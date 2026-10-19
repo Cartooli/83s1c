@@ -122,6 +122,8 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
 - `package.json`: `prebuild:finance` no longer regenerates docs page dates. That step unshallows
   the repo over HTTPS, which fails for a private repo on Vercel, and it only feeds the removed
   docs site; the generated file stays committed.
+- `scripts/shared/bundle-budgets.json`: regenerated (`npm run bundle:budgets`) after the removed surfaces
+  reshuffled chunks (the `clerk` and `safe-storage` chunks are gone). Regenerate after upstream merges.
 
 ### 2026-10-19 — M3: security gates
 
