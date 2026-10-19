@@ -14,6 +14,7 @@ This is not legal advice; the AGPL text in `LICENSE` controls. Tags: [V] means v
 | Commercial use | Permitted under AGPL; private-source use needs a separate commercial license from the maintainer |
 
 **What this means for Rob:**
+
 - A forked AGPL codebase can't be "owned" proprietarily. You own your additions'
   copyright, but they ship under AGPL.
 - The repo is private today [V]. A public site with a private repo does not meet the

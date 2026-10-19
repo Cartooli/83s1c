@@ -10,6 +10,7 @@ Tags: **[V]** means verified on 2026-10-19 against upstream code at SHA
 public markets, macro indicators, news, and public video feeds, with a private-markets layer
 added on top. It is a fork of World Monitor's existing **finance variant** [V], not a rewrite.
 Upstream already ships these finance and macro pieces [V]:
+
 - market quotes and a watchlist
 - crypto and stablecoins
 - FX
@@ -39,6 +40,7 @@ Create `src/config/brand.ts` (fork-owned) with `name: "83s1c"`, `origin:
 "https://83s1c.online"`, `sourceUrl` (the public repo URL, set at M5), `upstreamName:
 "World Monitor"`, and `upstreamUrl: "https://github.com/koala73/worldmonitor"`.
 Route every user-visible name, title, OG/meta, manifest, and favicon through it.
+
 - Remove the World Monitor name, logo, and visual identity from primary branding, as the
   trademark policy requires [V]. Keep factual attribution.
 - Footer on every page: "83s1c · Based on World Monitor (AGPL-3.0) · Source · License".
@@ -70,6 +72,7 @@ Each removal should be its own commit, and the finance build must stay green aft
 It's one line, so upstream merges stay easy.
 
 Default panels for the finance variant:
+
 - Markets/watchlist, Commodities, FX, Crypto, Macro Signals, FRED/BIS rates, Yield Curve
 - Economic Calendar, Earnings Calendar, ETF Flows, Market Breadth, Fear & Greed
 - News (finance + world), Live Video

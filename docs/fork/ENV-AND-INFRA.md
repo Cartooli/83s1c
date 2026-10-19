@@ -52,6 +52,7 @@ Provision it via the Vercel Marketplace integration in `dwellchecker`, as two da
 desk seeder environment, never in public Production.
 
 **Never set:**
+
 - any `VITE_*` var holding a secret;
 - `CLERK_*`, `DODO_*`, `CONVEX_*`, `TELEGRAM_*`, `RESEND_*`, `VITE_SENTRY_DSN`;
 - `I_UNDERSTAND_THIS_DISABLES_AUTH=true` (upstream's auth kill switch) [V].
@@ -62,6 +63,7 @@ each seeder once locally against the Preview DB and add any key its error names.
 ## 5. Seeders on GitHub Actions (replaces upstream's Railway fleet)
 
 Workflow `.github/workflows/fork-seed.yml`:
+
 - runs on `schedule` plus `workflow_dispatch`;
 - uses Node 24, `npm ci`, then runs the listed scripts sequentially with
   `continue-on-error` per script;

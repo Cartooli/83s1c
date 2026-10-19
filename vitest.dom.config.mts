@@ -46,6 +46,8 @@ export default defineConfig({
     // contributor named after the repo's more common convention — the exact
     // never-reported-test failure this directory exists to prevent.
     include: ['tests/dom/**/*.test.{mts,mjs}'],
+    // 83s1c fork: imports the removed plugin-country entry point (SPEC §4).
+    exclude: ['tests/dom/country-headline-severity.test.mts'],
     // #6984: vitest's 5000ms default is not a budget anyone chose. Several
     // DOM files pay a large module-graph transform to the first test
     // (`@/app/data-loader`, story-data, economic), and under load that lands

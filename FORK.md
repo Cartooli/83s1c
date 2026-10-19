@@ -27,6 +27,7 @@ Dates are UTC. Every edit to an upstream-owned file is listed here.
 ### 2026-10-19 — M1: neutralize upstream infra
 
 Removed (deleted from the tree):
+
 - Workflows: all except `codeql`, `security-audit`, `typecheck`, `lint-code`, `test`,
   `proto-check`. Added fork-owned `gitleaks.yml`.
 - Desktop app: `src-tauri/`, `desktop-sign-in.html`, desktop build/package scripts.
@@ -37,6 +38,7 @@ Removed (deleted from the tree):
   Umami-ops and Telegram scripts.
 
 Disabled (source kept, never built, deployed, or run):
+
 - `pro-test/`, `blog-site/`: the finance prebuild (`product:facts`) reads and writes them;
   `build:pro`/`build:blog` are removed and no route serves them.
 - `scripts/ais-relay.cjs`, `scripts/notification-relay.cjs`: ~100 test suites cover shared
@@ -47,6 +49,7 @@ Disabled (source kept, never built, deployed, or run):
   it is a refactor, not a strip.
 
 Upstream files edited:
+
 - `.github/workflows/{test,typecheck,security-audit,codeql}.yml`: jobs/steps for removed
   surfaces dropped (desktop, docs-stats, umami, consumer-prices, pro, blog, digest/relay
   images, rust audit, go/ruby/rust CodeQL).
@@ -64,6 +67,15 @@ Upstream files edited:
 - `src/main.ts`: `initAnalytics()` (Umami at abacus.worldmonitor.app) no longer called.
 - `src/styles/base-layer.css`: imports fork-owned `src/config/fork/fork.css`, which hides
   the Clerk sign-in widget, Pro banner and locked-panel upgrade CTA.
+
+- `.github/workflows/gitleaks.yml` (fork-owned): `pull-requests: read` so PR scans can list commits.
+- `.github/workflows/lint-code.yml`: TUI catalog check removed with the CLI.
+- `tsconfig.dom-tests.json`, `vitest.dom.config.mts`: exclude `country-headline-severity` DOM test
+  (imports the removed plugin-country entry point).
+- `package.json`: `sync:tui-catalog*` scripts and the `mcp-market-built` e2e spec (plugin build)
+  removed from the ci-smoke lists; `e2e/mcp-market-built.spec.ts` and `scripts/sync-tui-catalog.mjs`
+  deleted.
+- `.gitleaksignore` (fork-owned): exact fingerprints of triaged upstream-history findings.
 
 Skipped tests: `scripts/fork/skipped-tests.json` lists every suite skipped because its
 subject was removed, with the reason. Never add a suite there to hide a regression.
