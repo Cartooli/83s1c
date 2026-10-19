@@ -59,7 +59,7 @@ function gatewayFor(path: string, body: Record<string, unknown>) {
 function credentialedRequest(path: string): Request {
   // `_debug=1` keeps the X-Cache-Tier header for assertion; the key makes it a
   // credentialed non-public GET.
-  return new Request(`https://worldmonitor.app${path}?_debug=1`, {
+  return new Request(`https://83s1c.online${path}?_debug=1`, {
     headers: { 'X-WorldMonitor-Key': KEY, 'cf-connecting-ip': '203.0.113.7' },
   });
 }
@@ -114,8 +114,8 @@ describe('gateway no-store floor + credentialed privacy (#6771)', () => {
     const res = await createDomainGateway([
       { method: 'GET', path, handler: healthyHandler({ events: [{ id: 1 }] }) },
     ])(
-      new Request(`https://worldmonitor.app${path}?_debug=1`, {
-        headers: { origin: 'https://worldmonitor.app', 'cf-connecting-ip': '203.0.113.7' },
+      new Request(`https://83s1c.online${path}?_debug=1`, {
+        headers: { origin: 'https://83s1c.online', 'cf-connecting-ip': '203.0.113.7' },
       }),
       ctx,
     );
@@ -159,7 +159,7 @@ describe('gateway no-store floor + credentialed privacy (#6771)', () => {
       }]);
       const cache = new Map<string, Response>();
       const fetchThroughBrowserCache = async (audience: 'dashboard' | 'api-key') => {
-        const url = `https://worldmonitor.app${path}?_debug=1`;
+        const url = `https://83s1c.online${path}?_debug=1`;
         const cached = cache.get(url);
         if (cached) return cached.clone();
         const response = await handler(new Request(url, {

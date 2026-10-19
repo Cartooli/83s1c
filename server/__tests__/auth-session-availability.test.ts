@@ -18,8 +18,8 @@ describe('session verification availability', () => {
     const dispatch = vi.fn(async () => new Response('private'));
     const path = '/api/market/v1/get-insider-transactions';
     const gateway = createDomainGateway([{ method: 'GET', path, handler: dispatch }]);
-    const response = await gateway(new Request(`https://worldmonitor.app${path}`, {
-      headers: { Authorization: 'Bearer token', Origin: 'https://worldmonitor.app' },
+    const response = await gateway(new Request(`https://83s1c.online${path}`, {
+      headers: { Authorization: 'Bearer token', Origin: 'https://83s1c.online' },
     }));
     expect(response.status).toBe(503);
     expect(Number(response.headers.get('Retry-After'))).toBeGreaterThan(0);
@@ -27,14 +27,14 @@ describe('session verification availability', () => {
   });
   test('keeps invalid and absent credentials distinct from outages', async () => {
     vi.mocked(validateBearerToken).mockResolvedValue({ valid: false, reason: 'invalid' });
-    expect(await resolveClerkSession(new Request('https://worldmonitor.app', {
+    expect(await resolveClerkSession(new Request('https://83s1c.online', {
       headers: { Authorization: 'Bearer invalid' },
     }))).toBeNull();
-    expect(await resolveClerkSession(new Request('https://worldmonitor.app'))).toBeNull();
+    expect(await resolveClerkSession(new Request('https://83s1c.online'))).toBeNull();
   });
   test('preserves an unverifiable session instead of returning an invalid credential', async () => {
     vi.mocked(validateBearerToken).mockResolvedValue({ valid: false, reason: 'unverifiable' });
-    expect(await resolveClerkSession(new Request('https://worldmonitor.app', {
+    expect(await resolveClerkSession(new Request('https://83s1c.online', {
       headers: { Authorization: 'Bearer token' },
     }))).toMatchObject({ reason: 'unverifiable' });
   });
@@ -44,8 +44,8 @@ describe('session verification availability', () => {
   ] as const) {
     test(`${name} returns retryable 503 before account work`, async () => {
       vi.mocked(validateBearerToken).mockResolvedValue({ valid: false, reason: 'unverifiable' });
-      const response = await handler(new Request(`https://worldmonitor.app/api/${name}`, {
-        method, headers: { Authorization: 'Bearer token', Origin: 'https://worldmonitor.app', 'Content-Type': 'application/json' },
+      const response = await handler(new Request(`https://83s1c.online/api/${name}`, {
+        method, headers: { Authorization: 'Bearer token', Origin: 'https://83s1c.online', 'Content-Type': 'application/json' },
         ...(method === 'POST' ? { body: '{}' } : {}),
       }));
       expect(response.status).toBe(503);

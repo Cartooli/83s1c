@@ -16,9 +16,11 @@ describe('fork HTML rebrand', () => {
     assert.deepEqual(executableScripts(out), executableScripts(source));
   });
 
-  it('drops upstream JSON-LD, hreflang alternates and twitter handles', () => {
+  it('drops upstream JSON-LD and twitter handles; keeps hreflang alternates on our origin', () => {
     assert.doesNotMatch(out, /application\/ld\+json/);
-    assert.doesNotMatch(out, /hreflang=/);
+    const alternates = [...out.matchAll(/<link rel="alternate" hreflang="[^"]*" href="([^"]*)"/g)].map((m) => m[1]);
+    assert.ok(alternates.length >= 1, 'upstream variant-dashboard plugin anchors on the hreflang alternates');
+    for (const href of alternates) assert.ok(href.startsWith('https://83s1c.online'), href);
     assert.doesNotMatch(out, /twitter:(site|creator)/);
   });
 

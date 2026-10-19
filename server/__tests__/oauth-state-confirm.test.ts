@@ -17,19 +17,19 @@ const ROUTES = [
   {
     name: 'discord',
     modulePath: '../../api/discord/oauth/start.ts',
-    url: 'https://worldmonitor.app/api/discord/oauth/start',
+    url: 'https://83s1c.online/api/discord/oauth/start',
     clientId: 'DISCORD_CLIENT_ID',
     redirect: 'DISCORD_REDIRECT_URI',
-    redirectValue: 'https://worldmonitor.app/api/discord/oauth/callback',
+    redirectValue: 'https://83s1c.online/api/discord/oauth/callback',
     host: 'discord.com',
   },
   {
     name: 'slack',
     modulePath: '../../api/slack/oauth/start.ts',
-    url: 'https://worldmonitor.app/api/slack/oauth/start',
+    url: 'https://83s1c.online/api/slack/oauth/start',
     clientId: 'SLACK_CLIENT_ID',
     redirect: 'SLACK_REDIRECT_URI',
-    redirectValue: 'https://worldmonitor.app/api/slack/oauth/callback',
+    redirectValue: 'https://83s1c.online/api/slack/oauth/callback',
     host: 'slack.com',
   },
 ] as const;
@@ -37,7 +37,7 @@ const ROUTES = [
 function requestFor(url: string): Request {
   return new Request(url, {
     method: 'POST',
-    headers: { Authorization: 'Bearer test-jwt', Origin: 'https://worldmonitor.app' },
+    headers: { Authorization: 'Bearer test-jwt', Origin: 'https://83s1c.online' },
   });
 }
 
@@ -98,7 +98,7 @@ for (const route of ROUTES) {
     vi.stubEnv(route.redirect, route.redirectValue);
     vi.stubEnv('UPSTASH_REDIS_REST_URL', 'https://fake-upstash.invalid');
     vi.stubEnv('UPSTASH_REDIS_REST_TOKEN', 'tok');
-    const preview = 'https://worldmonitor-git-review-eliewm.vercel.app';
+    const preview = 'https://83s1c-git-review-dwellchecker.vercel.app';
     const fetchMock = vi.fn(async (_url, init) => {
       const commands = JSON.parse(init.body);
       expect(commands).toHaveLength(2);
