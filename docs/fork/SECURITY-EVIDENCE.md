@@ -1,20 +1,20 @@
 # 83s1c security evidence (SECURITY-AND-LICENSE §4)
 
 Recorded 2026-10-19 on branch `fork/m3-security`, locally on macOS with Node 22. CI runs the
-same suites on Node 24. Gates 6, 7, 8 and 10 need a deployed preview, and are recorded in M4.
+same suites on Node 24. Preview checks (M4) are in the last section.
 
 | # | Gate | Status |
 |---|---|---|
 | 1 | Fail-closed secrets | Pass (test) |
-| 2 | MCP 401 without `WORLDMONITOR_VALID_KEYS` | Pass (test); recheck on preview |
+| 2 | MCP 401 without `WORLDMONITOR_VALID_KEYS` | Pass (test and preview) |
 | 3 | No client secrets | Pass for values; names appear as labels (see below) |
 | 4 | Gitleaks, full history | Pass with triaged upstream-history ignore list |
 | 5 | `npm audit --omit=dev` | Pass: 0 high, 0 critical |
-| 6 | Security headers | Pending preview (M4) |
-| 7 | Rate limiting | Pending preview (M4) |
-| 8 | Environment isolation | Pending M4 |
+| 6 | Security headers | Pass (preview) |
+| 7 | Rate limiting | Blocked: needs Upstash (not provisioned) |
+| 8 | Environment isolation | Partial: separate secrets and protection done; separate DBs need Upstash |
 | 9 | SSRF in rss-proxy | Pass (test) |
-| 10 | CORS via curl | Unit-tested in M2; curl pending preview (M4) |
+| 10 | CORS via curl | Pass (preview) |
 | 11 | No worldmonitor.app at runtime | Pass at runtime; residual strings in JS listed below |
 | 12 | SECURITY.md | Pass |
 | 13 | Branch protection on `main` | Applied |
@@ -155,6 +155,45 @@ $ gh api -X PUT repos/Cartooli/83s1c/branches/main/protection --input bp.json
   fail on it: `proto-changes` (GitHub lists only 3,000 of its 8,078 files) and the
   `unit-built-output` health-probe cutover (it diffs against the old `main`, which has no
   `api/`).
+
+## Preview checks (M4)
+
+Preview deployment `https://83s1c-k3bg3k5m5-dwellchecker.vercel.app`. It is behind Vercel Authentication, so requests go through
+`vercel curl`. The upstream bot gate 403s curl's user agent on `/api/*`, so API calls send a
+browser user agent.
+
+```text
+GET /dashboard -> HTTP/2 200
+  content-security-policy: ... frame-ancestors 'none' ...
+  strict-transport-security: max-age=63072000; includeSubDomains
+  x-content-type-options: nosniff
+  referrer-policy: strict-origin-when-cross-origin
+  x-frame-options: SAMEORIGIN
+
+GET /api/health?compact=1 (Origin: https://83s1c.online)          -> 503, access-control-allow-origin: https://83s1c.online
+GET /api/health?compact=1 (Origin: https://83s1c.online.evil.com) -> 403, no access-control-allow-origin
+GET /api/health?compact=1 (Origin: https://x.vercel.app)          -> 403, no access-control-allow-origin
+
+POST /api/mcp tools/call, no key, browser UA -> 401
+POST /api/mcp, curl UA                       -> 403 (upstream bot gate, before MCP)
+GET /api/customer-portal (removed surface)   -> 404
+GET /source -> 302 Location: https://github.com/Cartooli/83s1c/tree/<deployed SHA>
+GET /api/health (detailed, no key)           -> 401 "Detailed health requires an operator/enterprise API key"
+```
+
+- **Gate 6 (headers):** pass.
+- **Gate 10 (CORS):** pass. The allowed origin is echoed; look-alikes get 403 and no allow
+  header.
+- **Gate 7 (rate limit):** blocked. Upstream's limiter needs Upstash, which is not provisioned
+  (see the M4 PR).
+- **Gate 8 (isolation):**
+  - `WM_SESSION_SECRET` differs between Preview and Production; each was generated separately
+    and stored as a sensitive variable.
+  - Vercel Authentication covers all deployments until M5.
+  - No market-data or vendor secrets are set anywhere.
+  - Separate Upstash databases per environment are pending provisioning.
+- **Health:** `/api/health?compact=1` answers 503 `REDIS_DOWN` without Redis, which is the
+  correct fail-closed behavior. It turns OK once Upstash is connected.
 
 ## Regenerating
 
