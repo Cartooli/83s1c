@@ -450,7 +450,6 @@ jobs:
         # seconds, not the full test:data run.
         run: |
           npm run bundle:check
-          npm run bundle:check:pro
           npm run bundle:check:embed
       - run: WM_EXPECT_BUILT_OUTPUT=1 npm run test:data -- --built-output=only --concurrency=4 --timings=${{ runner.temp }}/data-test-timings.jsonl
       - name: Upload data test timings

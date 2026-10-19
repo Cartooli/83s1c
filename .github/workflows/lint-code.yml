@@ -107,8 +107,6 @@ jobs:
       - run: npm run lint:safe-local-storage
       - run: npm run lint:overlay-reload-policy
       - run: npm run security:vite-env-secrets
-      - name: Version sync check
-        run: npm run version:check
 
   # One owner for markdown lint (#7772). It used to run inside biome as well
   # as in a path-filtered lint.yml, so a code+markdown PR linted twice, and

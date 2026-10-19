@@ -69,7 +69,8 @@ Upstream files edited:
   the Clerk sign-in widget, Pro banner and locked-panel upgrade CTA.
 
 - `.github/workflows/gitleaks.yml` (fork-owned): `pull-requests: read` so PR scans can list commits.
-- `.github/workflows/lint-code.yml`: TUI catalog check removed with the CLI.
+- `.github/workflows/lint-code.yml`: TUI catalog and desktop version-sync checks removed.
+- `.github/workflows/test.yml`: Pro bundle budget check removed (Pro site not built).
 - `tsconfig.dom-tests.json`, `vitest.dom.config.mts`: exclude `country-headline-severity` DOM test
   (imports the removed plugin-country entry point).
 - `package.json`: `sync:tui-catalog*` scripts and the `mcp-market-built` e2e spec (plugin build)
