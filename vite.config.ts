@@ -10,6 +10,7 @@ import pkg from './package.json';
 import { getSentryBuildMetadata } from './shared/sentry-build-metadata';
 import { appendChunkOwnership, chunkHasFirstPartyModule } from './shared/chunk-ownership';
 import { VARIANT_META, type VariantMeta } from './src/config/variant-meta';
+import { forkBrandHtmlPlugin } from './src/config/fork/vite-brand-plugin';
 import {
   WEB_DASHBOARD_VARIANTS,
   renderVariantDashboardHtml,
@@ -995,6 +996,7 @@ export default defineConfig(({ mode }) => {
         },
       },
       htmlVariantPlugin(activeMeta, activeVariant, isDesktopBuild),
+      forkBrandHtmlPlugin(), // 83s1c fork: head rebrand after the variant rewrite
       firstPartyChunkManifestPlugin(),
       chunkSizeWarningPolicyPlugin(),
       !isDesktopBuild && dashboardHtmlOutputPlugin(),
