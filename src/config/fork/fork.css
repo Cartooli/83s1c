@@ -1,0 +1,10 @@
+/* 83s1c: no accounts or billing. Upstream still mounts its auth widget and Pro
+   upsell UI when Clerk/Dodo are unconfigured; hide them here so the upstream
+   components stay untouched for merges. */
+#authWidgetMount,
+#mobileAuthWidgetMount,
+#mobileAuthFallback,
+.pro-banner,
+.panel-locked-cta {
+  display: none !important;
+}

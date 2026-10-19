@@ -1,4 +1,5 @@
 import './styles/base-layer.css';
+import './config/fork/fork.css';
 import './bootstrap/zod-csp';
 import { SITE_VARIANT } from '@/config/variant';
 import { installLcpAttributionDebug } from '@/bootstrap/lcp-attribution';
@@ -549,7 +550,7 @@ import { loadDesktopSecrets } from '@/services/runtime-config';
 import { applyStoredTheme } from '@/utils/theme-manager';
 import { applyFont } from '@/services/font-settings';
 import { applyFontScale, FONT_SCALE_STORAGE_KEY } from '@/services/font-scale-settings';
-import { initAnalytics, trackContentHandoff } from '@/services/analytics';
+import { trackContentHandoff } from '@/services/analytics';
 import { clearChunkReloadGuard, installChunkReloadGuard } from '@/bootstrap/chunk-reload';
 import { initDebugBearRum } from '@/bootstrap/debugbear-rum';
 import { installStaleBundleCheck } from '@/bootstrap/stale-bundle-check';
@@ -578,7 +579,7 @@ if (capturedContentAttribution) {
 // Drop unread secrets (email, license_key) from the live URL before any
 // telemetry vendor initializes.
 stripSensitiveParamsFromUrl();
-void initAnalytics();
+// 83s1c: initAnalytics() not called; its Umami collector is upstream-owned (abacus.worldmonitor.app).
 initVercelAnalytics();
 initDebugBearRum();
 
