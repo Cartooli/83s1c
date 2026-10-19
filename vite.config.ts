@@ -996,7 +996,6 @@ export default defineConfig(({ mode }) => {
         },
       },
       htmlVariantPlugin(activeMeta, activeVariant, isDesktopBuild),
-      forkBrandHtmlPlugin(), // 83s1c fork: head rebrand after the variant rewrite
       firstPartyChunkManifestPlugin(),
       chunkSizeWarningPolicyPlugin(),
       !isDesktopBuild && dashboardHtmlOutputPlugin(),
@@ -1004,6 +1003,7 @@ export default defineConfig(({ mode }) => {
       // which is always the 'full' build (variant selection is runtime by
       // hostname). Desktop and dedicated VITE_VARIANT builds skip it.
       !isDesktopBuild && activeVariant === 'full' && variantDashboardHtmlPlugin(),
+      forkBrandHtmlPlugin(), // 83s1c fork: rebrand emitted HTML after upstream's HTML plugins
       webMcpDevSecurityHeadersPlugin(),
       polymarketPlugin(),
       rssProxyPlugin(),

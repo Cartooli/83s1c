@@ -1,6 +1,7 @@
 // 83s1c fork-owned build plugin: finishes the rebrand of HTML <head> metadata that
 // upstream's htmlVariantPlugin leaves pointing at World Monitor (author, twitter handles,
-// hreflang alternates, JSON-LD, absolute worldmonitor.app URLs). It only rewrites
+// JSON-LD, absolute worldmonitor.app URLs). hreflang alternates are kept (upstream's
+// variant-dashboard plugin anchors on them) and only their hrefs are rebranded. It only rewrites
 // <title>, <meta>, <link> and JSON-LD blocks, never executable inline scripts, so the
 // CSP script hashes in vercel.json stay valid.
 import type { Plugin } from 'vite';
@@ -20,7 +21,6 @@ export function rebrandHead(html: string): string {
   const rest = html.slice(headEnd);
   head = head
     .replace(/\s*<script type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g, '')
-    .replace(/\s*<link rel="alternate" hreflang="[^"]*" href="[^"]*"\s*\/?>/g, '')
     .replace(/\s*<meta name="twitter:(?:site|creator)" content="[^"]*"\s*\/?>/g, '')
     .replace(/<meta name="author" content="[^"]*"/g, `<meta name="author" content="${BRAND.name}"`)
     .replace(/<title>[^<]*<\/title>/g, rebrandTag)
@@ -52,17 +52,23 @@ export function rebrandBody(html: string): string {
     .replace(/(<span class="skeleton-brand-mark" aria-hidden="true"><\/span><span>)World Monitor(<\/span>)/, `$1${BRAND.name}$2`);
 }
 
+/** True for the dashboard document and upstream's per-variant dashboard siblings. */
+export function isDashboardHtml(fileName: string): boolean {
+  return fileName === 'dashboard.html' || /^dashboard-[a-z]+\.html$/.test(fileName);
+}
+
 export function forkBrandHtmlPlugin(): Plugin {
   return {
     name: 'fork-brand-html',
     enforce: 'post',
-    transformIndexHtml: {
-      order: 'post',
-      // Every page's <head> is rebranded; only the dashboard entry gets the body copy.
-      handler: (html: string, ctx: { filename: string }) => {
-        const head = rebrandHead(html);
-        return ctx.filename.endsWith('/index.html') ? rebrandBody(head) : head;
-      },
+    // Runs after upstream's dashboard-output and variant-dashboard plugins (registered
+    // after them in vite.config.ts), whose anchors expect upstream markup.
+    generateBundle(_options, bundle) {
+      for (const [fileName, output] of Object.entries(bundle)) {
+        if (output.type !== 'asset' || !fileName.endsWith('.html') || typeof output.source !== 'string') continue;
+        const head = rebrandHead(output.source);
+        output.source = isDashboardHtml(fileName) ? rebrandBody(head) : head;
+      }
     },
   };
 }
