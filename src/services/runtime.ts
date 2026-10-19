@@ -164,7 +164,9 @@ export function getConfiguredWebApiBaseUrl(): string {
 }
 
 export function getCanonicalApiOrigin(): string {
-  return getConfiguredWebApiBaseUrl() || DEFAULT_WEB_API_URL;
+  // 83s1c fork: our API is same-origin; never fall back to upstream's api.worldmonitor.app.
+  return getConfiguredWebApiBaseUrl()
+    || (typeof window !== 'undefined' && window.location?.origin ? window.location.origin : DEFAULT_WEB_API_URL);
 }
 
 export function getRemoteApiBaseUrl(): string {
