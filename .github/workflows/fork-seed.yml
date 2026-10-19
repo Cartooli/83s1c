@@ -1,0 +1,79 @@
+# 83s1c fork-owned: seeds the public deployments' Redis on GitHub Actions instead of
+# upstream's Railway fleet (docs/fork/ENV-AND-INFRA.md §5). Open-data seeders only:
+# anything calling Finnhub, Alpha Vantage, Yahoo or TradingView belongs to the desk
+# deployment, which has its own environment and database.
+# Each job reads only its own GitHub Actions environment's secrets (preview / production).
+name: Fork Seed
+
+on:
+  schedule:
+    - cron: '7 * * * *'      # hourly group
+    - cron: '23 */6 * * *'   # six-hourly group
+  workflow_dispatch:
+    inputs:
+      group:
+        description: Seeder group to run
+        type: choice
+        options: [hourly, six-hourly, all]
+        default: all
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fork-seed-${{ github.event.schedule || inputs.group }}
+  cancel-in-progress: false
+
+jobs:
+  seed:
+    if: github.repository == 'Cartooli/83s1c'
+    strategy:
+      fail-fast: false
+      matrix:
+        environment: [preview, production]
+    environment: ${{ matrix.environment }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+      FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+      GROUP: ${{ github.event.schedule == '7 * * * *' && 'hourly' || github.event.schedule == '23 */6 * * *' && 'six-hourly' || inputs.group }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - uses: ./.github/actions/install-root-deps
+      - name: Require this environment's Redis credentials
+        run: |
+          if [ -z "$UPSTASH_REDIS_REST_URL" ] || [ -z "$UPSTASH_REDIS_REST_TOKEN" ]; then
+            echo "::error::Upstash secrets are not set for the '${{ matrix.environment }}' environment."
+            exit 1
+          fi
+      - name: Run seeders
+        run: |
+          hourly="seed-crypto-quotes seed-prediction-markets seed-live-video-resolved"
+          six="seed-economic-calendar seed-fred-rates seed-ecb-fx-rates seed-us-treasury-par-yield seed-bundle-macro"
+          case "$GROUP" in
+            hourly) list="$hourly" ;;
+            six-hourly) list="$six" ;;
+            *) list="$hourly $six" ;;
+          esac
+          total=0; failed=""
+          for s in $list; do
+            total=$((total + 1))
+            echo "::group::$s"
+            if ! timeout 600 node "scripts/$s.mjs"; then failed="$failed $s"; fi
+            echo "::endgroup::"
+          done
+          nfail=$(echo $failed | wc -w)
+          echo "### Fork seed ($GROUP, ${{ matrix.environment }}): $((total - nfail))/$total succeeded" >> "$GITHUB_STEP_SUMMARY"
+          [ -n "$failed" ] && echo "Failed:$failed" >> "$GITHUB_STEP_SUMMARY"
+          if [ $((nfail * 100)) -gt $((total * 30)) ]; then
+            echo "::error::More than 30% of seeders failed:$failed"
+            exit 1
+          fi

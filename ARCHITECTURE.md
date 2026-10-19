@@ -394,6 +394,7 @@ Runs before every `git push`:
 | `proto-check.yml` | PR (proto changes) | Generated code matches committed output |
 | `security-audit.yml` | PR, push to main, daily cron, manual | Production npm lockfile audits plus RustSec Cargo.lock advisories; fixable Rust findings block, dated decisions/no-fix findings remain visible, and daily sweeps require database availability |
 | `gitleaks.yml` | Push, PR, manual | Fork-owned (83s1c): gitleaks secret scan over the pushed commits |
+| `fork-seed.yml` | Hourly and six-hourly cron, manual | Fork-owned (83s1c): runs the open-data seeders against the preview and production Redis, each job reading its own GitHub Actions environment secrets |
 | `codeql.yml` | Path-selected PR jobs, daily JS/TS, weekly all languages, push to main (workflow file only), manual | Advanced CodeQL scans; uncertain PR diffs run all languages. Default-branch runs then delete all but the newest overlay-base cache per job and language. Requires the default-setup handover in CONTRIBUTING.md |
 
 The Railway `umami` runtime is built from `Dockerfile.umami`, which pins the
