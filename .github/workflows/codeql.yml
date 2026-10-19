@@ -83,6 +83,8 @@ jobs:
     permissions:
       contents: read
       security-events: write
+      # 83s1c fork: analyze reads the workflow run; private-repo token defaults omit it.
+      actions: read
       packages: read
     strategy:
       fail-fast: false
