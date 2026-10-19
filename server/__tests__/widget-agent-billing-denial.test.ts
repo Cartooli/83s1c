@@ -43,10 +43,10 @@ const FREE_FEATURES = {
 };
 
 function bearerRequest(): Request {
-  return new Request("https://www.worldmonitor.app/api/widget-agent", {
+  return new Request("https://www.83s1c.online/api/widget-agent", {
     method: "POST",
     headers: {
-      Origin: "https://www.worldmonitor.app",
+      Origin: "https://www.83s1c.online",
       "Content-Type": "application/json",
       Authorization: "Bearer test-session-token",
     },
@@ -74,7 +74,7 @@ describe("widget-agent billing-verification denial (#4771)", () => {
     expect(res.status).toBe(503);
     expect(res.headers.get("X-Billing-Verification")).toBe("renewal_verification_pending");
     expect(res.headers.get("Retry-After")).toBeTruthy();
-    expect(res.headers.get("Access-Control-Allow-Origin")).toBe("https://www.worldmonitor.app");
+    expect(res.headers.get("Access-Control-Allow-Origin")).toBe("https://www.83s1c.online");
     const body = await res.json();
     expect(body.code).toBe("renewal_verification_pending");
   });

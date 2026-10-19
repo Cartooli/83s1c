@@ -70,7 +70,7 @@ function publicGateway() {
 }
 
 function get(path: string, headers: Record<string, string>): Request {
-  return new Request(`https://worldmonitor.app${path}?_debug=1`, {
+  return new Request(`https://83s1c.online${path}?_debug=1`, {
     headers: { 'cf-connecting-ip': '203.0.113.7', ...headers },
   });
 }
@@ -136,7 +136,7 @@ describe('credential-bearing headers force a private tier (#8400)', () => {
     expect(hasCredentialBearingHeader(get(PRIVATE_PATH, { 'X-Test-Audience': 'dashboard' }))).toBe(false);
 
     const res = await publicGateway()(
-      get(PUBLIC_PATH, { origin: 'https://worldmonitor.app' }),
+      get(PUBLIC_PATH, { origin: 'https://83s1c.online' }),
       ctx,
     );
 
