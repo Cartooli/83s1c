@@ -71,6 +71,11 @@ describe('fail-closed: removed surfaces are unreachable (middleware)', () => {
     }
   });
 
+  it('lets /source through to its vercel.json rewrite', async () => {
+    const middleware = (await import('../middleware.ts')).default as (r: Request) => Response | undefined;
+    assert.equal(middleware(req('/source')), undefined);
+  });
+
   it('does not block the routes the dashboard needs', async () => {
     const { isRemovedApiPath } = await import('../src/config/fork/removed-routes.ts');
     for (const path of ['/api/bootstrap', '/api/wm-session', '/api/rss-proxy', '/api/mcp', '/api/health',

@@ -202,6 +202,8 @@ export default function middleware(request: Request) {
   const path = url.pathname;
   // 83s1c fork: removed surfaces (SPEC §4) never reach their handlers.
   if (isRemovedApiPath(path)) return removedApiResponse();
+  // 83s1c fork: /source (AGPL source offer) is a vercel.json rewrite to api/fork/source.
+  if (path === '/source') return;
   const host = normalizeMcpHost(request.headers.get('host') ?? url.hostname);
   const aliasMcpRequest = isMcpAliasRequest(url.hostname, path)
     || isMcpAliasRequest(request.headers.get('host') ?? '', path);
