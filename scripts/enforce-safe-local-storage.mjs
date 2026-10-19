@@ -289,7 +289,6 @@ export const LEGACY_RAW_LOCAL_STORAGE = [
   'src/config/beta.ts :: localStorage.<member> x1',
   'src/config/variant.ts :: localStorage.<member> x1',
   'src/main.ts :: localStorage.<member> x2',
-  'src/mcp-grant-main.ts :: localStorage.<member> x1',
   'src/services/ai-flow-settings.ts :: localStorage.<member> x4',
   'src/services/analytics.ts :: <global>.localStorage x3',
   'src/services/anonymous-identity-storage.ts :: localStorage.<member> x5',

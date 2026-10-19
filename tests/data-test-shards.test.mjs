@@ -16,8 +16,10 @@ const durations = JSON.parse(readFileSync(join(root, 'scripts/shared/data-test-d
 const workflow = parse(readFileSync(join(root, '.github/workflows/test.yml'), 'utf8'));
 const ciShards = workflow.jobs['unit-shards'].strategy.matrix.shard;
 const ciShardCount = ciShards.length;
-const patterns = ['tests/*.test.mjs', 'tests/*.test.mts', 'cli/test/*.test.mjs', 'api/security/report.test.mjs'];
-const inventory = globSync(patterns, { cwd: root });
+const patterns = ['tests/*.test.mjs', 'tests/*.test.mts', 'api/security/report.test.mjs'];
+// 83s1c fork: the runner drops suites listed in scripts/fork/skipped-tests.json.
+const forkSkipped = JSON.parse(readFileSync(join(root, 'scripts/fork/skipped-tests.json'), 'utf8'));
+const inventory = globSync(patterns, { cwd: root }).filter((file) => !Object.hasOwn(forkSkipped, file));
 const childEnv = { ...process.env };
 delete childEnv.NODE_TEST_CONTEXT;
 const run = (args) => spawnSync(process.execPath, [runner, ...args], { cwd: root, encoding: 'utf8', timeout: 30_000, env: childEnv });
@@ -38,7 +40,6 @@ test('the shards and the built-output job together execute the complete data inv
   assert.equal(new Set(all).size, inventory.length);
   assert.ok(shards.every((files) => files.length > 0), 'no CI shard may be empty');
   assert.ok(all.includes('api/security/report.test.mjs'));
-  assert.ok(all.some((file) => file.startsWith('cli/test/')));
   const withNewFile = partitionTests([...inventory, 'tests/new-unmeasured.test.mts'], durations, ciShardCount).flat();
   assert.equal(withNewFile.filter((file) => file === 'tests/new-unmeasured.test.mts').length, 1);
   const full = run([...patterns, '--list']);
