@@ -119,6 +119,9 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
   `src/config/fork/vite-brand-plugin.ts`), `public/favico/*.png|ico` and
   `public/favico/finance/*` replaced with 83s1c icons generated from
   `src/config/fork/assets/*.svg`. `LICENSE` and copyright headers untouched.
+- `package.json`: `prebuild:finance` no longer regenerates docs page dates. That step unshallows
+  the repo over HTTPS, which fails for a private repo on Vercel, and it only feeds the removed
+  docs site; the generated file stays committed.
 
 ### 2026-10-19 — M3: security gates
 
