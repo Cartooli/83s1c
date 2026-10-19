@@ -1,0 +1,9 @@
+export const CII_RISK_SCORE_CACHE_KEYS: Readonly<{
+  live: 'risk:scores:sebuf:v10';
+  stale: 'risk:scores:sebuf:stale:v10';
+  trendHistoryPrefix: 'risk:scores:sebuf:trend-history:v10';
+  dailyHistoryPrefix: 'risk:scores:history:';
+  dailyHistoryIndex: 'risk:scores:history:index';
+  dailyHistoryMeta: 'seed-meta:intelligence:risk-scores-history';
+  dailyHistoryActivation: 'seed-activated:intelligence:risk-scores-history';
+}>;
