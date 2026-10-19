@@ -1212,7 +1212,6 @@ export default defineConfig(({ mode }) => {
           embed: resolve(__dirname, 'embed.html'),
           settings: resolve(__dirname, 'settings.html'),
           liveChannels: resolve(__dirname, 'live-channels.html'),
-          mcpGrant: resolve(__dirname, 'mcp-grant.html'),
           verify: resolve(__dirname, 'verify.html'),
         },
         output: {
