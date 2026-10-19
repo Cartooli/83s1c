@@ -17,6 +17,7 @@
   "tests/auth-resource-timeout.test.mts",
   "tests/batch-execute.test.mts",
   "tests/bootstrap-canada-alerts-cutover.test.mjs",
+  "tests/bootstrap-natural-events-fallback.test.mjs",
   "tests/bootstrap-r2-shadow.test.mjs",
   "tests/bootstrap-rpc-contract.test.mts",
   "tests/brief-edge-route-smoke.test.mjs",

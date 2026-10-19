@@ -44,8 +44,8 @@ function installRedis(values) {
 }
 
 function makePublicSlowRequest() {
-  return new Request('https://worldmonitor.app/api/bootstrap?tier=slow&public=1', {
-    headers: { origin: 'https://worldmonitor.app' },
+  return new Request('https://83s1c.online/api/bootstrap?tier=slow&public=1', {
+    headers: { origin: 'https://83s1c.online' },
   });
 }
 
