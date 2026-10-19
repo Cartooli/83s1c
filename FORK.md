@@ -143,9 +143,6 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
 - `ARCHITECTURE.md`: CI table lists `fork-seed.yml`.
 - `middleware.ts`: `runtime: 'edge'`. New Vercel projects default Routing Middleware to Node.js,
   where upstream's extensionless imports fail (`MIDDLEWARE_INVOCATION_FAILED`).
-- `package.json`: `prebuild:finance` no longer regenerates docs page dates. That step unshallows
-  the repo over HTTPS, which fails for a private repo on Vercel, and it only feeds the removed
-  docs site; the generated file stays committed.
 
 ## Merge procedure
 
