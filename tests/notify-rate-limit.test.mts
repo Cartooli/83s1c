@@ -26,10 +26,10 @@ function makePost(
   body: Record<string, unknown> = { eventType: 'market_alert', payload: { symbol: 'WTI' } },
   extraHeaders: Record<string, string> = {},
 ): Request {
-  return new Request('https://worldmonitor.app/api/notify', {
+  return new Request('https://83s1c.online/api/notify', {
     method: 'POST',
     headers: {
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://83s1c.online',
       Authorization: 'Bearer test-token',
       'Content-Type': 'application/json',
       ...extraHeaders,

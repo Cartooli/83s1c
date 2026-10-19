@@ -200,14 +200,14 @@ describe('resilience indicator RPC contract', () => {
             },
       }, gatewayModule.serverOptions);
       const gateway = gatewayModule.createDomainGateway(routes);
-      const url = 'https://worldmonitor.app/api/resilience/v1/get-resilience-indicators?countryCode=DE';
+      const url = 'https://83s1c.online/api/resilience/v1/get-resilience-indicators?countryCode=DE';
 
-      const anonymous = await gateway(new Request(url, { headers: { Origin: 'https://worldmonitor.app' } }));
+      const anonymous = await gateway(new Request(url, { headers: { Origin: 'https://83s1c.online' } }));
       assert.equal(anonymous.status, 401);
 
       const free = await gateway(new Request(url, {
         headers: {
-          Origin: 'https://worldmonitor.app',
+          Origin: 'https://83s1c.online',
           'X-WorldMonitor-Key': `wm_${'a'.repeat(40)}`,
         },
       }));
@@ -219,7 +219,7 @@ describe('resilience indicator RPC contract', () => {
         planKey: 'free',
       });
 
-      const headers = { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': 'issue-6507-test-key' };
+      const headers = { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': 'issue-6507-test-key' };
       const invalid = await gateway(new Request(url.replace('DE', 'DEU'), { headers }));
       assert.equal(invalid.status, 400);
 

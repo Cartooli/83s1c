@@ -99,7 +99,7 @@ function serveRedis(stored: Record<string, unknown>, failing: string[] = []) {
 }
 
 function makeCtx() {
-  const req = new Request('https://worldmonitor.app/api/forecast/v1/get-forecast-scorecard');
+  const req = new Request('https://83s1c.online/api/forecast/v1/get-forecast-scorecard');
   return { request: req, pathParams: {}, headers: {} };
 }
 
@@ -242,7 +242,7 @@ describe('getForecastScorecard backend status', () => {
       return fetchImpl(input, init);
     };
     const response = await forecastRoute(new Request(makeCtx().request.url, {
-      headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token },
+      headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token },
     }));
     assert.equal(response.status, 200);
     const serialized = await response.json();
@@ -506,7 +506,7 @@ describe('getForecastScorecard backend status', () => {
         return fetchImpl(input, init);
       };
       const response = await forecastRoute(new Request(makeCtx().request.url, {
-        headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token },
+        headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token },
       }));
       assert.equal(response.status, 200);
       return response;

@@ -166,7 +166,7 @@ function classifyMainHealth(chinaMeta: ChinaMeta) {
 async function readSeedHealth(chinaMeta: ChinaMeta) {
   installSeedHealthPipelineMock(chinaMeta);
   const response = await seedHealthHandler(new Request(
-    'https://api.worldmonitor.app/api/seed-health',
+    'https://83s1c.online/api/seed-health',
     { headers: { 'X-WorldMonitor-Key': OPERATOR_KEY } },
   ));
   return {
@@ -187,8 +187,8 @@ describe('China decision-signal access tiers (#5580)', () => {
       }),
     }]);
 
-    const response = await gateway(new Request(`https://api.worldmonitor.app${PATH}`, {
-      headers: { Origin: 'https://worldmonitor.app' },
+    const response = await gateway(new Request(`https://83s1c.online${PATH}`, {
+      headers: { Origin: 'https://83s1c.online' },
     }));
 
     assert.equal(response.status, 200);
@@ -198,7 +198,7 @@ describe('China decision-signal access tiers (#5580)', () => {
     process.env.WM_SESSION_SECRET = 'china-decision-health-secret-at-least-32-chars';
     const { token } = await issueSessionToken();
     const response = await seedHealthHandler(new Request(
-      'https://api.worldmonitor.app/api/seed-health',
+      'https://83s1c.online/api/seed-health',
       { headers: { Cookie: `wm-session=${token}` } },
     ));
 

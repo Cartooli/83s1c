@@ -126,7 +126,7 @@ function request(
   options: { clientIp?: string | null; method?: 'GET' | 'POST' } = {},
 ): Request {
   const headers = new Headers({
-    Origin: 'https://worldmonitor.app',
+    Origin: 'https://83s1c.online',
   });
   const clientIp = options.clientIp === undefined ? CLIENT_IP : options.clientIp;
   if (clientIp) headers.set('X-Real-IP', clientIp);
@@ -137,7 +137,7 @@ function request(
     headers.set('Content-Type', 'application/json');
     headers.set('Content-Length', String(new TextEncoder().encode(body).byteLength));
   }
-  return new Request(`https://worldmonitor.app${path}?country_code=US`, {
+  return new Request(`https://83s1c.online${path}?country_code=US`, {
     method,
     headers,
     body,

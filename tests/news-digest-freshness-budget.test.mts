@@ -49,8 +49,8 @@ describe('news digest freshness budget', () => {
       path: PATH,
       handler: async () => new Response(JSON.stringify({ categories: {} }), { status: 200 }),
     }]);
-    const response = await handler(new Request(`https://www.worldmonitor.app${PATH}?variant=full&lang=en&public=1`, {
-      headers: { Origin: 'https://www.worldmonitor.app' },
+    const response = await handler(new Request(`https://www.83s1c.online${PATH}?variant=full&lang=en&public=1`, {
+      headers: { Origin: 'https://www.83s1c.online' },
     }));
     assert.equal(response.status, 200);
     // stale-while-revalidate serves the old body on a healthy origin too, so it

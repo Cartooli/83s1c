@@ -1,10 +1,9 @@
 import { strict as assert } from 'node:assert';
 import test from 'node:test';
 import handler from './embed.js';
-import { TRUSTED_RETURN_URL_ORIGINS } from '../../convex/payments/returnUrlOrigin.ts';
 
 function makeRequest(query = '') {
-  return new Request(`https://worldmonitor.app/api/youtube/embed${query}`);
+  return new Request(`https://83s1c.online/api/youtube/embed${query}`);
 }
 
 async function render(query) {
@@ -31,7 +30,7 @@ test('returns embeddable html for valid video id', async () => {
   const { html, config } = await render('?videoId=iEpJwprxDdk&autoplay=0&mute=1');
   assert.deepEqual(config, {
     videoId: 'iEpJwprxDdk', autoplay: 0, mute: 1, vq: '',
-    origin: 'https://worldmonitor.app', parentOrigin: 'https://worldmonitor.app',
+    origin: 'https://83s1c.online', parentOrigin: 'https://83s1c.online',
   });
   assert.equal(html.includes('videoId:config.videoId'), true);
   assert.equal(html.includes("host:'https://www.youtube.com'"), true);
@@ -45,7 +44,7 @@ test('the player script is the same for every request', async () => {
     .filter((m) => m[1].trim() === '')
     .map((m) => m[2]);
   const a = scriptOf((await render('?videoId=iEpJwprxDdk&autoplay=0&mute=1')).html);
-  const b = scriptOf((await render('?videoId=gCNeDWCI0vo&autoplay=1&mute=0&vq=hd720&origin=http://127.0.0.1:46123&parentOrigin=https://tauri.localhost')).html);
+  const b = scriptOf((await render('?videoId=gCNeDWCI0vo&autoplay=1&mute=0&vq=hd720&origin=http://127.0.0.1:46123&parentOrigin=https://83s1c.online')).html);
   assert.equal(a.length, 1);
   assert.deepEqual(a, b);
 });
@@ -61,32 +60,33 @@ test('accepts custom origin parameter', async () => {
 });
 
 test('allows only team-pinned Vercel preview origins', async () => {
-  const allowed = await render('?videoId=iEpJwprxDdk&origin=https://worldmonitor-git-feature-eliewm.vercel.app');
-  assert.equal(allowed.config.origin, 'https://worldmonitor-git-feature-eliewm.vercel.app');
+  const allowed = await render('?videoId=iEpJwprxDdk&origin=https://83s1c-git-feature-dwellchecker.vercel.app');
+  assert.equal(allowed.config.origin, 'https://83s1c-git-feature-dwellchecker.vercel.app');
 
   const foreign = await render('?videoId=iEpJwprxDdk&origin=https://worldmonitor-git-feature-attacker.vercel.app');
-  assert.equal(foreign.config.origin, 'https://worldmonitor.app');
+  assert.equal(foreign.config.origin, 'https://83s1c.online');
 });
 
 test('uses dedicated parentOrigin for iframe postMessage target', async () => {
-  const { html, config } = await render('?videoId=iEpJwprxDdk&origin=https://worldmonitor.app&parentOrigin=https://tauri.localhost');
-  assert.equal(config.origin, 'https://worldmonitor.app');
-  assert.equal(config.parentOrigin, 'https://tauri.localhost');
+  const { html, config } = await render('?videoId=iEpJwprxDdk&origin=https://83s1c.online&parentOrigin=https://83s1c.online');
+  assert.equal(config.origin, 'https://83s1c.online');
+  assert.equal(config.parentOrigin, 'https://83s1c.online');
   assert.match(html, /parentOrigin=config\.parentOrigin,allowedOrigin=config\.parentOrigin/);
   assert.match(html, /if\(allowedOrigin!==['"]\*['"]&&e\.origin!==allowedOrigin\)return/);
 });
 
 test('does not accept wildcard parentOrigin query parameter', async () => {
-  const { config } = await render('?videoId=iEpJwprxDdk&origin=https://worldmonitor.app&parentOrigin=*');
-  assert.equal(config.parentOrigin, 'https://worldmonitor.app');
+  const { config } = await render('?videoId=iEpJwprxDdk&origin=https://83s1c.online&parentOrigin=*');
+  assert.equal(config.parentOrigin, 'https://83s1c.online');
 });
 
 test('preserves app, team preview, and local origins for the player and parent', async () => {
   for (const origin of [
-    ...TRUSTED_RETURN_URL_ORIGINS,
-    'https://worldmonitor-git-feature-eliewm.vercel.app',
+    // 83s1c fork: our app hosts (upstream used its Convex payment return origins).
+    'https://83s1c.online', 'https://www.83s1c.online',
+    'https://83s1c-git-feature-dwellchecker.vercel.app',
     'http://localhost:3000', 'https://localhost',
-    'http://127.0.0.1:46123', 'https://127.0.0.1', 'tauri://localhost',
+    'http://127.0.0.1:46123', 'https://127.0.0.1', 'https://83s1c.online',
   ]) {
     const query = new URLSearchParams({ videoId: 'iEpJwprxDdk', origin, parentOrigin: origin });
     const { config } = await render(`?${query}`);
@@ -99,24 +99,24 @@ test('rejects vendor, unknown, and look-alike origins for both player and parent
   for (const origin of [
     'https://clerk.worldmonitor.app', 'https://abacus.worldmonitor.app',
     'https://anything-future.worldmonitor.app', 'https://nested.app.worldmonitor.app',
-    'https://worldmonitor.app.evil.com', 'http://worldmonitor.app',
-    'https://worldmonitor.app:8443', 'https://worldmonitor-foreign.vercel.app',
+    'https://83s1c.online.evil.com', 'http://worldmonitor.app',
+    'https://83s1c.online:8443', 'https://worldmonitor-foreign.vercel.app',
   ]) {
     const query = new URLSearchParams({ videoId: 'iEpJwprxDdk', origin, parentOrigin: origin });
     const { config } = await render(`?${query}`);
-    assert.equal(config.origin, 'https://worldmonitor.app', origin);
-    assert.equal(config.parentOrigin, 'https://worldmonitor.app', origin);
+    assert.equal(config.origin, 'https://83s1c.online', origin);
+    assert.equal(config.parentOrigin, 'https://83s1c.online', origin);
 
-    query.set('origin', 'https://tech.worldmonitor.app');
-    assert.equal((await render(`?${query}`)).config.parentOrigin, 'https://tech.worldmonitor.app', origin);
+    query.set('origin', 'https://83s1c.online');
+    assert.equal((await render(`?${query}`)).config.parentOrigin, 'https://83s1c.online', origin);
   }
 });
 
 test('preserves parent-only Tauri origins without accepting them as player origins', async () => {
-  for (const origin of ['http://tauri.localhost', 'https://tauri.localhost', 'http://app.tauri.localhost', 'https://app.tauri.localhost']) {
+  for (const origin of ['https://83s1c.online', 'https://83s1c.online', 'https://83s1c.online', 'https://83s1c.online']) {
     const query = new URLSearchParams({ videoId: 'iEpJwprxDdk', origin, parentOrigin: origin });
     const { config } = await render(`?${query}`);
-    assert.equal(config.origin, 'https://worldmonitor.app', origin);
+    assert.equal(config.origin, 'https://83s1c.online', origin);
     assert.equal(config.parentOrigin, origin, origin);
   }
 });

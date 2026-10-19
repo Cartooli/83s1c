@@ -80,18 +80,18 @@ function installFetchStub(row: unknown) {
 
 /** No credential of any kind — the signed-out browser. */
 function anonymousRequest(): Request {
-  return new Request('https://api.worldmonitor.app/api/chat-analyst', {
+  return new Request('https://83s1c.online/api/chat-analyst', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Origin: 'https://worldmonitor.app' },
+    headers: { 'Content-Type': 'application/json', Origin: 'https://83s1c.online' },
     body: JSON.stringify({ query: 'what is happening in the strait of hormuz' }),
   });
 }
 
 /** A credential that is present but does not validate. */
 function badCredentialRequest(headers: Record<string, string>): Request {
-  return new Request('https://api.worldmonitor.app/api/chat-analyst', {
+  return new Request('https://83s1c.online/api/chat-analyst', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Origin: 'https://worldmonitor.app', ...headers },
+    headers: { 'Content-Type': 'application/json', Origin: 'https://83s1c.online', ...headers },
     body: JSON.stringify({ query: 'what is happening in the strait of hormuz' }),
   });
 }
@@ -102,11 +102,11 @@ function badCredentialRequest(headers: Record<string, string>): Request {
  * fetch stub is enough to steer the verdict without standing up Clerk.
  */
 function confirmedFreeRequest(userId: string): Request {
-  return new Request('https://api.worldmonitor.app/api/chat-analyst', {
+  return new Request('https://83s1c.online/api/chat-analyst', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://83s1c.online',
       [INTERNAL_MCP_VERIFIED_HEADER]: VERIFIED_NONCE,
       [TRUSTED_USER_ID_HEADER]: userId,
     },
@@ -302,7 +302,7 @@ describe('api/chat-analyst answers a missing credential with 401 (#5619)', () =>
     assert.deepEqual(await res.clone().json(), { error: 'UNAUTHENTICATED' });
     // The panel is cross-origin: an opaque failure is indistinguishable from a
     // crash, so CORS must survive the denial.
-    assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://worldmonitor.app');
+    assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://83s1c.online');
   });
 
   it('an invalid bearer token gets the same 401', async () => {

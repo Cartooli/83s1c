@@ -40,8 +40,8 @@ const gateway = createDomainGateway([
 ]);
 
 function request(path: string): Promise<Response> {
-  return gateway(new Request(`https://worldmonitor.app${path}`, {
-    headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token },
+  return gateway(new Request(`https://83s1c.online${path}`, {
+    headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token },
   }));
 }
 
@@ -193,7 +193,7 @@ it('preserves local sidecar FRED, GDELT, and energy reads', async () => {
   sidecarCacheSet('economic:fred:v1:ESTR:0', { series: { seriesId: 'ESTR', observations: [] } }, 60);
   sidecarCacheSet('gdelt:intel:tone:cyber', { data: [{ date: '2026-09-13', value: 1 }], fetchedAt: '2026-09-13' }, 60);
   sidecarCacheSet('energy:mix:v1:FR', { year: 2025, nuclearShare: 70 }, 60);
-  const ctx = { request: new Request('https://worldmonitor.app'), pathParams: {}, headers: {} };
+  const ctx = { request: new Request('https://83s1c.online'), pathParams: {}, headers: {} };
   assert.equal((await getFredSeries(ctx, { seriesId: 'estr', limit: 1 })).series?.seriesId, 'ESTR');
   assert.equal((await getGdeltTopicTimeline(ctx, { topic: 'cyber' })).tone.length, 1);
   assert.equal((await getCountryEnergyProfile(ctx, { countryCode: 'FR' })).nuclearShare, 70);

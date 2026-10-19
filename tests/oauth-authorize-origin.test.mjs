@@ -3,7 +3,7 @@
  *
  * The OAuth discovery metadata (PRM/AS) and the /agent/auth challenge are all
  * host-derived, so an agent can be pointed at the apex OR www OR api consent
- * page. Previously the POST handler accepted only Origin=https://api.worldmonitor.app
+ * page. Previously the POST handler accepted only Origin=https://83s1c.online
  * and 403'd every other first-party host, dead-ending the www/apex flow. The gate
  * now accepts any worldmonitor.app apex/subdomain origin (foreign origins still
  * 403). The CSRF nonce remains the real protection.
@@ -28,7 +28,7 @@ const { default: handler } = await import('../api/oauth/authorize.js');
 const postWithOrigin = (origin) => {
   const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
   if (origin !== undefined) headers.origin = origin;
-  return handler(new Request('https://www.worldmonitor.app/oauth/authorize', {
+  return handler(new Request('https://www.83s1c.online/oauth/authorize', {
     method: 'POST',
     headers,
     body: '', // no _nonce → 400 "Missing session token" once the origin gate passes
@@ -37,11 +37,11 @@ const postWithOrigin = (origin) => {
 
 describe('OAuth authorize — consent POST origin gate (P1)', () => {
   const firstPartyOrigins = [
-    'https://worldmonitor.app',          // apex — the scanned host, previously 403'd
-    'https://www.worldmonitor.app',      // canonical Vercel host
-    'https://api.worldmonitor.app',      // the only host that worked before
-    'https://tech.worldmonitor.app',     // variant subdomain
-    'https://finance.worldmonitor.app',
+    'https://83s1c.online',          // apex — the scanned host, previously 403'd
+    'https://www.83s1c.online',      // canonical Vercel host
+    'https://83s1c.online',      // the only host that worked before
+    'https://83s1c.online',     // variant subdomain
+    'https://83s1c.online',
   ];
 
   for (const origin of firstPartyOrigins) {
@@ -66,10 +66,10 @@ describe('OAuth authorize — consent POST origin gate (P1)', () => {
 
   const foreignOrigins = [
     'https://evil.example',
-    'https://worldmonitor.app.evil.example', // suffix attack — must stay anchored
+    'https://83s1c.online.evil.example', // suffix attack — must stay anchored
     'https://evilworldmonitor.app',          // prefix attack — no subdomain dot
     'http://worldmonitor.app',               // non-https
-    'https://worldmonitor.app:8443',         // port smuggling
+    'https://83s1c.online:8443',         // port smuggling
     'https://clerk.worldmonitor.app',        // vendor CNAME, not an app host
     'https://abacus.worldmonitor.app',       // vendor CNAME, not an app host
   ];

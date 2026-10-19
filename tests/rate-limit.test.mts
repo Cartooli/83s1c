@@ -43,7 +43,7 @@ function restoreEnv() {
 }
 
 function makeRequest(headers: Record<string, string> = {}): Request {
-  return new Request('https://worldmonitor.app/api/test', { headers });
+  return new Request('https://83s1c.online/api/test', { headers });
 }
 
 async function importFreshRateLimitModule() {
@@ -171,7 +171,7 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
   it('checkRateLimit returns 503 with the degraded marker when failClosed=true', async () => {
     const res = await checkRateLimit(
       makeRequest({ 'cf-connecting-ip': '203.0.113.7' }),
-      { 'Access-Control-Allow-Origin': 'https://worldmonitor.app' },
+      { 'Access-Control-Allow-Origin': 'https://83s1c.online' },
       { failClosed: true },
     );
     assert.ok(res, 'expected a Response when fail-closed');
@@ -180,7 +180,7 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
     assert.equal(res.headers.get('Retry-After'), '5');
     assert.equal(
       res.headers.get('Access-Control-Allow-Origin'),
-      'https://worldmonitor.app',
+      'https://83s1c.online',
       'CORS headers should be propagated on the degraded response',
     );
     const body = (await res.json()) as { error?: string };
@@ -194,7 +194,7 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
 
     const res = await mod.checkRateLimit(
       makeRequest({ 'cf-connecting-ip': '203.0.113.7' }),
-      { 'Access-Control-Allow-Origin': 'https://worldmonitor.app' },
+      { 'Access-Control-Allow-Origin': 'https://83s1c.online' },
       { failClosed: true },
     );
 
@@ -265,7 +265,7 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
     const res = await mod.checkEndpointRateLimit(
       makeRequest({ 'cf-connecting-ip': '203.0.113.7' }),
       pathname,
-      { 'Access-Control-Allow-Origin': 'https://worldmonitor.app' },
+      { 'Access-Control-Allow-Origin': 'https://83s1c.online' },
     );
 
     assert.ok(res, 'expected summarize-article endpoint policy to fail closed without Redis config');
@@ -273,7 +273,7 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
     assert.equal(res.headers.get('X-RateLimit-Mode'), 'degraded');
     assert.equal(
       res.headers.get('Access-Control-Allow-Origin'),
-      'https://worldmonitor.app',
+      'https://83s1c.online',
       'CORS headers should be propagated on the degraded response',
     );
     assert.equal(res.headers.get('Retry-After'), '5');
@@ -298,7 +298,7 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
     const res = await mod.checkEndpointRateLimit(
       makeRequest({ 'cf-connecting-ip': '203.0.113.7' }),
       pathname,
-      { 'Access-Control-Allow-Origin': 'https://worldmonitor.app' },
+      { 'Access-Control-Allow-Origin': 'https://83s1c.online' },
     );
 
     assert.ok(res, 'expected deduct-situation endpoint policy to fail closed without Redis config');
@@ -306,7 +306,7 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
     assert.equal(res.headers.get('X-RateLimit-Mode'), 'degraded');
     assert.equal(
       res.headers.get('Access-Control-Allow-Origin'),
-      'https://worldmonitor.app',
+      'https://83s1c.online',
       'CORS headers should be propagated on the degraded response',
     );
   });
@@ -339,7 +339,7 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
       const res = await mod.checkEndpointRateLimit(
         makeRequest({ 'cf-connecting-ip': '203.0.113.7' }),
         pathname,
-        { 'Access-Control-Allow-Origin': 'https://worldmonitor.app' },
+        { 'Access-Control-Allow-Origin': 'https://83s1c.online' },
       );
 
       assert.ok(res, `expected ${pathname} endpoint policy to fail closed without Redis config`);
@@ -347,7 +347,7 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
       assert.equal(res.headers.get('X-RateLimit-Mode'), 'degraded');
       assert.equal(
         res.headers.get('Access-Control-Allow-Origin'),
-        'https://worldmonitor.app',
+        'https://83s1c.online',
         'CORS headers should be propagated on the degraded response',
       );
     });
@@ -375,7 +375,7 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
     const res = await mod.checkEndpointRateLimit(
       makeRequest({ 'cf-connecting-ip': '203.0.113.7' }),
       pathname,
-      { 'Access-Control-Allow-Origin': 'https://worldmonitor.app' },
+      { 'Access-Control-Allow-Origin': 'https://83s1c.online' },
     );
 
     assert.ok(res, 'expected reverse-geocode RPC policy to fail closed without Redis config');
@@ -395,10 +395,10 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
       },
     }]);
     const gatewayRes = await gateway(new Request(
-      `https://worldmonitor.app${pathname}?lat=40.7&lon=-74.0`,
+      `https://83s1c.online${pathname}?lat=40.7&lon=-74.0`,
       {
         headers: {
-          Origin: 'https://worldmonitor.app',
+          Origin: 'https://83s1c.online',
           'X-WorldMonitor-Key': 'reverse-geocode-gateway-test-key',
           'x-real-ip': '203.0.113.7',
         },
@@ -427,8 +427,8 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
     }) as typeof fetch;
     const gateway = createDomainGateway(createMarketServiceRoutes(marketHandler));
     const response = await gateway(new Request(
-      'https://worldmonitor.app/api/market/v1/list-crypto-quotes?ids=dogecoin',
-      { headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token, 'x-real-ip': '203.0.113.7' } },
+      'https://83s1c.online/api/market/v1/list-crypto-quotes?ids=dogecoin',
+      { headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token, 'x-real-ip': '203.0.113.7' } },
     ));
     assert.equal(response.status, 503);
     assert.equal(response.headers.get('X-RateLimit-Mode'), 'degraded');
@@ -470,8 +470,8 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
     }) as typeof fetch;
     const token = (await issueSessionToken()).token;
     const gateway = createDomainGateway(createMarketServiceRoutes(marketHandler));
-    const request = () => new Request('https://worldmonitor.app/api/market/v1/list-crypto-quotes?ids=budget-coin', {
-      headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token, 'x-real-ip': '203.0.113.8' },
+    const request = () => new Request('https://83s1c.online/api/market/v1/list-crypto-quotes?ids=budget-coin', {
+      headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token, 'x-real-ip': '203.0.113.8' },
     });
     for (let i = 0; i < 60; i += 1) assert.equal((await gateway(request())).status, 200);
     assert.equal(providerCalls, 1, 'successful calls reuse the gap cache');
@@ -527,13 +527,13 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
     const res = await mod.checkEndpointRateLimit(
       makeRequest({ 'x-real-ip': '203.0.113.7' }),
       '/api/market/v1/get-insider-transactions',
-      { 'Access-Control-Allow-Origin': 'https://worldmonitor.app' },
+      { 'Access-Control-Allow-Origin': 'https://83s1c.online' },
     );
 
     assert.ok(res, 'a timed-out limiter decision must not use the SDK allow fallback');
     assert.equal(res.status, 503);
     assert.equal(res.headers.get('X-RateLimit-Mode'), 'degraded');
-    assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://worldmonitor.app');
+    assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://83s1c.online');
   });
 
   it('paid-provider endpoint policies abort a stalled Redis fetch before failing closed (#6236)', async () => {
@@ -654,12 +654,12 @@ describe('rate-limit fail-open / fail-closed posture (#3531 M9)', () => {
       'pre-attribution-test',
       600,
       '60 s',
-      { 'Access-Control-Allow-Origin': 'https://worldmonitor.app' },
+      { 'Access-Control-Allow-Origin': 'https://83s1c.online' },
     );
 
     assert.equal(res?.status, 503);
     assert.equal(res.headers.get('X-RateLimit-Mode'), 'degraded');
-    assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://worldmonitor.app');
+    assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://83s1c.online');
   });
 });
 
@@ -846,7 +846,7 @@ describe('slow-Redis timeout is degraded, not a silent allow (#6412 review)', ()
   it('checkRateLimit (api/_rate-limit.js) fails closed on a timed-out decision when asked to', { timeout: HANG_TEST_TIMEOUT_MS }, async () => {
     const { checkRateLimit: apiCheckRateLimit, __resetRateLimitForTest: resetApi } = await import('../api/_rate-limit.js');
     try {
-      const req = new Request('https://api.worldmonitor.app/api/anything', {
+      const req = new Request('https://83s1c.online/api/anything', {
         headers: { 'x-real-ip': '203.0.113.78' },
       });
       const res = await apiCheckRateLimit(req, {}, { failClosed: true, scope: 'timeout-probe-api', limit: 30, window: '60 s' });

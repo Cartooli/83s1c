@@ -47,9 +47,9 @@ afterEach(() => {
  */
 async function makeRequest(path = '/api/x-feed?limit=50') {
   const { token } = await issueSessionToken();
-  return new Request(`https://worldmonitor.app${path}`, {
+  return new Request(`https://83s1c.online${path}`, {
     method: 'GET',
-    headers: { origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token },
+    headers: { origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token },
   });
 }
 
@@ -202,7 +202,7 @@ describe('api/x-feed R4 first-party boundary', () => {
 
   async function get(headers) {
     const handler = (await import(`../api/x-feed.js?t=${Date.now()}`)).default;
-    return handler(new Request('https://api.worldmonitor.app/api/x-feed?limit=200', {
+    return handler(new Request('https://83s1c.online/api/x-feed?limit=200', {
       method: 'GET',
       headers,
     }));
@@ -213,14 +213,14 @@ describe('api/x-feed R4 first-party boundary', () => {
   // rejections stop proving anything.
   it('serves post bodies to a credentialed first-party caller', async () => {
     const { token } = await issueSessionToken();
-    const res = await get({ origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token });
+    const res = await get({ origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token });
     assert.equal(res.status, 200);
     assert.match(await res.text(), /SECRET BODY/);
   });
 
   it('rejects a credential-less request that sends no Origin at all', async () => {
     // The reported hole: isDisallowedOrigin returns false on an absent Origin,
-    // so `curl https://worldmonitor.app/api/x-feed?limit=200` collected every
+    // so `curl https://83s1c.online/api/x-feed?limit=200` collected every
     // body. CORS is browser-enforced only and never gated this.
     const res = await get({});
     assert.equal(res.status, 401);
@@ -230,7 +230,7 @@ describe('api/x-feed R4 first-party boundary', () => {
   it('rejects a credential-less request that forges an allowed Origin', async () => {
     // The reason the gate is not Origin-based: Origin is client-controlled at
     // the wire level, so an Origin-only fix costs an attacker one curl -H.
-    const res = await get({ origin: 'https://worldmonitor.app' });
+    const res = await get({ origin: 'https://83s1c.online' });
     assert.equal(res.status, 401);
     assert.doesNotMatch(await res.text(), /SECRET BODY/);
   });
@@ -240,7 +240,7 @@ describe('api/x-feed R4 first-party boundary', () => {
     // The desktop sidecar strips sec-fetch-* on the way through in any case
     // (src-tauri/sidecar/local-api-server.mjs toHeaders), so trusting it would
     // admit only forgeries.
-    const res = await get({ origin: 'https://worldmonitor.app', 'sec-fetch-site': 'same-origin' });
+    const res = await get({ origin: 'https://83s1c.online', 'sec-fetch-site': 'same-origin' });
     assert.equal(res.status, 401);
     assert.doesNotMatch(await res.text(), /SECRET BODY/);
   });
@@ -248,7 +248,7 @@ describe('api/x-feed R4 first-party boundary', () => {
   it('rejects a tampered session token', async () => {
     const { token } = await issueSessionToken();
     const tampered = `${token.slice(0, -2)}${token.slice(-2) === 'AA' ? 'BB' : 'AA'}`;
-    const res = await get({ origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': tampered });
+    const res = await get({ origin: 'https://83s1c.online', 'X-WorldMonitor-Key': tampered });
     assert.equal(res.status, 401);
     assert.doesNotMatch(await res.text(), /SECRET BODY/);
   });
@@ -257,9 +257,9 @@ describe('api/x-feed R4 first-party boundary', () => {
     // The gate sits after the OPTIONS branch on purpose: a browser cannot
     // attach credentials to a preflight, so gating it would break the panel.
     const handler = (await import(`../api/x-feed.js?t=${Date.now()}`)).default;
-    const res = await handler(new Request('https://api.worldmonitor.app/api/x-feed', {
+    const res = await handler(new Request('https://83s1c.online/api/x-feed', {
       method: 'OPTIONS',
-      headers: { origin: 'https://worldmonitor.app' },
+      headers: { origin: 'https://83s1c.online' },
     }));
     assert.equal(res.status, 204);
   });
@@ -416,10 +416,10 @@ describe('api/x-feed caller admission', () => {
 
   async function request(ip = '203.0.113.1', options = {}) {
     const { token } = await issueSessionToken();
-    return new Request('https://worldmonitor.app/api/x-feed?limit=50', {
+    return new Request('https://83s1c.online/api/x-feed?limit=50', {
       method: options.method ?? 'GET',
       headers: {
-        origin: 'https://worldmonitor.app',
+        origin: 'https://83s1c.online',
         'X-WorldMonitor-Key': token,
         'x-real-ip': ip,
         ...options.headers,
@@ -459,7 +459,7 @@ describe('api/x-feed caller admission', () => {
     assert.equal(denied.headers.get('x-ratelimit-limit'), '60');
     assert.equal(denied.headers.get('retry-after'), '60');
     assert.equal(denied.headers.get('cache-control'), 'no-store');
-    assert.equal(denied.headers.get('access-control-allow-origin'), 'https://worldmonitor.app');
+    assert.equal(denied.headers.get('access-control-allow-origin'), 'https://83s1c.online');
     assert.equal(relayCalls, 60);
     assert.equal((await handler(await request('203.0.113.2'))).status, 200);
     assert.equal(relayCalls, 61);

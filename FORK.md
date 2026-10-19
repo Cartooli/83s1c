@@ -82,6 +82,22 @@ Upstream files edited:
 Skipped tests: `scripts/fork/skipped-tests.json` lists every suite skipped because its
 subject was removed, with the reason. Never add a suite there to hide a regression.
 
+### 2026-10-19 — M2: finance variant, CORS, rebrand
+
+- `src/config/variant.ts`: the final fallback returns `buildVariant` (was `'full'`), so
+  `VITE_VARIANT=finance` applies on 83s1c.online and previews. Test:
+  `tests/fork-variant-fallback.test.mts`; `tests/runtime-env-guards.test.mjs` now expects five
+  `buildVariant` fallbacks.
+- CORS allowlists in `api/_cors.js`, `server/cors.ts` and `api/youtube/embed.js`: trust only
+  `^https://(www.)?83s1c.online$` and `^https://83s1c-[a-z0-9-]+-dwellchecker.vercel.app$`.
+  Upstream worldmonitor.app, eliewm previews and Tauri origins removed; refusal fallback
+  origin is `https://83s1c.online`. Tests: `tests/fork-cors-allowlist.test.mts`,
+  `api/_cors.test.mjs` (look-alikes, other teams, former desktop origins).
+- Test origin fixtures: `scripts/fork/rewrite-test-origins.mjs` rewrote upstream/Tauri
+  origins to ours in the suites listed in `scripts/fork/origin-rewritten-tests.json`. After an
+  upstream merge, take upstream's version of those files and re-run the script on them.
+  `api/youtube/embed.test.mjs` uses our hosts instead of Convex payment return origins.
+
 ## Merge procedure
 
 See `docs/fork/ENV-AND-INFRA.md` §8. In short:

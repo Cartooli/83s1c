@@ -26,8 +26,8 @@ it('rejects a digest request before feed work when its Redis admission fails', a
     builds++;
     return { categories: {}, feedStatuses: {}, generatedAt: '' };
   } } as never, serverOptions));
-  const response = await gateway(new Request('https://worldmonitor.app/api/news/v1/list-feed-digest?lang=en', {
-    headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token, 'x-vercel-forwarded-for': '192.0.2.83' },
+  const response = await gateway(new Request('https://83s1c.online/api/news/v1/list-feed-digest?lang=en', {
+    headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token, 'x-vercel-forwarded-for': '192.0.2.83' },
   }));
   assert.equal(response.status, 503);
   assert.equal(response.headers.get('Cache-Control'), 'no-store');

@@ -66,8 +66,8 @@ for (const proof of ['legacy', 'unverified', 'verified'] as const) {
       checkTierProEntitlement: async () => ({ allowed: true }),
       checkScopedRateLimit: async () => ({ allowed: true, limit: 30, remaining: 29, reset: 0, degraded: false }),
     });
-    const response = await notify(new Request('https://worldmonitor.app/api/notify', {
-      method: 'POST', headers: { Authorization: 'Bearer fake', Origin: 'https://worldmonitor.app', 'Content-Type': 'application/json' },
+    const response = await notify(new Request('https://83s1c.online/api/notify', {
+      method: 'POST', headers: { Authorization: 'Bearer fake', Origin: 'https://83s1c.online', 'Content-Type': 'application/json' },
       body: JSON.stringify({ eventType: 'market_alert', severity: 'critical', variant: 'full', payload: { title: 'Synthetic market alert', link: 'https://example.com/alert' } }),
     }));
     assert.equal(response.status, 200);

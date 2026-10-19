@@ -66,18 +66,18 @@ function makeRequest(pathAndQuery: string): Request {
   if (pathAndQuery.startsWith(AIRCRAFT_OPTIONAL_BBOX_PATH)) delete ENDPOINT_RATE_POLICIES[AIRCRAFT_OPTIONAL_BBOX_PATH];
   process.env.WORLDMONITOR_VALID_KEYS = TEST_KEY;
   return new Request(
-    'https://worldmonitor.app' + pathAndQuery,
-    { headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': TEST_KEY } },
+    'https://83s1c.online' + pathAndQuery,
+    { headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': TEST_KEY } },
   );
 }
 
 function makeJsonPostRequest(path: string, bodyObject: Record<string, unknown>): Request {
   process.env.WORLDMONITOR_VALID_KEYS = TEST_KEY;
   const body = JSON.stringify(bodyObject);
-  return new Request('https://worldmonitor.app' + path, {
+  return new Request('https://83s1c.online' + path, {
     method: 'POST',
     headers: {
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://83s1c.online',
       'X-WorldMonitor-Key': TEST_KEY,
       'Content-Type': 'application/json',
       'Content-Length': String(new TextEncoder().encode(body).byteLength),
@@ -88,7 +88,7 @@ function makeJsonPostRequest(path: string, bodyObject: Record<string, unknown>):
 
 async function getGeneratedMilitaryFlightsPathAndQuery(req: Parameters<MilitaryServiceClient['listMilitaryFlights']>[0]): Promise<string> {
   let requestedUrl = '';
-  const client = new MilitaryServiceClient('https://worldmonitor.app', {
+  const client = new MilitaryServiceClient('https://83s1c.online', {
     fetch: async (input) => {
       requestedUrl = String(input);
       return new Response(JSON.stringify({ flights: [], clusters: [] }), {

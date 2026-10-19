@@ -7,19 +7,18 @@ function makeRequest(origin) {
   if (origin !== null) {
     headers.set('origin', origin);
   }
-  return new Request('https://worldmonitor.app/api/test', { headers });
+  return new Request('https://83s1c.online/api/test', { headers });
 }
 
-test('allows desktop Tauri origins', () => {
-  const origins = [
-    'https://tauri.localhost',
-    'https://abc123.tauri.localhost',
-    'tauri://localhost',
-    'asset://localhost',
-    'http://127.0.0.1:46123',
-  ];
+// 83s1c fork: desktop (Tauri) origins were removed from the allowlist with the desktop app.
+test('rejects former desktop Tauri origins', () => {
+  for (const origin of ['https://tauri.localhost', 'https://abc123.tauri.localhost', 'tauri://localhost', 'asset://localhost']) {
+    assert.equal(isDisallowedOrigin(makeRequest(origin)), true, `origin must be rejected: ${origin}`);
+  }
+});
 
-  for (const origin of origins) {
+test('allows the fork app hosts and team-pinned previews with credentials', () => {
+  for (const origin of ['https://83s1c.online', 'https://www.83s1c.online', 'https://83s1c-git-main-dwellchecker.vercel.app', 'https://83s1c-abc123-dwellchecker.vercel.app']) {
     const req = makeRequest(origin);
     assert.equal(isDisallowedOrigin(req), false, `origin should be allowed: ${origin}`);
     const cors = getCorsHeaders(req);
@@ -28,11 +27,22 @@ test('allows desktop Tauri origins', () => {
   }
 });
 
-test('allows Google Translate proxy origins of worldmonitor.app (#6411)', () => {
+test('rejects look-alikes of the fork hosts and any other Vercel team', () => {
+  for (const origin of [
+    'https://83s1c.online.evil.com', 'https://evil83s1c.online', 'http://83s1c.online',
+    'https://x.vercel.app', 'https://83s1c-git-main-otherteam.vercel.app', 'https://83s1c.vercel.app',
+    'https://worldmonitor.app', 'https://worldmonitor-git-main-eliewm.vercel.app',
+  ]) {
+    const req = makeRequest(origin);
+    assert.equal(isDisallowedOrigin(req), true, `must reject ${origin}`);
+    assert.notEqual(getCorsHeaders(req)['Access-Control-Allow-Origin'], origin, `must not echo ${origin}`);
+  }
+});
+
+test('allows Google Translate proxy origins of 83s1c.online (#6411)', () => {
   const origins = [
-    'https://www-worldmonitor-app.translate.goog',
-    'https://worldmonitor-app.translate.goog',
-    'https://tech-worldmonitor-app.translate.goog',
+    'https://www-83s1c-online.translate.goog',
+    'https://83s1c-online.translate.goog',
   ];
 
   for (const origin of origins) {
@@ -59,9 +69,9 @@ test('rejects unrelated translate.goog hosts', () => {
 
 test('allows trailing-dot FQDN form of first-party origins (#6411)', () => {
   const origins = [
-    'https://worldmonitor.app.',
-    'https://tech.worldmonitor.app.',
-    'https://www.worldmonitor.app.',
+    'https://83s1c.online.',
+    'https://83s1c.online.',
+    'https://www.83s1c.online.',
   ];
 
   for (const origin of origins) {
@@ -83,7 +93,7 @@ test('rejects unrelated external origins', () => {
   const req = makeRequest('https://evil.example.com');
   assert.equal(isDisallowedOrigin(req), true);
   const cors = getCorsHeaders(req);
-  assert.equal(cors['Access-Control-Allow-Origin'], 'https://worldmonitor.app');
+  assert.equal(cors['Access-Control-Allow-Origin'], 'https://83s1c.online');
   assert.equal(cors['Access-Control-Allow-Credentials'], 'true');
 });
 
@@ -103,7 +113,7 @@ test('requests without origin remain allowed', () => {
 });
 
 test('CORS allow headers include MCP transport headers', () => {
-  const privateCors = getCorsHeaders(makeRequest('https://worldmonitor.app'));
+  const privateCors = getCorsHeaders(makeRequest('https://83s1c.online'));
   const publicCors = getPublicCorsHeaders('POST, GET, OPTIONS');
 
   for (const cors of [privateCors, publicCors]) {

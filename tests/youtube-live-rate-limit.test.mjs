@@ -22,7 +22,7 @@ delete process.env.WS_RELAY_URL;
 const { default: handler } = await import('../api/youtube/live.js');
 const { __resetRateLimitForTest } = await import('../api/_rate-limit.js');
 
-const ENDPOINT = 'https://api.worldmonitor.app/api/youtube/live';
+const ENDPOINT = 'https://83s1c.online/api/youtube/live';
 
 let ipCounter = 0;
 /** Distinct caller per test — the limiter memoizes per scope, so a shared IP
@@ -34,7 +34,7 @@ function uniqueCallerIp() {
 
 function makeRequest(query, ip) {
   return new Request(`${ENDPOINT}?${query}`, {
-    headers: { Origin: 'https://worldmonitor.app', 'x-real-ip': ip },
+    headers: { Origin: 'https://83s1c.online', 'x-real-ip': ip },
   });
 }
 
@@ -90,7 +90,7 @@ test('returns 429 and never reaches youtube.com when the rate limit is exhausted
   assertLimiterBudget(assert, calls, { limit: 30, windowSeconds: 60, scope: 'youtube-live' });
   // Without CORS on the 429 the browser client sees an opaque network error
   // instead of a readable rate-limit response.
-  assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://worldmonitor.app');
+  assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://83s1c.online');
   assert.deepEqual(
     youtubeCalls(calls).map((c) => c.url),
     [],

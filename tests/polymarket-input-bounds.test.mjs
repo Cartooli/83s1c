@@ -69,7 +69,7 @@ test('Edge forwards only canonical query fields', async () => {
     calls.push(url);
     return Response.json([]);
   };
-  const response = await handler(new Request('https://worldmonitor.app/api/polymarket?' + new URLSearchParams({ endpoint: 'arbitrary', closed: 'junk', order: 'junk', ascending: 'junk', limit: '999', unknown: 'value' }), { headers: { 'X-WorldMonitor-Key': 'synthetic', 'Origin': 'https://worldmonitor.app' } }));
+  const response = await handler(new Request('https://83s1c.online/api/polymarket?' + new URLSearchParams({ endpoint: 'arbitrary', closed: 'junk', order: 'junk', ascending: 'junk', limit: '999', unknown: 'value' }), { headers: { 'X-WorldMonitor-Key': 'synthetic', 'Origin': 'https://83s1c.online' } }));
   assert.equal(response.status, 200);
   assert.equal(response.headers.get('Cache-Control'), 'private, max-age=120');
   assert.equal(response.headers.get('CDN-Cache-Control'), null);
@@ -80,7 +80,7 @@ test('Edge forwards only canonical query fields', async () => {
     globalThis.fetch = async input => String(input).includes('redis.example')
       ? Response.json([{ result: [29, 30] }])
       : Response.json(status === 200 ? [] : { error: 'unavailable' }, { status, headers: { 'Cache-Control': 'no-store' } });
-    const response = await handler(new Request('https://worldmonitor.app/api/polymarket', { headers: { 'X-WorldMonitor-Key': 'synthetic' } }));
+    const response = await handler(new Request('https://83s1c.online/api/polymarket', { headers: { 'X-WorldMonitor-Key': 'synthetic' } }));
     assert.equal(response.status, status);
     assert.equal(response.headers.get('Cache-Control'), 'no-store');
     assert.equal(response.headers.get('CDN-Cache-Control'), 'no-store');

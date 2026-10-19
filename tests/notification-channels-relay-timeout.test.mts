@@ -22,10 +22,10 @@ async function importFreshNotificationChannels() {
 }
 
 function makeSetChannelRequest(): Request {
-  return new Request('https://worldmonitor.app/api/notification-channels', {
+  return new Request('https://83s1c.online/api/notification-channels', {
     method: 'POST',
     headers: {
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://83s1c.online',
       Authorization: 'Bearer clerk-token',
       'Content-Type': 'application/json',
       'Idempotency-Key': 'notification-channel-timeout-retry',
@@ -39,10 +39,10 @@ function makeSetChannelRequest(): Request {
 }
 
 function makeSetWebPushRequest(): Request {
-  return new Request('https://worldmonitor.app/api/notification-channels', {
+  return new Request('https://83s1c.online/api/notification-channels', {
     method: 'POST',
     headers: {
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://83s1c.online',
       Authorization: 'Bearer clerk-token',
       'Content-Type': 'application/json',
       'Idempotency-Key': 'notification-web-push-timeout-retry',
@@ -162,7 +162,7 @@ describe('/api/notification-channels relay timeout recovery', () => {
 
     assert.equal(first.status, 500);
     assert.deepEqual(await first.json(), { error: 'Operation failed' });
-    assert.equal(first.headers.get('Access-Control-Allow-Origin'), 'https://worldmonitor.app');
+    assert.equal(first.headers.get('Access-Control-Allow-Origin'), 'https://83s1c.online');
     assert.equal(first.headers.get('Idempotency-Key'), 'notification-channel-timeout-retry');
     assert.equal(first.headers.get('Idempotent-Replayed'), 'false');
     assert.equal(relaySignals[0]?.aborted, true);

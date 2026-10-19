@@ -53,8 +53,8 @@ function storage(): Storage {
 test('frontend session mint must not block API callers forever', async () => {
   (globalThis as unknown as { window: unknown }).window = globalThis;
   (globalThis as unknown as { location: Location }).location = {
-    href: 'https://worldmonitor.app/',
-    origin: 'https://worldmonitor.app',
+    href: 'https://83s1c.online/',
+    origin: 'https://83s1c.online',
     hostname: 'worldmonitor.app',
     protocol: 'https:',
     host: 'worldmonitor.app',
@@ -105,10 +105,10 @@ test('wm-session request-body read must terminate for a body that never ends', a
         controller.enqueue(new TextEncoder().encode('{"widgetKey":"'));
       },
     });
-    const req = new Request('https://api.worldmonitor.app/api/wm-session', {
+    const req = new Request('https://83s1c.online/api/wm-session', {
       method: 'POST',
       headers: {
-        origin: 'https://worldmonitor.app',
+        origin: 'https://83s1c.online',
         'content-type': 'application/json',
       },
       body,
@@ -146,10 +146,10 @@ test('widget-agent request-body read must terminate for a body that never ends',
       },
       cancel() { cancelled = true; },
     });
-    const req = new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const req = new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
-        Origin: 'https://www.worldmonitor.app',
+        Origin: 'https://www.83s1c.online',
         'Content-Type': 'application/json',
         'X-WorldMonitor-Key': 'browser-test-key',
       },
@@ -172,8 +172,8 @@ test('widget-agent request-body read must terminate for a body that never ends',
 test('__resetWmSessionForTests restores the default mint timeout', async () => {
   (globalThis as unknown as { window: unknown }).window = globalThis;
   (globalThis as unknown as { location: Location }).location = {
-    href: 'https://worldmonitor.app/',
-    origin: 'https://worldmonitor.app',
+    href: 'https://83s1c.online/',
+    origin: 'https://83s1c.online',
     hostname: 'worldmonitor.app',
     protocol: 'https:',
     host: 'worldmonitor.app',

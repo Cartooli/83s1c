@@ -8,7 +8,7 @@ import test from 'node:test';
 const ORIGINAL_ENV = { ...process.env };
 const ORIGINAL_FETCH = globalThis.fetch;
 const REDIS_URL = 'https://redis.example.test';
-const ALLOWED_ORIGIN = 'https://worldmonitor.app';
+const ALLOWED_ORIGIN = 'https://83s1c.online';
 
 function restoreEnvironment() {
   globalThis.fetch = ORIGINAL_FETCH;
@@ -23,7 +23,7 @@ function json(value) {
 }
 
 function request(path, { origin = ALLOWED_ORIGIN, headers = {} } = {}) {
-  return new Request(`https://api.worldmonitor.app${path}`, {
+  return new Request(`https://83s1c.online${path}`, {
     headers: { Origin: origin, ...headers },
   });
 }
