@@ -138,6 +138,9 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
   one job per Actions environment (`preview`, `production`); fails when more than 30% of
   seeders fail. Quote seeders (Finnhub/Alpha Vantage/Yahoo/TradingView) are desk-only.
 - `ARCHITECTURE.md`: CI table lists `fork-seed.yml`.
+- `package.json`: `prebuild:finance` no longer regenerates docs page dates. That step unshallows
+  the repo over HTTPS, which fails for a private repo on Vercel, and it only feeds the removed
+  docs site; the generated file stays committed.
 
 ## Merge procedure
 

@@ -114,7 +114,7 @@
     "build:full": "npm run security:vite-env-secrets -- --strict-local && npm run build:openapi && npm run build:agent-skills && npm run build:crawlable-corpus && npm run build:sitemap && cross-env-shell VITE_VARIANT=full \"tsc && vite build\" && npm run build:plugin",
     "prebuild:tech": "npm run docs:dates -- --fetch-history && npm run product:facts",
     "build:tech": "npm run security:vite-env-secrets -- --strict-local && npm run build:openapi && npm run build:agent-skills && cross-env-shell VITE_VARIANT=tech \"tsc && vite build\"",
-    "prebuild:finance": "npm run docs:dates -- --fetch-history && npm run product:facts",
+    "prebuild:finance": "npm run product:facts",
     "build:finance": "npm run security:vite-env-secrets -- --strict-local && npm run build:openapi && npm run build:agent-skills && cross-env-shell VITE_VARIANT=finance \"tsc && vite build\"",
     "prebuild:happy": "npm run docs:dates -- --fetch-history && npm run product:facts",
     "build:happy": "npm run security:vite-env-secrets -- --strict-local && npm run build:openapi && npm run build:agent-skills && cross-env-shell VITE_VARIANT=happy \"tsc && vite build\"",
