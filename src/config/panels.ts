@@ -6,6 +6,7 @@ import { isDesktopRuntime } from '@/services/runtime';
 import { getSecretState } from '@/services/runtime-config';
 // boundary-ignore: isEntitled is a pure state check with no side effects
 import { isEntitled } from '@/services/entitlements';
+import { forkFinanceMapLayers, forkFinancePanels, MARKET_QUOTES_ENABLED } from '@/config/fork/finance-panels';
 
 const _desktop = isDesktopRuntime();
 
@@ -1158,7 +1159,7 @@ type PanelVariant = 'full' | 'tech' | 'finance' | 'commodity' | 'energy' | 'happ
 const VARIANT_PANEL_CONFIGS: Record<PanelVariant, Record<string, PanelConfig>> = {
   full: FULL_PANELS,
   tech: TECH_PANELS,
-  finance: FINANCE_PANELS,
+  finance: forkFinancePanels(FINANCE_PANELS, MARKET_QUOTES_ENABLED), // 83s1c fork
   commodity: COMMODITY_PANELS,
   energy: ENERGY_PANELS,
   happy: HAPPY_PANELS,
@@ -1464,7 +1465,7 @@ export const DEFAULT_MAP_LAYERS = SITE_VARIANT === 'happy'
   : SITE_VARIANT === 'tech'
     ? TECH_MAP_LAYERS
     : SITE_VARIANT === 'finance'
-      ? FINANCE_MAP_LAYERS
+      ? forkFinanceMapLayers(FINANCE_MAP_LAYERS) // 83s1c fork
       : SITE_VARIANT === 'commodity'
         ? COMMODITY_MAP_LAYERS
         : SITE_VARIANT === 'energy'
@@ -1476,7 +1477,7 @@ export const MOBILE_DEFAULT_MAP_LAYERS = SITE_VARIANT === 'happy'
   : SITE_VARIANT === 'tech'
     ? TECH_MOBILE_MAP_LAYERS
     : SITE_VARIANT === 'finance'
-      ? FINANCE_MOBILE_MAP_LAYERS
+      ? forkFinanceMapLayers(FINANCE_MOBILE_MAP_LAYERS) // 83s1c fork
       : SITE_VARIANT === 'commodity'
         ? COMMODITY_MOBILE_MAP_LAYERS
         : SITE_VARIANT === 'energy'
