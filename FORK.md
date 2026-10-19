@@ -114,7 +114,7 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
 - `package.json`: `test:sidecar` also runs `api/fork/source.test.mjs`.
 - Rebrand: `src/app/panel-layout.ts` (logo, header source link, mobile menu, footer via
   `src/config/fork/footer.ts`; upstream author's X handle removed from the header, attribution
-  kept in the footer), `src/services/i18n.ts` (registers `src/config/fork/brand-i18n.ts`),
+  kept in the footer), `src/services/i18n.ts` (registers `src/config/fork/brand-strings.ts`),
   `src/config/variant-meta.ts` (finance meta), `vite.config.ts` (registers
   `src/config/fork/vite-brand-plugin.ts`), `public/favico/*.png|ico` and
   `public/favico/finance/*` replaced with 83s1c icons generated from

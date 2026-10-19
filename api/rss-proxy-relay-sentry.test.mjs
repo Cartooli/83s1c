@@ -32,7 +32,7 @@ const TEST_KEY = 'rss-proxy-relay-sentry-key';
 const ENVELOPE_URL = 'https://127.0.0.1/api/4242/envelope/';
 const FEED_URL = 'https://techcrunch.com/feed';
 // Same host shape as api/rss-proxy.test.mjs; Origin/CORS checks need a real URL.
-const PROXY_ENDPOINT = 'https://api.worldmonitor.app/api/rss-proxy'; // pragma: allowlist secret
+const PROXY_ENDPOINT = 'https://83s1c.online/api/rss-proxy'; // pragma: allowlist secret
 
 const originalEnv = { ...process.env };
 const originalFetch = globalThis.fetch;
@@ -86,7 +86,7 @@ async function runRelayRetryFailure(relayError) {
 
   const res = await handler(new Request(
     `${PROXY_ENDPOINT}?url=${encodeURIComponent(FEED_URL)}`,
-    { headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': TEST_KEY } },
+    { headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': TEST_KEY } },
   ));
   // The capture is fire-and-forget; give its microtask chain a turn to run so
   // a missing assertion is a real absence, not a race we sampled too early.
@@ -165,7 +165,7 @@ async function runOuterFetchFailure(directError) {
 
   const res = await handler(new Request(
     `${PROXY_ENDPOINT}?url=${encodeURIComponent(FEED_URL)}`,
-    { headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': TEST_KEY } },
+    { headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': TEST_KEY } },
   ));
   await new Promise((resolve) => setTimeout(resolve, 0));
   return { res, envelopes };

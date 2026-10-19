@@ -372,7 +372,8 @@ describe('api/slack/oauth/callback.ts safety', () => {
 describe('vercel.json CSP: Slack OAuth callback has unsafe-inline override', () => {
   const vercelJson = JSON.parse(readFileSync(join(root, 'vercel.json'), 'utf-8'));
 
-  it('vercel.json has a CSP override for /api/slack/oauth/callback allowing unsafe-inline scripts', () => {
+  // 83s1c fork: Slack notification channel is a removed Pro surface; vercel.json is fork-owned.
+  it.skip('vercel.json has a CSP override for /api/slack/oauth/callback allowing unsafe-inline scripts', () => {
     const rule = vercelJson.headers?.find((r) => r.source === '/api/slack/oauth/callback');
     assert.ok(rule, 'vercel.json: missing header rule for /api/slack/oauth/callback — the callback page serves inline JS (postMessage + window.close) which is blocked by the global CSP');
     const csp = rule.headers?.find((h) => h.key === 'Content-Security-Policy');
@@ -383,7 +384,8 @@ describe('vercel.json CSP: Slack OAuth callback has unsafe-inline override', () 
     );
   });
 
-  it('/api/slack/oauth/callback CSP override appears after the global CSP rule (must override it)', () => {
+  // 83s1c fork: Slack notification channel is a removed Pro surface; vercel.json is fork-owned.
+  it.skip('/api/slack/oauth/callback CSP override appears after the global CSP rule (must override it)', () => {
     const headers = vercelJson.headers ?? [];
     const globalIdx = headers.findIndex((rule) => rule.headers?.some(
       (header) => header.key === 'X-Frame-Options' && header.value === 'SAMEORIGIN',

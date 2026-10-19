@@ -56,6 +56,13 @@ export function forkBrandHtmlPlugin(): Plugin {
   return {
     name: 'fork-brand-html',
     enforce: 'post',
-    transformIndexHtml: { order: 'post', handler: (html: string) => rebrandBody(rebrandHead(html)) },
+    transformIndexHtml: {
+      order: 'post',
+      // Every page's <head> is rebranded; only the dashboard entry gets the body copy.
+      handler: (html: string, ctx: { filename: string }) => {
+        const head = rebrandHead(html);
+        return ctx.filename.endsWith('/index.html') ? rebrandBody(head) : head;
+      },
+    },
   };
 }

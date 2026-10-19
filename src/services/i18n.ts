@@ -9,7 +9,7 @@ import { LatestRequestGuard } from '@/utils/latest-request-guard';
 // Keep only first-paint English strings in the entry chunk. The full English
 // dictionary is loaded through localeModules so it can split like other locales.
 import enShellTranslation from '../locales/en.shell.json';
-import { brandPostProcessor } from '@/config/fork/brand-i18n';
+import { brandPostProcessor } from '@/config/fork/brand-strings';
 
 // Explicit-choice localStorage key. Written ONLY when the user manually picks
 // a language via Settings → Language. The default detector's `i18nextLng`
