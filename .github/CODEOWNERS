@@ -3,8 +3,8 @@
 # exception is justified, so the manifest needs a human. Ownership sits with
 # the repo owner: GitHub skips the review request when the code owner is the
 # PR author, so this fires only when someone else opens the escape hatch.
-/api/api-route-exceptions.json @koala73
+/api/api-route-exceptions.json @Cartooli
 
 # The enforcement script is the teeth behind the manifest, so a change to it
 # cannot be policed by the gate it defines. Same ownership rule applies.
-/scripts/enforce-sebuf-api-contract.mjs @koala73
+/scripts/enforce-sebuf-api-contract.mjs @Cartooli
