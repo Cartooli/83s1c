@@ -582,6 +582,9 @@ async function proxyDocsLocaleHtml(request: Request, url: URL, host: string): Pr
 }
 
 export const config = {
+  // 83s1c fork: new Vercel projects default Routing Middleware to Node.js, which runs this
+  // file as unbundled ESM (extensionless imports fail). Upstream's project runs it on Edge.
+  runtime: 'edge',
   matcher: [
     '/mcp',
     '/api/:path*',
