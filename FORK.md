@@ -97,6 +97,28 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
   origins to ours in the suites listed in `scripts/fork/origin-rewritten-tests.json`. After an
   upstream merge, take upstream's version of those files and re-run the script on them.
   `api/youtube/embed.test.mjs` uses our hosts instead of Convex payment return origins.
+- `src/services/runtime.ts`: `getCanonicalApiOrigin()` falls back to the page origin (was
+  `api.worldmonitor.app`).
+- `src/services/country-geometry.ts`: boundary overrides load only when
+  `VITE_COUNTRY_OVERRIDES_URL` is set (default was `maps.worldmonitor.app`).
+- `index.html`: upstream `api.`/`maps.worldmonitor.app` preconnects removed.
+- `vercel.json`: replaced by a minimal fork config (finance build, `/` → `/dashboard`,
+  `/source`, security headers, `frame-ancestors 'none'`). HSTS `preload` intentionally off.
+- `src/config/panels.ts`: finance panels and map layers go through
+  `src/config/fork/finance-panels.ts` (public open-data set; quote panels only with
+  `VITE_MARKET_QUOTES=1`; conflicts/hotspots on, AIS/flights/military off).
+- `server/_shared/constants.ts`: `yahooGate()` refuses unless `VITE_MARKET_QUOTES=1`, so
+  request-time Yahoo calls fail closed on the public deployment.
+- `api/api-route-exceptions.json`: entry for fork-owned `api/fork/source.js` (`/source`, AGPL
+  §13 redirect to the deployed commit).
+- `package.json`: `test:sidecar` also runs `api/fork/source.test.mjs`.
+- Rebrand: `src/app/panel-layout.ts` (logo, header source link, mobile menu, footer via
+  `src/config/fork/footer.ts`; upstream author's X handle removed from the header, attribution
+  kept in the footer), `src/services/i18n.ts` (registers `src/config/fork/brand-i18n.ts`),
+  `src/config/variant-meta.ts` (finance meta), `vite.config.ts` (registers
+  `src/config/fork/vite-brand-plugin.ts`), `public/favico/*.png|ico` and
+  `public/favico/finance/*` replaced with 83s1c icons generated from
+  `src/config/fork/assets/*.svg`. `LICENSE` and copyright headers untouched.
 
 ## Merge procedure
 
