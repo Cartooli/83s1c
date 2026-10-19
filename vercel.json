@@ -16,7 +16,7 @@
     },
     {
       "source": "/source",
-      "destination": "/source.html"
+      "destination": "/api/fork/source"
     }
   ],
   "headers": [
