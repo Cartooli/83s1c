@@ -146,6 +146,12 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
 - `middleware.ts`: `runtime: 'edge'`. New Vercel projects default Routing Middleware to Node.js,
   where upstream's extensionless imports fail (`MIDDLEWARE_INVOCATION_FAILED`).
 
+### 2026-10-20 — Remove upstream author badge
+
+- `src/components/DeckGLMap.ts`, `src/components/GlobeMap.ts`: removed the "© Elie Habib ·
+  Someone™" badge from the layers panel.
+- `src/styles/main.css`: removed the unused `.map-author-badge` rule.
+
 ## Merge procedure
 
 See `docs/fork/ENV-AND-INFRA.md` §8. In short:
