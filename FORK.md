@@ -178,6 +178,13 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
   and the mobile menu, and one `initForkViewControls()` call before `createPanels()`.
   Simple mode is CSS + relabeling only; saved panel settings are never modified.
 
+### 2026-10-20 — Remove Elie Habib references from served pages
+
+- `index.html`: removed `<meta name="author">`.
+- `public/world-monitor.md`: removed the founder X link and the founder keyword line. The
+  founder line and the press links stay because tests assert them (brand-identity,
+  geo-content-credibility).
+
 ## Merge procedure
 
 See `docs/fork/ENV-AND-INFRA.md` §8. In short:

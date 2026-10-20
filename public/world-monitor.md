@@ -78,7 +78,6 @@ Human about page: https://www.worldmonitor.app/docs/about
 - GitHub: https://github.com/koala73/worldmonitor
 - npm CLI: https://www.npmjs.com/package/worldmonitor
 - X / Twitter (product): https://x.com/worldmonitorai
-- X / Twitter (founder): https://x.com/eliehabib
 - WIRED feature: https://www.wired.com/story/world-monitor-elie-habib/
 - The Atlantic feature: https://www.theatlantic.com/technology/2026/03/world-monitor-situation-meme/686389/
 - El País feature: https://elpais.com/tecnologia/2026-03-16/el-riesgo-de-seguir-en-directo-el-conflicto-de-oriente-proximo-en-plataformas-hechas-con-ia-hacen-que-parezca-casi-como-un-videojuego.html
@@ -99,4 +98,3 @@ Human about page: https://www.worldmonitor.app/docs/about
 - worldmonitor.app
 - World Monitor dashboard
 - World Monitor geopolitical intelligence
-- Elie Habib World Monitor
