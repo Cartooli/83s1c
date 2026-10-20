@@ -21,6 +21,10 @@
     {
       "source": "/brief",
       "destination": "/brief.html"
+    },
+    {
+      "source": "/terminal",
+      "destination": "/terminal.html"
     }
   ],
   "headers": [

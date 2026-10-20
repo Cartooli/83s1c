@@ -60,3 +60,14 @@ describe('fork view routes', () => {
     assert.ok(rewrites.some((r: { source: string; destination: string }) => r.source === '/brief' && r.destination === '/brief.html'));
   });
 });
+
+describe('fork view routes: terminal', () => {
+  it('/terminal passes the middleware and has a vercel.json rewrite', async () => {
+    const { default: middleware } = await import('../middleware.ts');
+    const { readFileSync } = await import('node:fs');
+    const html = { headers: { accept: 'text/html', 'user-agent': 'Mozilla/5.0 Chrome/130' } };
+    assert.equal(middleware(new Request('https://83s1c.online/terminal', html)), undefined);
+    const rewrites = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8')).rewrites;
+    assert.ok(rewrites.some((r: { source: string; destination: string }) => r.source === '/terminal' && r.destination === '/terminal.html'));
+  });
+});

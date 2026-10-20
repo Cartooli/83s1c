@@ -155,6 +155,14 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
 - `vercel.json`: `/brief` → `/brief.html` rewrite (no header/CSP change).
 - `middleware.ts`: passthrough for `FORK_VIEW_PATHS` next to the `/source` one.
 
+### 2026-10-19 — Quick-read views: Terminal
+
+- Fork-owned: `src/config/fork/views/terminal*.ts`, `terminal.html`,
+  `tests/fork-views-terminal.test.mts`, `docs/fork/evidence/terminal-*`.
+- `vite.config.ts`: `terminal` Rollup input; `terminal.html` in `PAGES_WITH_OWN_HEAD_META`.
+- `vercel.json`: `/terminal` → `/terminal.html` rewrite (no header/CSP change).
+- `src/config/fork/views/routes.ts` (fork-owned): `/terminal` added to the middleware passthrough.
+
 ## Merge procedure
 
 See `docs/fork/ENV-AND-INFRA.md` §8. In short:

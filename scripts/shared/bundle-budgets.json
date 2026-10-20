@@ -7,7 +7,7 @@
   "totalTolerancePct": 0.25,
   "totalToleranceBytes": 16384,
   "total": {
-    "raw": 454918
+    "raw": 455432
   },
   "chunks": {
     "analytics": {
@@ -34,16 +34,24 @@
       "raw": 2715,
       "files": 1
     },
+    "finance-panels": {
+      "raw": 667,
+      "files": 1
+    },
     "font-settings": {
       "raw": 574,
       "files": 1
     },
+    "geo": {
+      "raw": 28356,
+      "files": 1
+    },
     "geo-convergence": {
-      "raw": 5044,
+      "raw": 5075,
       "files": 1
     },
     "geo-distance": {
-      "raw": 28576,
+      "raw": 328,
       "files": 1
     },
     "globe-marker-probe": {
@@ -55,7 +63,7 @@
       "files": 1
     },
     "main": {
-      "raw": 123095,
+      "raw": 123265,
       "files": 1
     },
     "map-layer-definitions": {
@@ -63,7 +71,7 @@
       "files": 1
     },
     "panels": {
-      "raw": 38196,
+      "raw": 37734,
       "files": 1
     },
     "runtime-config": {
@@ -97,11 +105,11 @@
   },
   "deferred": {
     "total": {
-      "raw": 1453849
+      "raw": 1455492
     },
     "chunks": {
       "App": {
-        "raw": 918354,
+        "raw": 919698,
         "files": 1
       },
       "ai-flow-settings": {
@@ -121,7 +129,7 @@
         "files": 1
       },
       "checkout": {
-        "raw": 13728,
+        "raw": 13820,
         "files": 1
       },
       "cloud-prefs-sync": {
@@ -161,7 +169,7 @@
         "files": 1
       },
       "markets": {
-        "raw": 9518,
+        "raw": 2574,
         "files": 1
       },
       "news-credibility": {
@@ -189,11 +197,15 @@
         "files": 1
       },
       "settings-persistence": {
-        "raw": 7832,
+        "raw": 7874,
         "files": 1
       },
       "source-provenance": {
         "raw": 88495,
+        "files": 1
+      },
+      "stocks": {
+        "raw": 7109,
         "files": 1
       },
       "storage-facility-registry-store": {
