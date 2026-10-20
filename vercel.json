@@ -17,6 +17,10 @@
     {
       "source": "/source",
       "destination": "/api/fork/source"
+    },
+    {
+      "source": "/brief",
+      "destination": "/brief.html"
     }
   ],
   "headers": [
