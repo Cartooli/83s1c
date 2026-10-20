@@ -146,6 +146,15 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
 - `middleware.ts`: `runtime: 'edge'`. New Vercel projects default Routing Middleware to Node.js,
   where upstream's extensionless imports fail (`MIDDLEWARE_INVOCATION_FAILED`).
 
+### 2026-10-19 — Quick-read views: Daily Brief
+
+- Fork-owned: `src/config/fork/views/` (Brief page, shared view chrome, route list),
+  `brief.html` (Vite entry), `tests/fork-views-brief.test.mts`, `docs/fork/evidence/brief-*`.
+- `vite.config.ts`: `brief` Rollup input; `brief.html` added to `PAGES_WITH_OWN_HEAD_META`
+  so the variant plugin keeps its own title.
+- `vercel.json`: `/brief` → `/brief.html` rewrite (no header/CSP change).
+- `middleware.ts`: passthrough for `FORK_VIEW_PATHS` next to the `/source` one.
+
 ## Merge procedure
 
 See `docs/fork/ENV-AND-INFRA.md` §8. In short:

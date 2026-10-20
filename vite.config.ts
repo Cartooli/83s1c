@@ -231,7 +231,7 @@ function brotliPrecompressPlugin(): Plugin {
 // Pages whose title, description and canonical are their own; the dashboard
 // brand meta below would otherwise mark them duplicates of /dashboard, or title
 // the desktop sign-in tab as the dashboard.
-const PAGES_WITH_OWN_HEAD_META = new Set(['verify.html']);
+const PAGES_WITH_OWN_HEAD_META = new Set(['verify.html', 'brief.html']);
 
 function htmlVariantPlugin(activeMeta: VariantMeta, activeVariant: string, isDesktopBuild: boolean): Plugin {
   return {
@@ -1215,6 +1215,8 @@ export default defineConfig(({ mode }) => {
           settings: resolve(__dirname, 'settings.html'),
           liveChannels: resolve(__dirname, 'live-channels.html'),
           verify: resolve(__dirname, 'verify.html'),
+          // 83s1c fork: quick-read views (FORK.md)
+          brief: resolve(__dirname, 'brief.html'),
         },
         output: {
           // onlyExplicitManualChunks keeps the panel clusters from forming
