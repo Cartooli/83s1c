@@ -18,3 +18,10 @@
 .variant-switcher {
   display: none !important;
 }
+
+/* Quick-read view switcher and Simple mode (src/config/fork/views/simple-mode.ts). */
+.v83-dash-views { display: inline-flex; gap: 2px; align-items: center; margin-right: 6px; }
+.v83-dash-views a, .v83-simple-toggle { font: inherit; font-size: 11px; color: var(--text-dim, inherit); text-decoration: none; padding: 3px 8px; border-radius: 999px; border: 1px solid transparent; background: none; cursor: pointer; }
+.v83-dash-views a[aria-current='page'] { color: var(--text, inherit); border-color: var(--border, currentColor); }
+.v83-simple-toggle[aria-pressed='true'] { color: var(--bg, #000); background: var(--accent, #5fb8c2); }
+.v83-simple-note { margin: 0; padding: 6px 10px; font-size: 12px; line-height: 1.4; color: var(--text-dim, inherit); border-bottom: 1px solid var(--border, transparent); }

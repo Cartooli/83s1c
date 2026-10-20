@@ -1,3 +1,4 @@
+import { FORK_VIEW_PATHS } from './src/config/fork/views/routes';
 import { acceptQuality, isKnownPublicPagePath, originNotFoundResponse } from './src/config/agent-not-found';
 import {
   DOCS_PUBLIC_ORIGIN,
@@ -204,6 +205,8 @@ export default function middleware(request: Request) {
   if (isRemovedApiPath(path)) return removedApiResponse();
   // 83s1c fork: /source (AGPL source offer) is a vercel.json rewrite to api/fork/source.
   if (path === '/source') return;
+  // 83s1c fork: quick-read views are vercel.json rewrites to their own HTML entries.
+  if (FORK_VIEW_PATHS.has(path)) return;
   const host = normalizeMcpHost(request.headers.get('host') ?? url.hostname);
   const aliasMcpRequest = isMcpAliasRequest(url.hostname, path)
     || isMcpAliasRequest(request.headers.get('host') ?? '', path);

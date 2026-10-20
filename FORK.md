@@ -152,6 +152,31 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
   Someone™" badge from the layers panel.
 - `src/styles/main.css`: removed the unused `.map-author-badge` rule.
 
+### 2026-10-19 — Quick-read views: Daily Brief
+
+- Fork-owned: `src/config/fork/views/` (Brief page, shared view chrome, route list),
+  `brief.html` (Vite entry), `tests/fork-views-brief.test.mts`, `docs/fork/evidence/brief-*`.
+- `vite.config.ts`: `brief` Rollup input; `brief.html` added to `PAGES_WITH_OWN_HEAD_META`
+  so the variant plugin keeps its own title.
+- `vercel.json`: `/brief` → `/brief.html` rewrite (no header/CSP change).
+- `middleware.ts`: passthrough for `FORK_VIEW_PATHS` next to the `/source` one.
+
+### 2026-10-19 — Quick-read views: Terminal
+
+- Fork-owned: `src/config/fork/views/terminal*.ts`, `terminal.html`,
+  `tests/fork-views-terminal.test.mts`, `docs/fork/evidence/terminal-*`.
+- `vite.config.ts`: `terminal` Rollup input; `terminal.html` in `PAGES_WITH_OWN_HEAD_META`.
+- `vercel.json`: `/terminal` → `/terminal.html` rewrite (no header/CSP change).
+- `src/config/fork/views/routes.ts` (fork-owned): `/terminal` added to the middleware passthrough.
+
+### 2026-10-19 — Quick-read views: Simple mode and dashboard switcher
+
+- Fork-owned: `src/config/fork/views/simple-mode.ts`, `tests/fork-views-simple.test.mts`,
+  `docs/fork/evidence/simple-*`, `dashboard-*`; styles appended to `src/config/fork/fork.css`.
+- `src/app/panel-layout.ts`: finance variant only — view switcher + Simple toggle in the header
+  and the mobile menu, and one `initForkViewControls()` call before `createPanels()`.
+  Simple mode is CSS + relabeling only; saved panel settings are never modified.
+
 ## Merge procedure
 
 See `docs/fork/ENV-AND-INFRA.md` §8. In short:
