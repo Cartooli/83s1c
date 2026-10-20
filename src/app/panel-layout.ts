@@ -79,6 +79,7 @@ import { showCheckoutFailureBanner } from '@/components/checkout-failure-banner'
 import { PanelTabBar, tabCapGateCopy } from '@/components/PanelTabBar';
 import { BRAND, sourceUrlForBuild } from '@/config/brand';
 import { forkAttributionLinksHtml, forkFooterHtml } from '@/config/fork/footer';
+import { forkViewControlsHtml, initForkViewControls } from '@/config/fork/views/simple-mode';
 import {
   loadTabsState,
   saveTabsState,
@@ -1148,6 +1149,7 @@ export class PanelLayoutManager implements AppModule {
           </button>
         </div>
         <div class="header-right">
+          ${SITE_VARIANT === 'finance' ? forkViewControlsHtml() : ''}
           <button class="search-btn" id="searchBtn"><kbd>⌘K</kbd> ${t('header.search')}</button>
           ${this.ctx.isDesktopApp ? '' : `<button class="copy-link-btn" id="copyLinkBtn">${t('header.copyLink')}</button>`}
           ${this.ctx.isDesktopApp ? '' : `<button class="copy-link-btn embed-link-btn" id="embedLinkBtn">${t('header.embed')}</button>`}
@@ -1210,6 +1212,7 @@ export class PanelLayoutManager implements AppModule {
           <span class="mobile-menu-item-label">${getCurrentTheme() === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
         </button>
         <div class="mobile-menu-divider"></div>
+        ${SITE_VARIANT === 'finance' ? forkViewControlsHtml() : ''}
         <div class="mobile-menu-footer-links">${forkAttributionLinksHtml()}</div>
         <div class="mobile-menu-version">v${__APP_VERSION__}</div>
       </nav>
@@ -1306,6 +1309,7 @@ export class PanelLayoutManager implements AppModule {
       }
     });
 
+    if (SITE_VARIANT === 'finance') initForkViewControls(this.ctx.container); // 83s1c fork
     await this.createPanels();
 
     this.initPanelTabs();
