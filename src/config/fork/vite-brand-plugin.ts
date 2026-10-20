@@ -4,6 +4,8 @@
 // variant-dashboard plugin anchors on them) and only their hrefs are rebranded. It only rewrites
 // <title>, <meta>, <link> and JSON-LD blocks, never executable inline scripts, so the
 // CSP script hashes in vercel.json stay valid.
+import { rmSync } from 'node:fs';
+import { resolve } from 'node:path';
 import type { Plugin } from 'vite';
 import { BRAND } from '../brand';
 
@@ -36,6 +38,20 @@ const SUMMARY = `${BRAND.name} is a real-time markets and world-events dashboard
 const ATTRIBUTION = `<a href="${BRAND.upstreamUrl}">Based on ${BRAND.upstreamName}</a> (AGPL-3.0) · `
   + '<a href="/source">Source</a>';
 
+/**
+ * Outside <script> blocks only: links to upstream pages go to the upstream repository
+ * (attribution) and bare upstream host mentions become ours. Scripts are left untouched
+ * so inline-script CSP hashes stay valid.
+ */
+export function rebrandLinks(html: string): string {
+  return html.split(/(<script\b[\s\S]*?<\/script>)/).map((part) => (part.startsWith('<script')
+    ? part
+    : part
+      .replace(/href="https:\/\/(?:www\.)?worldmonitor\.app\/[^"]+"/g, `href="${BRAND.upstreamUrl}"`)
+      .replace(UPSTREAM_ORIGIN, BRAND.origin)
+      .replace(/\bworldmonitor\.app\b/g, new URL(BRAND.origin).host))).join('');
+}
+
 /** Replaces upstream's static SEO copy, noscript block and skeleton brand in <body>. */
 export function rebrandBody(html: string): string {
   return html
@@ -52,23 +68,45 @@ export function rebrandBody(html: string): string {
     .replace(/(<span class="skeleton-brand-mark" aria-hidden="true"><\/span><span>)World Monitor(<\/span>)/, `$1${BRAND.name}$2`);
 }
 
+/**
+ * Upstream static files copied from public/ that belong to removed surfaces (SEO corpus,
+ * docs site, hosted agent/MCP discovery, Pro pricing, upstream robots variants). They
+ * describe and link to worldmonitor.app, so the fork build does not ship them.
+ */
+export const PRUNED_PUBLIC_PATHS = [
+  'sitemap.xml', 'sitemap-main.xml', 'schemamap.xml',
+  'llms.txt', 'llms-full.txt', 'api/llms.txt', 'api/download.md', 'developers',
+  'agent', 'agent.txt', 'agent-view.json', 'agents.md', 'ai-search.md', 'home.md',
+  'world-monitor.md', 'support.md', 'mcp-server.md', 'developers.md', 'sdks.md', 'auth.md',
+  'pricing.md', 'api-versioning.md', 'openapi.md', 'openapi.yaml', 'openapi.json',
+  'product-facts.json', 'plugin.json', 'trust', 'sandbox',
+  'robots.www.txt', 'robots.api.txt', 'robots.variant.txt',
+] as const;
+
 /** True for the dashboard document and upstream's per-variant dashboard siblings. */
 export function isDashboardHtml(fileName: string): boolean {
   return fileName === 'dashboard.html' || /^dashboard-[a-z]+\.html$/.test(fileName);
 }
 
 export function forkBrandHtmlPlugin(): Plugin {
+  let outDir = 'dist';
   return {
     name: 'fork-brand-html',
     enforce: 'post',
+    configResolved(config) {
+      outDir = resolve(config.root, config.build.outDir);
+    },
     // Runs after upstream's dashboard-output and variant-dashboard plugins (registered
     // after them in vite.config.ts), whose anchors expect upstream markup.
     generateBundle(_options, bundle) {
       for (const [fileName, output] of Object.entries(bundle)) {
         if (output.type !== 'asset' || !fileName.endsWith('.html') || typeof output.source !== 'string') continue;
-        const head = rebrandHead(output.source);
+        const head = rebrandLinks(rebrandHead(output.source));
         output.source = isDashboardHtml(fileName) ? rebrandBody(head) : head;
       }
+    },
+    closeBundle() {
+      for (const path of PRUNED_PUBLIC_PATHS) rmSync(resolve(outDir, path), { recursive: true, force: true });
     },
   };
 }

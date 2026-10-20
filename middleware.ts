@@ -19,6 +19,7 @@ import {
 } from './scripts/crawlable-chokepoint-live.mjs';
 import { liveTopicPageForPath, liveTopicReading } from './scripts/live-pages/index.mjs';
 import { replaceLiveSection } from './scripts/live-pages/common.mjs';
+import { isRemovedApiPath, removedApiResponse } from './src/config/fork/removed-routes';
 
 type LiveTopicPage = NonNullable<ReturnType<typeof liveTopicPageForPath>>;
 
@@ -199,6 +200,8 @@ export default function middleware(request: Request) {
   const url = new URL(request.url);
   const ua = request.headers.get('user-agent') ?? '';
   const path = url.pathname;
+  // 83s1c fork: removed surfaces (SPEC §4) never reach their handlers.
+  if (isRemovedApiPath(path)) return removedApiResponse();
   const host = normalizeMcpHost(request.headers.get('host') ?? url.hostname);
   const aliasMcpRequest = isMcpAliasRequest(url.hostname, path)
     || isMcpAliasRequest(request.headers.get('host') ?? '', path);
