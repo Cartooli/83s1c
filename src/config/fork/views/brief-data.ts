@@ -14,7 +14,7 @@ export async function loadBrief(fetchImpl: typeof fetch, baseUrl = ''): Promise<
   const results = await Promise.all(
     BRIEF_VARIANTS.map((variant) =>
       client.listFeedDigest({ variant, lang: 'en' }).then(
-        (r) => [variant, r.categories as DigestBuckets] as const,
+        (r) => [variant, (r.categories ?? {}) as DigestBuckets] as const,
         () => {
           failed.push(variant);
           return [variant, {}] as const;
