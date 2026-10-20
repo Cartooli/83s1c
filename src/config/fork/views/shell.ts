@@ -18,9 +18,9 @@ export function viewSwitcherHtml(current: string): string {
   return `<nav class="v83-switcher" aria-label="Views">${links}</nav>`;
 }
 
-/** Upstream map credit plus the fork footer links; kept verbatim on every view. */
+/** Fork footer links shown on every view. */
 export function viewFooterHtml(): string {
-  return `<footer class="v83-footer"><span class="v83-credit">© Elie Habib · Someone™</span><nav>${forkAttributionLinksHtml()}</nav></footer>`;
+  return `<footer class="v83-footer"><nav>${forkAttributionLinksHtml()}</nav></footer>`;
 }
 
 export function escapeHtml(s: string): string {
