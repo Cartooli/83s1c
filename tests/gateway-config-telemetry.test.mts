@@ -64,10 +64,10 @@ function makeCtx(): { ctx: { waitUntil: (p: Promise<unknown>) => void }; settle:
 }
 
 function makeSignedShapeRequest(): Request {
-  return new Request(`https://worldmonitor.app${PATH}`, {
+  return new Request(`https://83s1c.online${PATH}`, {
     method: 'GET',
     headers: {
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://83s1c.online',
       [INTERNAL_MCP_SIG_HEADER]: 'not-a-real-signature',
       [INTERNAL_MCP_USER_ID_HEADER]: 'user_config_telemetry',
       [INTERNAL_MCP_NONCE_HEADER]: 'nonce-config-telemetry',

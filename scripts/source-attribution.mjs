@@ -1343,7 +1343,9 @@ function overrideFor(observed) {
   const presentationOnly = observed.references.length > 0
     && observed.references.every((reference) => PRESENTATION_ONLY_FILES.has(reference.path));
   if (presentationOnly) return { provider: observed.host, ...GENERATED_EXCLUSIONS[0] };
-  if (EXCLUDED_HOSTS.has(observed.host) || observed.host.endsWith('.worldmonitor.app')) {
+  // 83s1c fork: our own origin is first-party, like upstream's worldmonitor.app hosts.
+  if (EXCLUDED_HOSTS.has(observed.host) || observed.host.endsWith('.worldmonitor.app')
+    || observed.host === '83s1c.online' || observed.host.endsWith('.83s1c.online')) {
     return { provider: observed.host, ...GENERATED_EXCLUSIONS[1] };
   }
   return {};

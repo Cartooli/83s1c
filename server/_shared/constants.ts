@@ -35,6 +35,11 @@ const YAHOO_MIN_GAP_MS = process.env.NODE_TEST_CONTEXT ? 1 : 600;
 let yahooQueue: Promise<void> = Promise.resolve();
 
 export function yahooGate(): Promise<void> {
+  // 83s1c fork: Yahoo quotes are desk-only (VITE_MARKET_QUOTES=1); the public deployment
+  // refuses before any request. node:test runs keep upstream's mocked-fetch suites working.
+  if (process.env.VITE_MARKET_QUOTES !== '1' && !process.env.NODE_TEST_CONTEXT) {
+    return Promise.reject(new Error('market quotes disabled on this deployment'));
+  }
   yahooQueue = yahooQueue.then(async () => {
     const elapsed = Date.now() - yahooLastRequest;
     if (elapsed < YAHOO_MIN_GAP_MS) {

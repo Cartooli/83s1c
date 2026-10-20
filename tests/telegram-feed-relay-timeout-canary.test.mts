@@ -108,9 +108,9 @@ async function runWithRelayFailure(path: string, relayError: Error): Promise<{
   }) as typeof fetch;
 
   const { token } = await issueSessionToken();
-  const res = await handler(new Request(`https://worldmonitor.app${path}`, {
+  const res = await handler(new Request(`https://83s1c.online${path}`, {
     method: 'GET',
-    headers: { origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token },
+    headers: { origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token },
   }));
   const body = await res.json();
   // The handler takes no `ctx`, so delivery is fire-and-forget on `keepalive`;

@@ -115,6 +115,20 @@
       ]
     },
     {
+      "host": "83s1c.online",
+      "provider": "83s1c.online",
+      "kind": "structured",
+      "observed": true,
+      "license": "Excluded: first-party, control-plane, UI, or rendering transport",
+      "attribution": "Excluded from the external-provider count: not an ingested upstream dataset.",
+      "status": "excluded",
+      "references": [
+        {
+          "path": "src/config/variant-meta.ts"
+        }
+      ]
+    },
+    {
       "host": "a16z.com",
       "provider": "a16z.com",
       "kind": "feed",
@@ -4453,9 +4467,6 @@
       "references": [
         {
           "path": "src/app/panel-layout.ts"
-        },
-        {
-          "path": "src/config/variant-meta.ts"
         }
       ]
     },
@@ -4827,6 +4838,9 @@
       "references": [
         {
           "path": "api/download.js"
+        },
+        {
+          "path": "api/fork/source.js"
         },
         {
           "path": "api/health.js"
@@ -6298,15 +6312,10 @@
       "host": "maps.worldmonitor.app",
       "provider": "maps.worldmonitor.app",
       "kind": "structured",
-      "observed": true,
+      "observed": false,
       "license": "Excluded: first-party, control-plane, UI, or rendering transport",
       "attribution": "Excluded from the external-provider count: not an ingested upstream dataset.",
-      "status": "excluded",
-      "references": [
-        {
-          "path": "src/services/country-geometry.ts"
-        }
-      ]
+      "status": "excluded"
     },
     {
       "host": "mapservices.weather.noaa.gov",

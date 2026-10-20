@@ -173,8 +173,8 @@ describe('demographics capability access and cache registration', () => {
         generated.createResilienceServiceRoutes(handlerModule.resilienceHandler, gatewayModule.serverOptions),
       );
       const response = await gateway(new Request(
-        'https://www.worldmonitor.app/api/resilience/v1/get-demographics-capability?countryCode=DE',
-        { headers: { Origin: 'https://worldmonitor.app' } },
+        'https://www.83s1c.online/api/resilience/v1/get-demographics-capability?countryCode=DE',
+        { headers: { Origin: 'https://83s1c.online' } },
       ));
       assert.equal(response.status, 401);
     } finally {

@@ -51,8 +51,8 @@ afterEach(() => {
 
 async function request(symbols = 'AAPL') {
   const { token } = await issueSessionToken();
-  return marketGateway(new Request(`https://worldmonitor.app/api/market/v1/list-market-quotes?symbols=${encodeURIComponent(symbols)}&_debug=1`, {
-    headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token },
+  return marketGateway(new Request(`https://83s1c.online/api/market/v1/list-market-quotes?symbols=${encodeURIComponent(symbols)}&_debug=1`, {
+    headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token },
   }));
 }
 function assertPrivateCache(response: Response) {

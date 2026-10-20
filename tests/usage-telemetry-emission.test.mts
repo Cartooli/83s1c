@@ -153,8 +153,8 @@ describe('gateway telemetry payload — widget credential', () => {
     const spy = installAxiomFetchSpy(ORIGINAL_FETCH);
     const handler = createDomainGateway([]);
     const recorder = makeRecordingCtx();
-    await handler(new Request('https://worldmonitor.app/api/market/v1/list-market-quotes', {
-      headers: { Origin: 'https://worldmonitor.app', 'x-widget-key': secret },
+    await handler(new Request('https://83s1c.online/api/market/v1/list-market-quotes', {
+      headers: { Origin: 'https://83s1c.online', 'x-widget-key': secret },
     }), recorder.ctx);
     await recorder.settled;
     assert.equal(spy.events.length, 1);
@@ -180,8 +180,8 @@ describe('gateway telemetry payload — domain extraction', () => {
 
     const recorder = makeRecordingCtx();
     const res = await handler(
-      new Request('https://worldmonitor.app/api/v2/shipping/route-intelligence', {
-        headers: { Origin: 'https://worldmonitor.app' },
+      new Request('https://83s1c.online/api/v2/shipping/route-intelligence', {
+        headers: { Origin: 'https://83s1c.online' },
       }),
       recorder.ctx,
     );
@@ -215,8 +215,8 @@ describe('gateway telemetry payload — domain extraction', () => {
 
     const recorder = makeRecordingCtx();
     const res = await handler(
-      new Request('https://worldmonitor.app/api/market/v1/list-market-quotes?symbols=AAPL', {
-        headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': SESSION_TOKEN },
+      new Request('https://83s1c.online/api/market/v1/list-market-quotes?symbols=AAPL', {
+        headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': SESSION_TOKEN },
       }),
       recorder.ctx,
     );
@@ -249,8 +249,8 @@ describe('gateway telemetry payload — domain extraction', () => {
 
     const recorder = makeRecordingCtx();
     const res = await handler(
-      new Request('https://worldmonitor.app/api/market/v1/list-market-quotes?symbols=AAPL', {
-        headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': SESSION_TOKEN },
+      new Request('https://83s1c.online/api/market/v1/list-market-quotes?symbols=AAPL', {
+        headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': SESSION_TOKEN },
       }),
       recorder.ctx,
     );
@@ -283,8 +283,8 @@ describe('gateway telemetry payload — domain extraction', () => {
 
     const recorder = makeRecordingCtx();
     const res = await handler(
-      new Request('https://worldmonitor.app/api/market/v1/list-market-quotes?symbols=AAPL&jmespath=a[[[', {
-        headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': SESSION_TOKEN },
+      new Request('https://83s1c.online/api/market/v1/list-market-quotes?symbols=AAPL&jmespath=a[[[', {
+        headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': SESSION_TOKEN },
       }),
       recorder.ctx,
     );
@@ -318,9 +318,9 @@ describe('gateway telemetry payload — trusted client attribution (#5228)', () 
     ]);
     const recorder = makeRecordingCtx();
     const response = await handler(
-      new Request('https://worldmonitor.app/api/market/v1/list-market-quotes?symbols=AAPL', {
+      new Request('https://83s1c.online/api/market/v1/list-market-quotes?symbols=AAPL', {
         headers: {
-          Origin: 'https://worldmonitor.app',
+          Origin: 'https://83s1c.online',
           'X-WorldMonitor-Key': SESSION_TOKEN,
           'cf-connecting-ip': '203.0.113.7',
           'cf-ipcountry': 'FR',
@@ -355,9 +355,9 @@ describe('gateway telemetry payload — trusted client attribution (#5228)', () 
     ]);
     const recorder = makeRecordingCtx();
     const response = await handler(
-      new Request('https://worldmonitor.app/api/market/v1/list-market-quotes?symbols=AAPL', {
+      new Request('https://83s1c.online/api/market/v1/list-market-quotes?symbols=AAPL', {
         headers: {
-          Origin: 'https://worldmonitor.app',
+          Origin: 'https://83s1c.online',
           'X-WorldMonitor-Key': SESSION_TOKEN,
           'cf-connecting-ip': '203.0.113.7',
           'cf-ipcountry': 'FR',
@@ -384,7 +384,7 @@ describe('gateway telemetry payload — trusted client attribution (#5228)', () 
 
   it('never falls back to an unproven Cloudflare country header', () => {
     process.env.CF_EDGE_PROOF_SECRET = 'edge-secret-xyz';
-    const request = new Request('https://worldmonitor.app/api/market/v1/list-market-quotes', {
+    const request = new Request('https://83s1c.online/api/market/v1/list-market-quotes', {
       headers: { 'cf-ipcountry': 'FR' },
     });
 
@@ -393,7 +393,7 @@ describe('gateway telemetry payload — trusted client attribution (#5228)', () 
 
   it('falls back from Cloudflare’s T1 pseudo-country to Vercel geography', () => {
     process.env.CF_EDGE_PROOF_SECRET = 'edge-secret-xyz';
-    const request = new Request('https://worldmonitor.app/api/market/v1/list-market-quotes', {
+    const request = new Request('https://83s1c.online/api/market/v1/list-market-quotes', {
       headers: {
         'cf-ipcountry': 'T1',
         'x-vercel-ip-country': 'ZA',
@@ -467,9 +467,9 @@ describe('gateway telemetry payload — bearer identity propagation', () => {
     const token = await signToken({ sub: 'user_pro', plan: 'pro' });
     const recorder = makeRecordingCtx();
     const res = await handler(
-      new Request('https://worldmonitor.app/api/resilience/v1/get-resilience-score?countryCode=US', {
+      new Request('https://83s1c.online/api/resilience/v1/get-resilience-score?countryCode=US', {
         headers: {
-          Origin: 'https://worldmonitor.app',
+          Origin: 'https://83s1c.online',
           Authorization: `Bearer ${token}`,
         },
       }),
@@ -528,9 +528,9 @@ describe('gateway telemetry payload — bearer identity propagation', () => {
     const token = await signToken({ sub: 'user_api', plan: 'api' });
     const recorder = makeRecordingCtx();
     const res = await handler(
-      new Request('https://worldmonitor.app/api/market/v1/analyze-stock?symbol=AAPL', {
+      new Request('https://83s1c.online/api/market/v1/analyze-stock?symbol=AAPL', {
         headers: {
-          Origin: 'https://worldmonitor.app',
+          Origin: 'https://83s1c.online',
           Authorization: `Bearer ${token}`,
         },
       }),
@@ -586,9 +586,9 @@ describe('gateway telemetry payload — bearer identity propagation', () => {
 
     const recorder = makeRecordingCtx();
     const res = await handler(
-      new Request('https://worldmonitor.app/api/market/v1/analyze-stock?symbol=AAPL', {
+      new Request('https://83s1c.online/api/market/v1/analyze-stock?symbol=AAPL', {
         headers: {
-          Origin: 'https://worldmonitor.app',
+          Origin: 'https://83s1c.online',
           'X-Api-Key': TELEMETRY_FREE_USER_KEY,
         },
       }),
@@ -650,9 +650,9 @@ describe('gateway telemetry payload — bearer identity propagation', () => {
 
     const recorder = makeRecordingCtx();
     const res = await handler(
-      new Request('https://worldmonitor.app/api/cyber/v1/list-cyber-threats', {
+      new Request('https://83s1c.online/api/cyber/v1/list-cyber-threats', {
         headers: {
-          Origin: 'https://worldmonitor.app',
+          Origin: 'https://83s1c.online',
           'X-Api-Key': TELEMETRY_ACTIVE_USER_KEY,
         },
       }),
@@ -687,9 +687,9 @@ describe('gateway telemetry payload — bearer identity propagation', () => {
 
     const recorder = makeRecordingCtx();
     const res = await handler(
-      new Request('https://worldmonitor.app/api/resilience/v1/get-resilience-score?countryCode=US', {
+      new Request('https://83s1c.online/api/resilience/v1/get-resilience-score?countryCode=US', {
         headers: {
-          Origin: 'https://worldmonitor.app',
+          Origin: 'https://83s1c.online',
           Authorization: 'Bearer not-a-real-token',
         },
       }),
@@ -722,8 +722,8 @@ describe('gateway telemetry payload — ctx-optional safety', () => {
     ]);
 
     const res = await handler(
-      new Request('https://worldmonitor.app/api/market/v1/list-market-quotes?symbols=AAPL', {
-        headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': SESSION_TOKEN },
+      new Request('https://83s1c.online/api/market/v1/list-market-quotes?symbols=AAPL', {
+        headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': SESSION_TOKEN },
       }),
     );
     assert.equal(res.status, 200);
@@ -762,8 +762,8 @@ describe('gateway telemetry payload — unmatched route reason labels', () => {
 
     const recorder = makeRecordingCtx();
     const res = await handler(
-      new Request('https://worldmonitor.app/api/trade/v1/list-tariffs', {
-        headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': SESSION_TOKEN },
+      new Request('https://83s1c.online/api/trade/v1/list-tariffs', {
+        headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': SESSION_TOKEN },
       }),
       recorder.ctx,
     );
@@ -802,9 +802,9 @@ describe('gateway telemetry payload — unmatched route reason labels', () => {
 
     const recorder = makeRecordingCtx();
     const res = await handler(
-      new Request('https://worldmonitor.app/api/market/v1/list-market-quotes', {
+      new Request('https://83s1c.online/api/market/v1/list-market-quotes', {
         method: 'DELETE',
-        headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': SESSION_TOKEN },
+        headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': SESSION_TOKEN },
       }),
       recorder.ctx,
     );

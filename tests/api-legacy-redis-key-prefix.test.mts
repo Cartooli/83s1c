@@ -373,7 +373,7 @@ describe('health sweep classifies the temporal producer keys into the preview na
     }) as typeof fetch;
 
     const response = await handleHealth(
-      new Request('https://api.worldmonitor.app/api/health', {
+      new Request('https://83s1c.online/api/health', {
         headers: { 'x-worldmonitor-key': 'prefix-health-test-key' },
       }),
       undefined,
@@ -444,7 +444,7 @@ describe('seed-health classifies mixed producer keys for preview (#7674)', () =>
       throw new Error(`unexpected global fetch: ${url}`);
     }) as typeof fetch;
 
-    await handleSeedHealth(new Request('https://api.worldmonitor.app/api/seed-health', {
+    await handleSeedHealth(new Request('https://83s1c.online/api/seed-health', {
       headers: { 'x-worldmonitor-key': 'prefix-seed-health-test-key' },
     }), { now: Date.parse('2026-09-05T00:00:00Z') });
 
@@ -535,8 +535,8 @@ describe('brief envelopes stay raw under preview (#7674)', () => {
     }) as typeof fetch;
 
     const res = await handler(new Request(
-      `https://worldmonitor.app/api/brief/${userId}/${issueDate}?t=${token}`,
-      { method: 'GET', headers: { origin: 'https://worldmonitor.app' } },
+      `https://83s1c.online/api/brief/${userId}/${issueDate}?t=${token}`,
+      { method: 'GET', headers: { origin: 'https://83s1c.online' } },
     ));
     // Miss → the route's documented 404; the assertion is about the KEY.
     assert.equal(res.status, 404);

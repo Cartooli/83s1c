@@ -48,8 +48,8 @@ for (const failure of ['missing-config', 'redis-error', 'timeout']) {
     const pending = [];
     const { token } = await issueSessionToken();
     try {
-      const response = await handler(new Request('https://worldmonitor.app/api/x-feed', {
-        headers: { origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token },
+      const response = await handler(new Request('https://83s1c.online/api/x-feed', {
+        headers: { origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token },
       }), { waitUntil: (promise) => pending.push(promise) });
       assert.equal(response.status, 503);
       assert.equal(pending.length, 1);

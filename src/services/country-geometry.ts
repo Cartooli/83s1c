@@ -20,8 +20,8 @@ const COUNTRY_GEOJSON_URL = '/data/countries.geojson';
 const COUNTRY_GEOJSON_TIMEOUT_MS = 15_000;
 
 /** Optional higher-resolution boundary overrides sourced from Natural Earth (served from R2 CDN). */
-const COUNTRY_OVERRIDES_URL = (typeof import.meta.env !== 'undefined' ? import.meta.env.VITE_COUNTRY_OVERRIDES_URL : undefined)
-  ?? 'https://maps.worldmonitor.app/country-boundary-overrides.geojson';
+// 83s1c fork: no default; upstream's default was its own CDN (maps.worldmonitor.app).
+const COUNTRY_OVERRIDES_URL: string | undefined = typeof import.meta.env !== 'undefined' ? import.meta.env.VITE_COUNTRY_OVERRIDES_URL : undefined;
 const COUNTRY_OVERRIDE_TIMEOUT_MS = 3_000;
 
 /**
@@ -310,18 +310,20 @@ async function ensureLoaded(): Promise<void> {
       markLcpDebug('wm:data:country-geometry-fetch-ready', { features: data.features.length });
 
       // Apply optional higher-resolution boundary overrides (sourced from Natural Earth)
-      try {
-        const overrideResp = await fetch(COUNTRY_OVERRIDES_URL, {
-          signal: makeTimeout(COUNTRY_OVERRIDE_TIMEOUT_MS),
-        });
-        if (overrideResp.ok) {
-          const overrideData = (await overrideResp.json()) as FeatureCollection<Geometry>;
-          if (overrideData?.type === 'FeatureCollection' && Array.isArray(overrideData.features)) {
-            applyCountryGeometryOverrides(data, overrideData);
+      if (COUNTRY_OVERRIDES_URL) {
+        try {
+          const overrideResp = await fetch(COUNTRY_OVERRIDES_URL, {
+            signal: makeTimeout(COUNTRY_OVERRIDE_TIMEOUT_MS),
+          });
+          if (overrideResp.ok) {
+            const overrideData = (await overrideResp.json()) as FeatureCollection<Geometry>;
+            if (overrideData?.type === 'FeatureCollection' && Array.isArray(overrideData.features)) {
+              applyCountryGeometryOverrides(data, overrideData);
+            }
           }
+        } catch {
+          // Overrides optional; ignore fetch/parse errors
         }
-      } catch {
-        // Overrides optional; ignore fetch/parse errors
       }
     } catch (err) {
       rebuildCountryIndex({ type: 'FeatureCollection', features: [] });

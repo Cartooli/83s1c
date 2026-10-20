@@ -296,7 +296,7 @@ describe('Windy webcam image proxy access contract', () => {
     __resetRateLimitForTest();
 
     const response = await checkEndpointRateLimit(
-      new Request(`https://worldmonitor.app${WEBCAM_IMAGE_PATH}`),
+      new Request(`https://83s1c.online${WEBCAM_IMAGE_PATH}`),
       WEBCAM_IMAGE_PATH,
       {},
     );
@@ -323,9 +323,9 @@ describe('Windy webcam image proxy access contract', () => {
       },
     }]);
 
-    const response = await gateway(new Request(`https://worldmonitor.app${WEBCAM_IMAGE_PATH}?webcam_id=camera-123`, {
+    const response = await gateway(new Request(`https://83s1c.online${WEBCAM_IMAGE_PATH}?webcam_id=camera-123`, {
       headers: {
-        Origin: 'https://worldmonitor.app',
+        Origin: 'https://83s1c.online',
         Cookie: `wm-session=${token}`,
       },
     }));
@@ -417,9 +417,9 @@ describe('Windy webcam image proxy access contract', () => {
     assert.equal(PUBLIC_NO_AUTH_RPC_PATHS.has(WEBCAM_IMAGE_PATH), false);
     assert.equal(PREMIUM_RPC_PATHS.has(WEBCAM_IMAGE_PATH), false);
 
-    const response = await gateway(new Request(`https://worldmonitor.app${WEBCAM_IMAGE_PATH}?webcam_id=camera-123`, {
+    const response = await gateway(new Request(`https://83s1c.online${WEBCAM_IMAGE_PATH}?webcam_id=camera-123`, {
       headers: {
-        Origin: 'https://worldmonitor.app',
+        Origin: 'https://83s1c.online',
         'X-WorldMonitor-Key': token,
       },
     }));
@@ -427,9 +427,9 @@ describe('Windy webcam image proxy access contract', () => {
     assert.equal(response.status, 200);
     assert.equal(handlerCalls, 1);
 
-    const cookieResponse = await gateway(new Request(`https://worldmonitor.app${WEBCAM_IMAGE_PATH}?webcam_id=camera-123`, {
+    const cookieResponse = await gateway(new Request(`https://83s1c.online${WEBCAM_IMAGE_PATH}?webcam_id=camera-123`, {
       headers: {
-        Origin: 'https://worldmonitor.app',
+        Origin: 'https://83s1c.online',
         Cookie: `wm-session=${token}`,
       },
     }));
@@ -437,8 +437,8 @@ describe('Windy webcam image proxy access contract', () => {
     assert.equal(cookieResponse.status, 200);
     assert.equal(handlerCalls, 2);
 
-    const unauthenticatedResponse = await gateway(new Request(`https://worldmonitor.app${WEBCAM_IMAGE_PATH}?webcam_id=camera-123`, {
-      headers: { Origin: 'https://worldmonitor.app' },
+    const unauthenticatedResponse = await gateway(new Request(`https://83s1c.online${WEBCAM_IMAGE_PATH}?webcam_id=camera-123`, {
+      headers: { Origin: 'https://83s1c.online' },
     }));
 
     assert.equal(unauthenticatedResponse.status, 401);

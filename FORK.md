@@ -82,6 +82,49 @@ Upstream files edited:
 Skipped tests: `scripts/fork/skipped-tests.json` lists every suite skipped because its
 subject was removed, with the reason. Never add a suite there to hide a regression.
 
+### 2026-10-19 — M2: finance variant, CORS, rebrand
+
+- `src/config/variant.ts`: the final fallback returns `buildVariant` (was `'full'`), so
+  `VITE_VARIANT=finance` applies on 83s1c.online and previews. Test:
+  `tests/fork-variant-fallback.test.mts`; `tests/runtime-env-guards.test.mjs` now expects five
+  `buildVariant` fallbacks.
+- CORS allowlists in `api/_cors.js`, `server/cors.ts` and `api/youtube/embed.js`: trust only
+  `^https://(www.)?83s1c.online$` and `^https://83s1c-[a-z0-9-]+-dwellchecker.vercel.app$`.
+  Upstream worldmonitor.app, eliewm previews and Tauri origins removed; refusal fallback
+  origin is `https://83s1c.online`. Tests: `tests/fork-cors-allowlist.test.mts`,
+  `api/_cors.test.mjs` (look-alikes, other teams, former desktop origins).
+- Test origin fixtures: `scripts/fork/rewrite-test-origins.mjs` rewrote upstream/Tauri
+  origins to ours in the suites listed in `scripts/fork/origin-rewritten-tests.json`. After an
+  upstream merge, take upstream's version of those files and re-run the script on them.
+  `api/youtube/embed.test.mjs` uses our hosts instead of Convex payment return origins.
+- `src/services/runtime.ts`: `getCanonicalApiOrigin()` falls back to the page origin (was
+  `api.worldmonitor.app`).
+- `src/services/country-geometry.ts`: boundary overrides load only when
+  `VITE_COUNTRY_OVERRIDES_URL` is set (default was `maps.worldmonitor.app`).
+- `index.html`: upstream `api.`/`maps.worldmonitor.app` preconnects removed.
+- `vercel.json`: replaced by a minimal fork config (finance build, `/` → `/dashboard`,
+  `/source`, security headers, `frame-ancestors 'none'`). HSTS `preload` intentionally off.
+- `src/config/panels.ts`: finance panels and map layers go through
+  `src/config/fork/finance-panels.ts` (public open-data set; quote panels only with
+  `VITE_MARKET_QUOTES=1`; conflicts/hotspots on, AIS/flights/military off).
+- `server/_shared/constants.ts`: `yahooGate()` refuses unless `VITE_MARKET_QUOTES=1`, so
+  request-time Yahoo calls fail closed on the public deployment.
+- `api/api-route-exceptions.json`: entry for fork-owned `api/fork/source.js` (`/source`, AGPL
+  §13 redirect to the deployed commit).
+- `package.json`: `test:sidecar` also runs `api/fork/source.test.mjs`.
+- Rebrand: `src/app/panel-layout.ts` (logo, header source link, mobile menu, footer via
+  `src/config/fork/footer.ts`; upstream author's X handle removed from the header, attribution
+  kept in the footer), `src/services/i18n.ts` (registers `src/config/fork/brand-strings.ts`),
+  `src/config/variant-meta.ts` (finance meta), `vite.config.ts` (registers
+  `src/config/fork/vite-brand-plugin.ts`), `public/favico/*.png|ico` and
+  `public/favico/finance/*` replaced with 83s1c icons generated from
+  `src/config/fork/assets/*.svg`. `LICENSE` and copyright headers untouched.
+- `package.json`: `prebuild:finance` no longer regenerates docs page dates. That step unshallows
+  the repo over HTTPS, which fails for a private repo on Vercel, and it only feeds the removed
+  docs site; the generated file stays committed.
+- `scripts/shared/bundle-budgets.json`: regenerated (`npm run bundle:budgets`) after the removed surfaces
+  reshuffled chunks (the `clerk` and `safe-storage` chunks are gone). Regenerate after upstream merges.
+
 ## Merge procedure
 
 See `docs/fork/ENV-AND-INFRA.md` §8. In short:

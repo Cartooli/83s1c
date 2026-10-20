@@ -19,7 +19,7 @@ delete process.env.UPSTASH_REDIS_REST_TOKEN;
 const { default: handler } = await import('../api/skills/fetch-agentskills.ts');
 const { __resetRateLimitForTest } = await import('../server/_shared/rate-limit.ts');
 
-const ENDPOINT = 'https://worldmonitor.app/api/skills/fetch-agentskills';
+const ENDPOINT = 'https://83s1c.online/api/skills/fetch-agentskills';
 const SKILL_URL = 'https://agentskills.io/skills/demo';
 
 let ipCounter = 0;
@@ -34,7 +34,7 @@ function makeRequest(body, ip) {
   return new Request(ENDPOINT, {
     method: 'POST',
     headers: {
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://83s1c.online',
       'Content-Type': 'application/json',
       'x-real-ip': ip,
     },
@@ -126,7 +126,7 @@ test('returns 429 and never reaches agentskills.io when the rate limit is exhaus
   assert.match(res.headers.get('RateLimit-Reset') ?? '', /^\d+$/);
   assert.match(res.headers.get('RateLimit-Policy') ?? '', /^"default";q=30;w=60$/);
   assert.match(res.headers.get('RateLimit') ?? '', /^"default";r=0;t=\d+$/);
-  assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://worldmonitor.app');
+  assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://83s1c.online');
   // The headers above echo the mocked reply, so they cannot tell 30 from 5000.
   // Assert what the handler SENT. (#6412 review)
   assertLimiterBudget(assert, calls, {
@@ -149,7 +149,7 @@ test('meters a malformed body too, so an invalid payload is not a free path', as
 
   const req = new Request(ENDPOINT, {
     method: 'POST',
-    headers: { Origin: 'https://worldmonitor.app', 'x-real-ip': uniqueCallerIp() },
+    headers: { Origin: 'https://83s1c.online', 'x-real-ip': uniqueCallerIp() },
     body: 'not json',
   });
   const res = await handler(req, ctx);

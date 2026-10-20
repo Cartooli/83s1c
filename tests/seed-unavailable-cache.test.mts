@@ -87,8 +87,8 @@ after(() => {
 });
 
 function request(path: string) {
-  return gateway(new Request(`https://worldmonitor.app/api/${path}`, {
-    headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token },
+  return gateway(new Request(`https://83s1c.online/api/${path}`, {
+    headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token },
   }));
 }
 function assertNoStore(response: Response) {
@@ -374,7 +374,7 @@ it('default crypto missing seed is degraded and no-store', async () => {
 it('physical premiums Redis error is 503 and no-store', async () => {
   mode = 'http-error';
   process.env.WORLDMONITOR_VALID_KEYS = 'cache-contract-test-key';
-  const response = await gateway(new Request('https://worldmonitor.app/api/market/v1/get-physical-premiums?_debug=1', { headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': 'cache-contract-test-key' } }));
+  const response = await gateway(new Request('https://83s1c.online/api/market/v1/get-physical-premiums?_debug=1', { headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': 'cache-contract-test-key' } }));
   assert.equal(response.status, 503);
   assert.equal(response.headers.get('Cache-Control'), 'no-store');
 });

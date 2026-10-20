@@ -64,9 +64,9 @@ function entitlement(planKey: string, tier: number, validUntil = Date.now() + 60
 }
 
 function request(path: string, headers: HeadersInit): Request {
-  return new Request(`https://worldmonitor.app${path}?_debug=1`, {
+  return new Request(`https://83s1c.online${path}?_debug=1`, {
     headers: {
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://83s1c.online',
       ...headers,
     },
   });

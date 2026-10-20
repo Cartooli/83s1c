@@ -81,14 +81,14 @@ describe('embed public data auth', () => {
     const gateway = makeGateway();
 
     for (const path of EMBED_PUBLIC_RPC_PATHS) {
-      const res = await gateway(new Request(`https://worldmonitor.app${path}`, {
-        headers: { Origin: 'https://worldmonitor.app' },
+      const res = await gateway(new Request(`https://83s1c.online${path}`, {
+        headers: { Origin: 'https://83s1c.online' },
       }));
       assert.equal(res.status, 401, `${path} must not answer a credential-less request`);
     }
 
-    const gated = await gateway(new Request('https://worldmonitor.app/api/conflict/v1/list-ucdp-events', {
-      headers: { Origin: 'https://worldmonitor.app' },
+    const gated = await gateway(new Request('https://83s1c.online/api/conflict/v1/list-ucdp-events', {
+      headers: { Origin: 'https://83s1c.online' },
     }));
     assert.equal(gated.status, 401);
   });
@@ -97,13 +97,13 @@ describe('embed public data auth', () => {
     const gateway = makeGateway();
 
     for (const path of EMBED_PUBLIC_RPC_PATHS) {
-      const viaCookie = await gateway(new Request(`https://worldmonitor.app${path}`, {
-        headers: { Origin: 'https://worldmonitor.app', Cookie: `wm-session=${sessionToken}` },
+      const viaCookie = await gateway(new Request(`https://83s1c.online${path}`, {
+        headers: { Origin: 'https://83s1c.online', Cookie: `wm-session=${sessionToken}` },
       }));
       assert.equal(viaCookie.status, 200, `${path} must answer a wms_ session cookie`);
 
-      const viaHeader = await gateway(new Request(`https://worldmonitor.app${path}`, {
-        headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': sessionToken },
+      const viaHeader = await gateway(new Request(`https://83s1c.online${path}`, {
+        headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': sessionToken },
       }));
       assert.equal(viaHeader.status, 200, `${path} must answer a wms_ session header`);
     }
@@ -119,10 +119,10 @@ describe('embed public data auth', () => {
     // request (#5386). No in-repo caller reads it; closing it would break
     // documented third-party server-to-server access, not the embed.
     for (const url of [
-      'https://worldmonitor.app/api/bootstrap?keys=weatherAlerts&public=1',
-      'https://worldmonitor.app/api/bootstrap?keys=weatherAlerts',
+      'https://83s1c.online/api/bootstrap?keys=weatherAlerts&public=1',
+      'https://83s1c.online/api/bootstrap?keys=weatherAlerts',
     ]) {
-      const publicReq = new Request(url, { headers: { Origin: 'https://worldmonitor.app' } });
+      const publicReq = new Request(url, { headers: { Origin: 'https://83s1c.online' } });
 
       const publicRes = await bootstrapHandler(publicReq);
       // This test intentionally has no Redis credentials. The public route still
@@ -133,28 +133,28 @@ describe('embed public data auth', () => {
     }
 
     assert.equal(isPublicWeatherBootstrapRequest(new Request(
-      'https://worldmonitor.app/api/bootstrap?keys=weatherAlerts&public=1',
-      { headers: { Origin: 'https://worldmonitor.app' } },
+      'https://83s1c.online/api/bootstrap?keys=weatherAlerts&public=1',
+      { headers: { Origin: 'https://83s1c.online' } },
     )), true);
     assert.equal(isAnonymousWeatherBootstrapRequest(new Request(
-      'https://worldmonitor.app/api/bootstrap?keys=weatherAlerts',
-      { headers: { Origin: 'https://worldmonitor.app' } },
+      'https://83s1c.online/api/bootstrap?keys=weatherAlerts',
+      { headers: { Origin: 'https://83s1c.online' } },
     )), true);
 
     const rejected = [
-      'https://worldmonitor.app/api/bootstrap',
-      'https://worldmonitor.app/api/bootstrap?tier=fast',
-      'https://worldmonitor.app/api/bootstrap?keys=weatherAlerts,marketQuotes',
-      'https://worldmonitor.app/api/bootstrap?keys=marketQuotes',
-      'https://worldmonitor.app/api/bootstrap?keys=weatherAlerts&debug=1',
-      'https://worldmonitor.app/api/bootstrap?keys=weatherAlerts&keys=marketQuotes',
-      'https://worldmonitor.app/api/bootstrap?keys=weatherAlerts&public=1&debug=1',
-      'https://worldmonitor.app/api/bootstrap?keys=weatherAlerts&public=0',
-      'https://worldmonitor.app/api/bootstrap?keys=marketQuotes&public=1',
+      'https://83s1c.online/api/bootstrap',
+      'https://83s1c.online/api/bootstrap?tier=fast',
+      'https://83s1c.online/api/bootstrap?keys=weatherAlerts,marketQuotes',
+      'https://83s1c.online/api/bootstrap?keys=marketQuotes',
+      'https://83s1c.online/api/bootstrap?keys=weatherAlerts&debug=1',
+      'https://83s1c.online/api/bootstrap?keys=weatherAlerts&keys=marketQuotes',
+      'https://83s1c.online/api/bootstrap?keys=weatherAlerts&public=1&debug=1',
+      'https://83s1c.online/api/bootstrap?keys=weatherAlerts&public=0',
+      'https://83s1c.online/api/bootstrap?keys=marketQuotes&public=1',
     ];
 
     for (const url of rejected) {
-      const req = new Request(url, { headers: { Origin: 'https://worldmonitor.app' } });
+      const req = new Request(url, { headers: { Origin: 'https://83s1c.online' } });
       assert.equal(isPublicWeatherBootstrapRequest(req), false, url);
       assert.equal(isAnonymousWeatherBootstrapRequest(req), false, url);
       const res = await bootstrapHandler(req);

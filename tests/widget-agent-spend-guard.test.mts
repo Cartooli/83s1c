@@ -34,10 +34,10 @@ function allowRelay(): void {
 }
 
 function postRequest(headers: Record<string, string> = {}, body = '{"prompt":"Build a widget"}'): Request {
-  return new Request('https://www.worldmonitor.app/api/widget-agent', {
+  return new Request('https://www.83s1c.online/api/widget-agent', {
     method: 'POST',
     headers: {
-      Origin: 'https://www.worldmonitor.app',
+      Origin: 'https://www.83s1c.online',
       'Content-Type': 'application/json',
       'X-WorldMonitor-Key': 'browser-test-key',
       ...headers,
@@ -220,10 +220,10 @@ describe('widget-agent spend guard', () => {
     assert.notEqual(secondSpendId, firstSpendId);
 
     // The same credential arriving by protected cookie shares the header's bucket.
-    const viaCookie = await handler(new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const viaCookie = await handler(new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
-        Origin: 'https://www.worldmonitor.app',
+        Origin: 'https://www.83s1c.online',
         'Content-Type': 'application/json',
         Cookie: '__Host-wm-pro-key=second-enterprise-key',
       },
@@ -248,10 +248,10 @@ describe('widget-agent spend guard', () => {
       },
     });
 
-    const res = await handler(new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const res = await handler(new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'GET',
       headers: {
-        Origin: 'https://www.worldmonitor.app',
+        Origin: 'https://www.83s1c.online',
         'X-WorldMonitor-Key': 'browser-test-key',
       },
     }));

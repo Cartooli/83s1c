@@ -130,8 +130,8 @@ describe('reverse-geocode shared cache contract', () => {
     }) as typeof fetch;
 
     const response = await edgeReverseGeocode(new Request(
-      'https://worldmonitor.app/api/reverse-geocode?lat=49&lon=-97',
-      { headers: { Origin: 'https://worldmonitor.app', 'x-real-ip': '198.51.100.40' } },
+      'https://83s1c.online/api/reverse-geocode?lat=49&lon=-97',
+      { headers: { Origin: 'https://83s1c.online', 'x-real-ip': '198.51.100.40' } },
     ));
     assert.equal(response.status, 502);
     assert.deepEqual(await response.json(), { error: 'Nominatim request failed' });
@@ -318,12 +318,12 @@ describe('reverse-geocode shared cache contract', () => {
     const waited: Promise<unknown>[] = [];
     const edgeCtx = { waitUntil: (promise: Promise<unknown>) => { waited.push(promise); } };
     const first = await edgeReverseGeocode(new Request(
-      'https://worldmonitor.app/api/reverse-geocode?lat=40.700&lon=-74.000',
-      { headers: { Origin: 'https://worldmonitor.app', 'x-real-ip': '198.51.100.10' } },
+      'https://83s1c.online/api/reverse-geocode?lat=40.700&lon=-74.000',
+      { headers: { Origin: 'https://83s1c.online', 'x-real-ip': '198.51.100.10' } },
     ), edgeCtx);
     const second = await edgeReverseGeocode(new Request(
-      'https://worldmonitor.app/api/reverse-geocode?lat=34.052&lon=-118.244',
-      { headers: { Origin: 'https://worldmonitor.app', 'x-real-ip': '198.51.100.11' } },
+      'https://83s1c.online/api/reverse-geocode?lat=34.052&lon=-118.244',
+      { headers: { Origin: 'https://83s1c.online', 'x-real-ip': '198.51.100.11' } },
     ), edgeCtx);
     await Promise.all(waited);
 
@@ -421,7 +421,7 @@ describe('browser reverse-geocode memoization', () => {
     globalThis.fetch = (async (input: RequestInfo | URL) => {
       const url = String(input);
       urls.push(url);
-      const parsed = new URL(url, 'https://worldmonitor.app');
+      const parsed = new URL(url, 'https://83s1c.online');
       const lat = Number(parsed.searchParams.get('lat'));
       if (lat >= 49) {
         return json({ country: 'Canada', code: 'CA', displayName: 'Manitoba, Canada' });

@@ -18,7 +18,7 @@ delete process.env.UPSTASH_REDIS_REST_TOKEN;
 const { default: handler } = await import('../api/reverse-geocode.js');
 const { __resetRateLimitForTest } = await import('../api/_rate-limit.js');
 
-const ENDPOINT = 'https://api.worldmonitor.app/api/reverse-geocode';
+const ENDPOINT = 'https://83s1c.online/api/reverse-geocode';
 
 let ipCounter = 0;
 /** Distinct caller per test — the limiter memoizes per scope. */
@@ -29,7 +29,7 @@ function uniqueCallerIp() {
 
 function makeRequest(query, ip) {
   return new Request(`${ENDPOINT}?${query}`, {
-    headers: { Origin: 'https://worldmonitor.app', 'x-real-ip': ip },
+    headers: { Origin: 'https://83s1c.online', 'x-real-ip': ip },
   });
 }
 
@@ -108,7 +108,7 @@ test('returns 429 and never reaches Nominatim when the rate limit is exhausted',
   // The headers above echo the mocked reply, so they cannot tell 60 from 5000.
   // Assert what the handler SENT. (#6412 review)
   assertLimiterBudget(assert, calls, { limit: 60, windowSeconds: 60, scope: 'reverse-geocode' });
-  assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://worldmonitor.app');
+  assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://83s1c.online');
   assert.deepEqual(
     nominatimCalls(calls).map((c) => c.url),
     [],

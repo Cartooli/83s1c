@@ -39,7 +39,7 @@ import {
 } from '../server/_shared/rate-limit.ts';
 import { installRedis } from './helpers/fake-upstash-redis.mts';
 
-const ORIGIN = 'https://www.worldmonitor.app';
+const ORIGIN = 'https://www.83s1c.online';
 const CALLER_IP = '203.0.113.9';
 
 function makeCtx(headers: Record<string, string> = {}) {
@@ -741,7 +741,7 @@ describe('batch gateway access', () => {
 
     const gateway = createDomainGateway(generated.createBatchServiceRoutes(batchHandler, serverOptions));
     const res = await gateway(
-      new Request('https://www.worldmonitor.app/api/batch/v1/execute', {
+      new Request('https://www.83s1c.online/api/batch/v1/execute', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ operations: [{ id: 'a', path: '/api/market/v1/get-fear-greed-index' }] }),

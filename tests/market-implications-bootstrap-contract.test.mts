@@ -7,7 +7,7 @@ import bootstrap from '../api/bootstrap.js';
 import { issueSessionToken } from '../api/_session.js';
 import { publishBootstrapTier } from '../scripts/publish-bootstrap-tiers.mjs';
 import { listMarketImplications } from '../server/worldmonitor/intelligence/v1/list-market-implications.ts';
-const PATH = 'https://api.worldmonitor.app/api/infrastructure/v1/get-bootstrap-data';
+const PATH = 'https://83s1c.online/api/infrastructure/v1/get-bootstrap-data';
 const SEED = 'intelligence:market-implications:v1';
 const fixture = { cards: [{ ticker: 'SYNTH', title: 'premium-fixture-only', risk_caveat: 'test risk' }], generatedAt: '2026-09-11T00:00:00Z' };
 async function setup(t: TestContext) {
@@ -47,7 +47,7 @@ async function setup(t: TestContext) {
     }));
   });
   const token = (await issueSessionToken()).token;
-  const request = (query: string) => rpc(new Request(PATH + query, { headers: { 'X-WorldMonitor-Key': token, Origin: 'https://worldmonitor.app' } }));
+  const request = (query: string) => rpc(new Request(PATH + query, { headers: { 'X-WorldMonitor-Key': token, Origin: 'https://83s1c.online' } }));
   return { values, reads, request, token };
 }
 
@@ -57,7 +57,7 @@ test('public tiers and session bootstrap selectors never read premium market car
   values.set(SEED, fixture);
   values.set('news:insights:v1', { headlines: ['public fixture'] });
   for (const query of ['?tier=fast&public=1', '?tier=slow&public=1', '?keys=marketImplications&public=1', '?keys=marketImplications']) {
-    const response = await bootstrap(new Request('https://api.worldmonitor.app/api/bootstrap' + query, { headers: query.includes('public=1') ? {} : { 'X-WorldMonitor-Key': token } }));
+    const response = await bootstrap(new Request('https://83s1c.online/api/bootstrap' + query, { headers: query.includes('public=1') ? {} : { 'X-WorldMonitor-Key': token } }));
     if (query.includes('tier=')) assert.equal(response.status, 200);
     assert.doesNotMatch(await response.text(), /premium-fixture-only|marketImplications/);
   }
@@ -86,7 +86,7 @@ test('canonical publisher excludes premium cards from both public tier envelopes
 test('premium RPC denies a public session while its handler preserves canonical seed mapping', async t => {
   const { values, token } = await setup(t);
   values.set(SEED, fixture);
-  const response = await intelligence(new Request('https://api.worldmonitor.app/api/intelligence/v1/list-market-implications', { headers: { 'X-WorldMonitor-Key': token, Origin: 'https://worldmonitor.app' } }));
+  const response = await intelligence(new Request('https://83s1c.online/api/intelligence/v1/list-market-implications', { headers: { 'X-WorldMonitor-Key': token, Origin: 'https://83s1c.online' } }));
   assert.ok([401, 403].includes(response.status));
   assert.doesNotMatch(await response.text(), /premium-fixture-only/);
   const data = await listMarketImplications({} as never, { frameworkId: '' });

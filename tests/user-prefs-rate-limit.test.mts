@@ -68,10 +68,10 @@ function makePost(body: Record<string, unknown> = {
   data: { theme: 'dark' },
   expectedSyncVersion: 1,
 }, extraHeaders: Record<string, string> = {}): Request {
-  return new Request('https://worldmonitor.app/api/user-prefs', {
+  return new Request('https://83s1c.online/api/user-prefs', {
     method: 'POST',
     headers: {
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://83s1c.online',
       Authorization: 'Bearer test-token',
       'Content-Type': 'application/json',
       ...extraHeaders,
@@ -475,7 +475,7 @@ describe('user-prefs variant boundary', () => {
       const { calls } = installDeps({ allowed: true, limit: 30, reset: 0, degraded: false });
       const valid = variants.includes(variant);
       const get = await handler(new Request(
-        `https://worldmonitor.app/api/user-prefs?variant=${encodeURIComponent(variant)}`,
+        `https://83s1c.online/api/user-prefs?variant=${encodeURIComponent(variant)}`,
         { headers: { Authorization: 'Bearer test-token' } },
       ));
       const post = await handler(makePost({ variant, data: { theme: 'dark' }, expectedSyncVersion: 0 }));
@@ -495,7 +495,7 @@ describe('user-prefs variant boundary', () => {
   it('defaults only an absent GET variant to full', async () => {
     process.env.CONVEX_URL = 'https://convex.test';
     const { calls } = installDeps({ allowed: true, limit: 30, reset: 0, degraded: false });
-    const response = await handler(new Request('https://worldmonitor.app/api/user-prefs', {
+    const response = await handler(new Request('https://83s1c.online/api/user-prefs', {
       headers: { Authorization: 'Bearer test-token' },
     }));
     assert.equal(response.status, 200);

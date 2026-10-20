@@ -48,17 +48,17 @@ interface SentryEvent {
 }
 
 function makeGet(): Request {
-  return new Request('https://worldmonitor.app/api/user-prefs?variant=full', {
+  return new Request('https://83s1c.online/api/user-prefs?variant=full', {
     method: 'GET',
-    headers: { Origin: 'https://worldmonitor.app', Authorization: 'Bearer test-token' },
+    headers: { Origin: 'https://83s1c.online', Authorization: 'Bearer test-token' },
   });
 }
 
 function makePost(): Request {
-  return new Request('https://worldmonitor.app/api/user-prefs', {
+  return new Request('https://83s1c.online/api/user-prefs', {
     method: 'POST',
     headers: {
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://83s1c.online',
       Authorization: 'Bearer test-token',
       'Content-Type': 'application/json',
     },

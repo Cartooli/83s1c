@@ -78,7 +78,7 @@ test('MIIT endpoint serves official RSS with original dates', async () => {
     calls.push({ url, options });
     return new Response(listing);
   };
-  const response = await handler(new Request('https://api.worldmonitor.app/api/miit-news'));
+  const response = await handler(new Request('https://83s1c.online/api/miit-news'));
   assert.equal(response.status, 200);
   assert.equal(response.headers.get('Content-Type'), 'application/rss+xml; charset=utf-8');
   assert.match(await response.text(), /Tue, 29 Sep 2026 16:00:00 GMT/);
@@ -93,7 +93,7 @@ test('upstream failure or empty parsing with no last-good copy fails without min
       if (url !== 'https://www.miit.gov.cn/') throw new Error('Cache unavailable');
       return upstream;
     };
-    const response = await handler(new Request('https://api.worldmonitor.app/api/miit-news'));
+    const response = await handler(new Request('https://83s1c.online/api/miit-news'));
     assert.equal(response.status, 502);
     assert.equal(response.headers.get('Cache-Control'), 'no-store');
     assert.doesNotMatch(await response.text(), /<rss|pubDate/);
@@ -109,7 +109,7 @@ test('cached MIIT articles retain the original dates without another source fetc
     commands.push({ url, method: options.method ?? 'GET' });
     return Response.json({ result: JSON.stringify(parseMiitNews(listing, NOW)) });
   };
-  const response = await handler(new Request('https://api.worldmonitor.app/api/miit-news'));
+  const response = await handler(new Request('https://83s1c.online/api/miit-news'));
   assert.equal(response.status, 200);
   assert.match(await response.text(), /Tue, 29 Sep 2026 16:00:00 GMT/);
   assert.equal(commands.length, 1);
@@ -132,7 +132,7 @@ test('empty official listing never publishes a cache record', async () => {
     }
     throw new Error('Unexpected test fetch');
   };
-  const response = await handler(new Request('https://api.worldmonitor.app/api/miit-news'));
+  const response = await handler(new Request('https://83s1c.online/api/miit-news'));
   assert.equal(response.status, 502);
   // Short-cache read, then the last-good read; never a write.
   assert.deepEqual(commands.map((c) => c.method), ['GET', 'GET']);
@@ -175,7 +175,7 @@ test('listing timeout serves the last-good official listing instead of a 502', a
     if (cached) return cached;
     throw new DOMException('The operation was aborted due to timeout', 'TimeoutError');
   };
-  const response = await handler(new Request('https://api.worldmonitor.app/api/miit-news'));
+  const response = await handler(new Request('https://83s1c.online/api/miit-news'));
   assert.equal(response.status, 200);
   assert.equal(response.headers.get('Content-Type'), 'application/rss+xml; charset=utf-8');
   assert.equal(response.headers.get('Cache-Control'), 'public, max-age=60, s-maxage=60');
@@ -187,7 +187,7 @@ test('empty parse and upstream HTTP errors also fall back to the last-good listi
   for (const upstream of [() => new Response('<html>challenge</html>'), () => new Response('failure', { status: 503 })]) {
     const { redis } = redisWithLastGood(parseMiitNews(listing, NOW));
     globalThis.fetch = async (url, options) => redis(url, options) ?? upstream();
-    const response = await handler(new Request('https://api.worldmonitor.app/api/miit-news'));
+    const response = await handler(new Request('https://83s1c.online/api/miit-news'));
     assert.equal(response.status, 200);
     assert.match(await response.text(), /<rss/);
   }
@@ -199,7 +199,7 @@ test('last-good fallback drops articles that aged out of the listing window', as
   globalThis.fetch = async (url, options) => redis(url, options)
     ?? (() => { throw new DOMException('The operation was aborted due to timeout', 'TimeoutError'); })();
   Date.now.mock.mockImplementation(() => Date.parse('2026-10-15T17:00:00Z'));
-  const response = await handler(new Request('https://api.worldmonitor.app/api/miit-news'));
+  const response = await handler(new Request('https://83s1c.online/api/miit-news'));
   assert.equal(response.status, 502);
   assert.doesNotMatch(await response.text(), /<rss|pubDate/);
 });
@@ -207,7 +207,7 @@ test('last-good fallback drops articles that aged out of the listing window', as
 test('fresh official listing refreshes both the short cache and the last-good copy', async () => {
   const { commands, redis } = redisWithLastGood(null);
   globalThis.fetch = async (url, options) => redis(url, options) ?? new Response(listing);
-  const response = await handler(new Request('https://api.worldmonitor.app/api/miit-news'));
+  const response = await handler(new Request('https://83s1c.online/api/miit-news'));
   assert.equal(response.status, 200);
   const writes = commands.filter((c) => c.op === 'SET').map((c) => [c.key.replace(/^.*?(miit:)/, '$1'), c.ttl]);
   assert.deepEqual(writes.sort(), [['miit:news-listing:last-good:v1', '1209600'], ['miit:news-listing:v1', '300']]);

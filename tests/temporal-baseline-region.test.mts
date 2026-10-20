@@ -5,7 +5,7 @@ import rpc from '../api/infrastructure/v1/[rpc].ts';
 import {issueSessionToken} from '../api/_session.js';
 import {getTemporalBaseline} from '../server/worldmonitor/infrastructure/v1/get-temporal-baseline.ts';
 import { validationFailure } from './helpers/validation-failure.mts';
-const PATH='https://api.worldmonitor.app/api/infrastructure/v1/get-temporal-baseline';
+const PATH='https://83s1c.online/api/infrastructure/v1/get-temporal-baseline';
 async function setup(t: TestContext) {
   for (const [name, value] of Object.entries({
     WORLDMONITOR_VALID_KEYS: 'synthetic-enterprise', IRAN_EVENTS_ENABLED: 'false', WM_SESSION_SECRET: 'bootstrap-contract-synthetic-secret-32',
@@ -43,7 +43,7 @@ async function setup(t: TestContext) {
     }));
   });
   const token = (await issueSessionToken()).token;
-  const request = (query: string, key = token) => rpc(new Request(PATH + query, { headers: { 'X-WorldMonitor-Key': key, Origin: 'https://worldmonitor.app' } }));
+  const request = (query: string, key = token) => rpc(new Request(PATH + query, { headers: { 'X-WorldMonitor-Key': key, Origin: 'https://83s1c.online' } }));
   return { values, reads, request, token };
 }
 
@@ -74,7 +74,7 @@ test('supported session and enterprise callers cannot select arbitrary baseline 
 test('POST remains disabled before any baseline access', async t => {
  const {reads,token}=await setup(t);
  for(const region of ['global','arbitrary-fixture','fixture:with:colon']) {
-  const response=await rpc(new Request(PATH.replace('get-temporal-baseline','record-baseline-snapshot'),{method:'POST',headers:{'X-WorldMonitor-Key':token,Origin:'https://worldmonitor.app','Content-Type':'application/json'},body:JSON.stringify({updates:[{type:'military_flights',count:2,region}]})}));
+  const response=await rpc(new Request(PATH.replace('get-temporal-baseline','record-baseline-snapshot'),{method:'POST',headers:{'X-WorldMonitor-Key':token,Origin:'https://83s1c.online','Content-Type':'application/json'},body:JSON.stringify({updates:[{type:'military_flights',count:2,region}]})}));
   assert.equal(response.status,region==='global'?403:400);
  }
  assert.equal(reads.length,0);

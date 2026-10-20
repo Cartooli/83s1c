@@ -198,7 +198,7 @@ test('natural 168-to-60 expiry cliff preserves publication and reports incomplet
   assert.equal(response.fetchedAt, input[`${PREFIX}${retained}`].fetchedAt);
   process.env.WORLDMONITOR_VALID_KEYS = 'test-key';
   const { handleSeedHealth } = await import('../api/seed-health.js');
-  const seedHealthResponse = await handleSeedHealth(new Request('https://api.worldmonitor.app/api/seed-health', {
+  const seedHealthResponse = await handleSeedHealth(new Request('https://83s1c.online/api/seed-health', {
     headers: { 'X-WorldMonitor-Key': 'test-key' },
   }), { now: NOW });
   const entry = (await seedHealthResponse.json()).seeds['supply_chain:portwatch-ports'];

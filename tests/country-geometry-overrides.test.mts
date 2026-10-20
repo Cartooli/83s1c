@@ -149,7 +149,24 @@ describe('country geometry political overrides', () => {
 });
 
 describe('country geometry overrides', () => {
-  it('loads bundled geometry when override fetch times out', async () => {
+  it('makes no override request when VITE_COUNTRY_OVERRIDES_URL is unset (83s1c fork)', async () => {
+    const requested: string[] = [];
+    globalThis.fetch = ((input: string | URL | Request) => {
+      const url = typeof input === 'string' ? input : input instanceof URL ? input.toString() : input.url;
+      requested.push(url);
+      if (url === '/data/countries.geojson') return Promise.resolve(jsonResponse(makeFeatureCollection(1)));
+      return Promise.reject(new Error(`Unexpected URL: ${url}`));
+    }) as typeof fetch;
+
+    const countryGeometry = await loadFreshCountryGeometryModule();
+    await countryGeometry.preloadCountryGeometry();
+
+    assert.deepEqual(requested, ['/data/countries.geojson']);
+    assert.deepEqual(countryGeometry.getCountryBbox('PK'), [0, 0, 1, 1]);
+  });
+
+  // 83s1c fork: no default overrides URL (upstream's was maps.worldmonitor.app); these exercise that fetch.
+  it.skip('loads bundled geometry when override fetch times out', async () => {
     installFastAbortTimeout();
     let overrideAborted = false;
 
@@ -179,7 +196,8 @@ describe('country geometry overrides', () => {
     assert.deepEqual(countryGeometry.getCountryBbox('PK'), [0, 0, 1, 1]);
   });
 
-  it('applies override geometry when the CDN responds in time', async () => {
+  // 83s1c fork: no default overrides URL (upstream's was maps.worldmonitor.app); these exercise that fetch.
+  it.skip('applies override geometry when the CDN responds in time', async () => {
     globalThis.fetch = ((input: string | URL | Request) => {
       const url = typeof input === 'string' ? input : input instanceof URL ? input.toString() : input.url;
       if (url === '/data/countries.geojson') {
@@ -225,7 +243,8 @@ describe('country geometry recovery', () => {
       await Promise.all([geometry.preloadCountryGeometry(), geometry.getCountriesGeoJson()]);
       assert.equal(requests, 2);
       assert.equal(geometry.isCountryGeometryLoaded(), true);
-      assert.equal(geometry.getCountryAtCoordinates(1.5, 1.5)?.code, 'PK');
+      // 83s1c fork: no overrides by default, so probe inside the base 1x1 shape.
+      assert.equal(geometry.getCountryAtCoordinates(0.5, 0.5)?.code, 'PK');
       await geometry.preloadCountryGeometry();
       assert.equal(requests, 2, 'successful data remains cached');
     });

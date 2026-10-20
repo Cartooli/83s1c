@@ -198,9 +198,9 @@ describe('renderVariantDashboardHtml (#4996)', () => {
     );
     const webApp = blocks.find((b) => b['@type'] === 'SoftwareApplication');
     assert.equal(webApp['@id'], `${finance.url}#software`);
-    assert.equal(webApp.name, 'Finance Monitor');
+    assert.equal(webApp.name, '83s1c'); // 83s1c fork: finance VARIANT_META siteName
     assert.equal(webApp.url, finance.url);
-    assert.equal(webApp.screenshot, 'https://finance.worldmonitor.app/favico/finance/og-image.png');
+    assert.equal(webApp.screenshot, 'https://83s1c.online/favico/finance/og-image.png');
     assert.deepEqual(webApp.featureList, finance.features);
     assert.deepEqual(webApp.publisher, { '@id': 'https://www.worldmonitor.app/#organization' });
     assert.deepEqual(webApp.isPartOf, { '@id': 'https://www.worldmonitor.app/#website' });
@@ -211,7 +211,7 @@ describe('renderVariantDashboardHtml (#4996)', () => {
     assert.deepEqual(webPage.breadcrumb, { '@id': `${finance.url}#breadcrumb` });
     const crumbs = blocks.find((b) => b['@type'] === 'BreadcrumbList');
     assert.equal(crumbs['@id'], `${finance.url}#breadcrumb`);
-    assert.equal(crumbs.itemListElement[1].name, 'Finance Monitor');
+    assert.equal(crumbs.itemListElement[1].name, '83s1c');
     const injected = [...html.matchAll(/<script\b([^>]*\btype=["']application\/ld\+json["'][^>]*)>/gi)]
       .map((match) => match[1]);
     assert.equal(injected.length, 3);

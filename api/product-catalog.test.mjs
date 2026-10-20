@@ -36,7 +36,7 @@ async function importHandler({ relaySecret, upstash = false }) {
 }
 
 function getRequest() {
-  return new Request('https://api.worldmonitor.app/api/product-catalog', {
+  return new Request('https://83s1c.online/api/product-catalog', {
     method: 'GET',
   });
 }
@@ -44,14 +44,14 @@ function getRequest() {
 function deleteRequest(authHeader) {
   const headers = new Headers();
   if (authHeader != null) headers.set('Authorization', authHeader);
-  return new Request('https://api.worldmonitor.app/api/product-catalog', {
+  return new Request('https://83s1c.online/api/product-catalog', {
     method: 'DELETE',
     headers,
   });
 }
 
-function optionsRequest({ origin = 'https://worldmonitor.app', requestHeaders = 'x-worldmonitor-key' } = {}) {
-  return new Request('https://api.worldmonitor.app/api/product-catalog', {
+function optionsRequest({ origin = 'https://83s1c.online', requestHeaders = 'x-worldmonitor-key' } = {}) {
+  return new Request('https://83s1c.online/api/product-catalog', {
     method: 'OPTIONS',
     headers: {
       Origin: origin,
@@ -100,7 +100,9 @@ test('OPTIONS advertises the session API key header for the catalog probe', asyn
   assert.equal(response.headers.get('access-control-allow-methods'), 'GET, DELETE, OPTIONS');
 });
 
-test('GET fallback publishes generated lifecycle, pricing, and capability facts', async () => {
+// 83s1c fork: Pro pricing catalog is a removed surface.
+
+test.skip('GET fallback publishes generated lifecycle, pricing, and capability facts', async () => {
   const handler = await importHandler({ relaySecret: null });
 
   const response = await handler(getRequest());
@@ -109,7 +111,7 @@ test('GET fallback publishes generated lifecycle, pricing, and capability facts'
 
   const body = await response.json();
   assert.equal(body.product.lifecycle, 'launched');
-  assert.equal(body.product.pricingUrl, 'https://www.worldmonitor.app/pro#pricing');
+  assert.equal(body.product.pricingUrl, 'https://www.83s1c.online/pro#pricing');
   assert.equal(body.currency, 'USD');
   assert.equal(body.capabilities.mcpTools, PUBLIC_INVENTORY_FACTS.capabilities.mcpTools);
   assert.equal(body._generated, PUBLIC_PRODUCT_FACTS._generated);

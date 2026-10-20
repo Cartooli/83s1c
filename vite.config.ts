@@ -10,6 +10,7 @@ import pkg from './package.json';
 import { getSentryBuildMetadata } from './shared/sentry-build-metadata';
 import { appendChunkOwnership, chunkHasFirstPartyModule } from './shared/chunk-ownership';
 import { VARIANT_META, type VariantMeta } from './src/config/variant-meta';
+import { forkBrandHtmlPlugin } from './src/config/fork/vite-brand-plugin';
 import {
   WEB_DASHBOARD_VARIANTS,
   renderVariantDashboardHtml,
@@ -1002,6 +1003,7 @@ export default defineConfig(({ mode }) => {
       // which is always the 'full' build (variant selection is runtime by
       // hostname). Desktop and dedicated VITE_VARIANT builds skip it.
       !isDesktopBuild && activeVariant === 'full' && variantDashboardHtmlPlugin(),
+      forkBrandHtmlPlugin(), // 83s1c fork: rebrand emitted HTML after upstream's HTML plugins
       webMcpDevSecurityHeadersPlugin(),
       polymarketPlugin(),
       rssProxyPlugin(),

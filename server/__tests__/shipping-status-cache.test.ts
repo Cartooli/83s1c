@@ -34,14 +34,14 @@ for (const scenario of [
   test(`status response cannot be cached: ${scenario.name}`, async () => {
     if (scenario.id === 'wh_missing') getCachedJson.mockResolvedValue(null);
     if (scenario.id === 'wh_unavailable') getCachedJson.mockRejectedValue(new Error('synthetic storage outage'));
-    const response = await handler(new Request(`https://www.worldmonitor.app/api/v2/shipping/webhooks/${scenario.id}`, {
+    const response = await handler(new Request(`https://www.83s1c.online/api/v2/shipping/webhooks/${scenario.id}`, {
       method: scenario.method,
-      headers: { Origin: 'https://www.worldmonitor.app', ...(scenario.key ? { 'X-Api-Key': scenario.key } : {}) },
+      headers: { Origin: 'https://www.83s1c.online', ...(scenario.key ? { 'X-Api-Key': scenario.key } : {}) },
     }));
     expect(response.status).toBe(scenario.status);
     expect(response.headers.get('Cache-Control')).toBe('private, no-store');
     expect(response.headers.get('CDN-Cache-Control')).toBe('no-store');
-    expect(response.headers.get('Access-Control-Allow-Origin')).toBe('https://www.worldmonitor.app');
+    expect(response.headers.get('Access-Control-Allow-Origin')).toBe('https://www.83s1c.online');
     if (response.status === 200) {
       const body = await response.json();
       expect(body).toMatchObject({ subscriberId: record.subscriberId, callbackUrl: record.callbackUrl });
@@ -52,8 +52,8 @@ for (const scenario of [
 }
 
 test('status reports delivery counters, defaulting records written before the worker', async () => {
-  const read = async () => (await handler(new Request('https://www.worldmonitor.app/api/v2/shipping/webhooks/wh_test', {
-    headers: { Origin: 'https://www.worldmonitor.app', 'X-Api-Key': 'tenant-a' },
+  const read = async () => (await handler(new Request('https://www.83s1c.online/api/v2/shipping/webhooks/wh_test', {
+    headers: { Origin: 'https://www.83s1c.online', 'X-Api-Key': 'tenant-a' },
   }))).json();
   expect(await read()).toMatchObject({ failureCount: 0, lastDeliveryAt: null, lastDeliveryStatus: null });
   getCachedJson.mockResolvedValue({

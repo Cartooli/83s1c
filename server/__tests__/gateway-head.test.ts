@@ -47,10 +47,10 @@ function getHandler() {
 }
 
 function makeRequest(path: string, method: string, extraHeaders: Record<string, string> = {}): Request {
-  return new Request(`https://worldmonitor.app${path}?_debug=1`, {
+  return new Request(`https://83s1c.online${path}?_debug=1`, {
     method,
     headers: {
-      origin: 'https://worldmonitor.app',
+      origin: 'https://83s1c.online',
       'cf-connecting-ip': '203.0.113.7',
       ...extraHeaders,
     },
@@ -86,7 +86,7 @@ describe('gateway HEAD on GET routes (#7275)', () => {
     expect(headRes.headers.get('ETag')).toBe(getRes.headers.get('ETag'));
     expect(headRes.headers.get('ETag')).toBeTruthy();
     expect(headRes.headers.get('Cache-Control')).toBe(getRes.headers.get('Cache-Control'));
-    expect(headRes.headers.get('Access-Control-Allow-Origin')).toBe('https://worldmonitor.app');
+    expect(headRes.headers.get('Access-Control-Allow-Origin')).toBe('https://83s1c.online');
     expect(headRes.headers.get('X-Cache-Tier')).toBe(getRes.headers.get('X-Cache-Tier'));
   });
 

@@ -170,7 +170,7 @@ function installRedisMock(redis: RedisMode) {
 }
 
 function requestFor(path: string): Request {
-  return new Request(`https://worldmonitor.app${path}`);
+  return new Request(`https://83s1c.online${path}`);
 }
 
 const DEFAULT_SEED = ['GC=F', 'CL=F', 'SI=F', 'BZ=F'].map(seedQuote);
@@ -252,15 +252,15 @@ describe('commodity seed cache policy through the market gateway', () => {
   async function request() {
     process.env.WM_SESSION_SECRET = "synthetic-commodity-cache-session-secret";
     const { token } = await issueSessionToken();
-    return new Request('https://worldmonitor.app/api/market/v1/list-commodity-quotes?_debug=1', {
-      headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': token },
+    return new Request('https://83s1c.online/api/market/v1/list-commodity-quotes?_debug=1', {
+      headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': token },
     });
   }
 
   it('requires authentication before reading the seed', async () => {
     installRedisMock({ kind: 'error' });
-    const response = await marketGateway(new Request('https://worldmonitor.app/api/market/v1/list-commodity-quotes', {
-      headers: { Origin: 'https://worldmonitor.app' },
+    const response = await marketGateway(new Request('https://83s1c.online/api/market/v1/list-commodity-quotes', {
+      headers: { Origin: 'https://83s1c.online' },
     }));
     assert.equal(response.status, 401);
     assert.equal(response.headers.get('CDN-Cache-Control'), null);

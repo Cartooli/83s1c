@@ -26,10 +26,10 @@ async function importFreshNotificationChannels() {
 }
 
 function makeRequest(method: 'GET' | 'POST', body?: Record<string, unknown>): Request {
-  return new Request('https://worldmonitor.app/api/notification-channels', {
+  return new Request('https://83s1c.online/api/notification-channels', {
     method,
     headers: {
-      Origin: 'https://worldmonitor.app',
+      Origin: 'https://83s1c.online',
       Authorization: 'Bearer clerk-token',
       'Content-Type': 'application/json',
     },
@@ -114,7 +114,7 @@ describe('/api/notification-channels POST write rate limit', () => {
     assert.deepEqual(await res.json(), { error: 'RATE_LIMITED' });
     assert.ok(Number(res.headers.get('Retry-After')) > 0);
     assert.equal(res.headers.get('X-RateLimit-Limit'), '30');
-    assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://worldmonitor.app');
+    assert.equal(res.headers.get('Access-Control-Allow-Origin'), 'https://83s1c.online');
     assert.deepEqual(relayCalls, []);
   });
 

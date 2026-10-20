@@ -81,12 +81,13 @@ export const VARIANT_META: { full: VariantMeta; [k: string]: VariantMeta } = {
     ],
   },
   finance: {
-    title: 'Finance Monitor - Real-Time Markets & Trading Dashboard',
-    description: 'Real-time finance and trading dashboard tracking global markets, stock exchanges, central banks, commodities, forex, crypto, and economic indicators worldwide.',
+    // 83s1c fork: finance is our only variant; its meta carries the 83s1c brand.
+    title: '83s1c - Markets and World Intelligence Dashboard',
+    description: 'Real-time markets and world-events dashboard: macro, rates, FX, economic calendar, news and live video beside one world map, every number linked to its source.',
     keywords: 'finance dashboard, trading dashboard, stock market, forex, commodities, central banks, crypto, economic indicators, market news, financial centers, stock exchanges, bonds, derivatives, fintech, hedge funds, IPO tracker, market analysis',
-    url: 'https://finance.worldmonitor.app/dashboard',
-    siteName: 'Finance Monitor',
-    shortName: 'FinanceMonitor',
+    url: 'https://83s1c.online/dashboard',
+    siteName: '83s1c',
+    shortName: '83s1c',
     subject: 'Global Markets, Trading, and Financial Intelligence',
     classification: 'Finance Dashboard, Market Tracker, Trading Intelligence',
     categories: ['finance', 'news'],

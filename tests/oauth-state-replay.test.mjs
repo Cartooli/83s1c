@@ -17,7 +17,7 @@ const ENV_KEYS = [
   'CONVEX_TENANT_RELAY_SECRET',
   'NOTIFICATION_ENCRYPTION_KEY',
 ];
-const OPENER_ORIGIN = 'https://tech.worldmonitor.app';
+const OPENER_ORIGIN = 'https://83s1c.online';
 const originalFetch = globalThis.fetch;
 
 // The state record and binding cookie `start` would have produced for this

@@ -13,3 +13,8 @@
 .panel-locked-cta {
   display: none !important;
 }
+
+/* Single-variant fork: upstream's variant switcher links to worldmonitor.app hosts. */
+.variant-switcher {
+  display: none !important;
+}

@@ -878,7 +878,7 @@ test('transient Convex HTTP 5xx on entitlement check emits the entitlement_verif
 
 test('rate limit accepts a request landing in the final sub-second of the window (ttl=0)', async () => {
   await withMockedConvex(async () => {
-    const req = new Request('https://api.worldmonitor.app/api/bootstrap', {
+    const req = new Request('https://83s1c.online/api/bootstrap', {
       headers: { 'cf-connecting-ip': '203.0.113.7' },
     });
     const result = await checkBootstrapUserApiKeyRateLimit(req);
@@ -895,7 +895,7 @@ test('user-key validation rate limit uses IP-scoped keys and never raw API key m
     // CF_EDGE_PROOF_SECRET. Simulate a genuine CF-proxied request so the bucket
     // is IP-scoped rather than the shared `unknown` fallback.
     process.env.CF_EDGE_PROOF_SECRET = 'edge-secret-xyz';
-    const req = new Request('https://api.worldmonitor.app/api/bootstrap', {
+    const req = new Request('https://83s1c.online/api/bootstrap', {
       headers: {
         'cf-connecting-ip': '203.0.113.7',
         'x-wm-edge-proof': 'edge-secret-xyz',
@@ -917,7 +917,7 @@ test('user-key validation rate limit uses IP-scoped keys and never raw API key m
 
 test('user-key validation rate limit accepts an existing fixed window without refreshing TTL', async () => {
   await withMockedConvex(async () => {
-    const req = new Request('https://api.worldmonitor.app/api/bootstrap', {
+    const req = new Request('https://83s1c.online/api/bootstrap', {
       headers: { 'cf-connecting-ip': '203.0.113.7' },
     });
     const result = await checkBootstrapUserApiKeyRateLimit(req);
@@ -928,7 +928,7 @@ test('user-key validation rate limit accepts an existing fixed window without re
 
 test('user-key validation rate limit fails closed when Redis is unavailable', async () => {
   await withMockedConvex(async () => {
-    const req = new Request('https://api.worldmonitor.app/api/bootstrap', {
+    const req = new Request('https://83s1c.online/api/bootstrap', {
       headers: { 'cf-connecting-ip': '203.0.113.7' },
     });
     const result = await checkBootstrapUserApiKeyRateLimit(req);
@@ -942,7 +942,7 @@ test('user-key validation rate limit fails closed when Redis is unavailable', as
 
 test('user-key validation rate limit fails closed when Redis count is invalid', async () => {
   await withMockedConvex(async () => {
-    const req = new Request('https://api.worldmonitor.app/api/bootstrap', {
+    const req = new Request('https://83s1c.online/api/bootstrap', {
       headers: { 'cf-connecting-ip': '203.0.113.7' },
     });
     const result = await checkBootstrapUserApiKeyRateLimit(req);
@@ -956,7 +956,7 @@ test('user-key validation rate limit fails closed when Redis count is invalid', 
 
 test('user-key validation rate limit fails closed when Redis counter has no expiry', async () => {
   await withMockedConvex(async () => {
-    const req = new Request('https://api.worldmonitor.app/api/bootstrap', {
+    const req = new Request('https://83s1c.online/api/bootstrap', {
       headers: { 'cf-connecting-ip': '203.0.113.7' },
     });
     const result = await checkBootstrapUserApiKeyRateLimit(req);
@@ -970,7 +970,7 @@ test('user-key validation rate limit fails closed when Redis counter has no expi
 
 test('user-key validation rate limit accepts exactly the configured maximum (600)', async () => {
   await withMockedConvex(async () => {
-    const req = new Request('https://api.worldmonitor.app/api/bootstrap', {
+    const req = new Request('https://83s1c.online/api/bootstrap', {
       headers: { 'cf-connecting-ip': '203.0.113.7' },
     });
     const result = await checkBootstrapUserApiKeyRateLimit(req);
@@ -981,7 +981,7 @@ test('user-key validation rate limit accepts exactly the configured maximum (600
 
 test('user-key validation rate limit uses current TTL for Retry-After when over limit', async () => {
   await withMockedConvex(async () => {
-    const req = new Request('https://api.worldmonitor.app/api/bootstrap', {
+    const req = new Request('https://83s1c.online/api/bootstrap', {
       headers: { 'cf-connecting-ip': '203.0.113.7' },
     });
     const result = await checkBootstrapUserApiKeyRateLimit(req);

@@ -27,8 +27,8 @@ afterEach(() => {
 });
 
 function makeRequest(feedUrl) {
-  return new Request(`https://api.worldmonitor.app/api/rss-proxy?url=${encodeURIComponent(feedUrl)}`, {
-    headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': TEST_KEY },
+  return new Request(`https://83s1c.online/api/rss-proxy?url=${encodeURIComponent(feedUrl)}`, {
+    headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': TEST_KEY },
   });
 }
 function spyFetch(respond) {

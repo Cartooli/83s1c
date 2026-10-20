@@ -12,21 +12,18 @@ function sanitizeVideoId(value) {
 
 const ALLOWED_ORIGINS = [
   // App hosts only: clerk and abacus are vendor CNAMEs, not trusted parents.
-  /^https:\/\/(www\.|app\.|api\.|tech\.|finance\.|commodity\.|happy\.|energy\.)?worldmonitor\.app$/,
-  /^https:\/\/worldmonitor-[a-z0-9-]+-eliewm\.vercel\.app$/,
+  // 83s1c fork: our apex/www and team-pinned previews only.
+  /^https:\/\/(?:www\.)?83s1c\.online$/,
+  /^https:\/\/83s1c-[a-z0-9-]+-dwellchecker\.vercel\.app$/,
   // Team-pinned only (mirrors public/wm-widget-sandbox.html): the unprefixed
   // worldmonitor-[a-z0-9-].vercel.app pattern matched ANY Vercel team's
   // look-alike project preview.
   /^https?:\/\/localhost(:\d+)?$/,
   /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
-  /^tauri:\/\/localhost$/,
 ];
 
 const ALLOWED_PARENT_ORIGINS = [
   ...ALLOWED_ORIGINS,
-  // tauri://localhost is already covered via ALLOWED_ORIGINS spread above.
-  /^https?:\/\/tauri\.localhost$/,
-  /^https?:\/\/[a-z0-9-]+\.tauri\.localhost$/,
 ];
 
 function sanitizeAllowedOrigin(raw, fallback, allowList = ALLOWED_ORIGINS) {
@@ -43,7 +40,7 @@ function sanitizeAllowedOrigin(raw, fallback, allowList = ALLOWED_ORIGINS) {
 }
 
 function sanitizeOrigin(raw) {
-  return sanitizeAllowedOrigin(raw, 'https://worldmonitor.app', ALLOWED_ORIGINS);
+  return sanitizeAllowedOrigin(raw, 'https://83s1c.online', ALLOWED_ORIGINS);
 }
 
 function sanitizeParentOrigin(raw, fallback) {

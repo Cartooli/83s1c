@@ -71,8 +71,8 @@ async function captureEvents(
   }) as typeof globalThis.fetch;
 
   const request = new Request(
-    `https://api.worldmonitor.app/api/rss-proxy?url=${encodeURIComponent(FEED_URL)}`,
-    { headers: { Origin: 'https://worldmonitor.app', 'X-WorldMonitor-Key': TEST_KEY } },
+    `https://83s1c.online/api/rss-proxy?url=${encodeURIComponent(FEED_URL)}`,
+    { headers: { Origin: 'https://83s1c.online', 'X-WorldMonitor-Key': TEST_KEY } },
   );
   await handler(request, { waitUntil: (p: Promise<unknown>) => { pending.push(p); } });
   await Promise.all(pending);

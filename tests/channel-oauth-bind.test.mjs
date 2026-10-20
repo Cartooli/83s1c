@@ -7,7 +7,7 @@ import { __resetRateLimitForTest } from '../server/_shared/rate-limit.ts';
 const originalFetch = globalThis.fetch;
 const originalUrl = process.env.UPSTASH_REDIS_REST_URL;
 const originalToken = process.env.UPSTASH_REDIS_REST_TOKEN;
-const preview = 'https://worldmonitor-git-review-eliewm.vercel.app';
+const preview = 'https://83s1c-git-review-dwellchecker.vercel.app';
 const stateToken = 's'.repeat(27);
 
 // The route now admits by IP before touching the launch key. The limiter uses
@@ -35,7 +35,7 @@ function withLimiter(responder) {
 async function setup(provider, destination) {
   process.env.UPSTASH_REDIS_REST_URL = 'https://redis.test';
   process.env.UPSTASH_REDIS_REST_TOKEN = 'test-token';
-  const req = new Request(`https://api.worldmonitor.app/api/${provider}/oauth/start`, { headers: { origin: preview } });
+  const req = new Request(`https://83s1c.online/api/${provider}/oauth/start`, { headers: { origin: preview } });
   const binding = await createChannelOAuthState(provider, req, 'user-test');
   const record = JSON.parse(binding.record);
   const oauthUrl = provider === 'slack' ? 'https://slack.com/oauth/v2/authorize' : 'https://discord.com/oauth2/authorize';
@@ -50,7 +50,7 @@ async function setup(provider, destination) {
     return Response.json({ result: 0 });
   });
   const request = (token = binding.bindValue, origin = preview) => new Request(
-    `https://api.worldmonitor.app/api/channel-oauth-bind?provider=${provider}&state=${stateToken}`, {
+    `https://83s1c.online/api/channel-oauth-bind?provider=${provider}&state=${stateToken}`, {
       method: 'POST', headers: { origin, 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ token }),
     },
@@ -83,7 +83,7 @@ for (const provider of ['slack', 'discord']) {
     const html = await response.text();
     assert.match(html, /http-equiv="refresh"/);
     assert.ok(!html.includes(flow.binding.bindValue));
-    assert.equal(await callbackMatchesBrowser(provider, new Request('https://api.worldmonitor.app/callback', {
+    assert.equal(await callbackMatchesBrowser(provider, new Request('https://83s1c.online/callback', {
       headers: { cookie: cookie.split(';')[0] },
     }), flow.record), true);
   });

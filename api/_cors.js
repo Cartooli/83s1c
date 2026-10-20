@@ -1,6 +1,6 @@
 // App-serving hosts only; sibling vendor hosts do not inherit browser trust.
 // Keep aligned with convex/payments/returnUrlOrigin.ts and CORS parity tests.
-const APP_ORIGIN_PATTERN = /^https:\/\/(?:(?:www|app|api|tech|finance|commodity|happy|energy)\.)?worldmonitor\.app$/;
+const APP_ORIGIN_PATTERN = /^https:\/\/(?:www\.)?83s1c\.online$/ // 83s1c fork;
 const MAX_ORIGIN_BYTES = 300;
 const ORIGIN_ENCODER = new TextEncoder();
 
@@ -10,15 +10,11 @@ export function isHostedAppOrigin(origin) {
 
 const ALLOWED_ORIGIN_PATTERNS = [
   APP_ORIGIN_PATTERN,
-  // Vercel preview deployments under the "eliewm" team scope, e.g.
-  //   worldmonitor-git-<branch>-eliewm.vercel.app  (git-branch alias)
-  //   worldmonitor-<hash>-eliewm.vercel.app        (deployment URL)
+  // 83s1c fork: Vercel previews under the "dwellchecker" team, project "83s1c", e.g.
+  //   83s1c-git-<branch>-dwellchecker.vercel.app / 83s1c-<hash>-dwellchecker.vercel.app
   // Tight on purpose: never a bare *.vercel.app (this is a security allowlist).
-  /^https:\/\/worldmonitor-[a-z0-9-]+-eliewm\.vercel\.app$/,
-  /^https?:\/\/tauri\.localhost(:\d+)?$/,
-  /^https?:\/\/[a-z0-9-]+\.tauri\.localhost(:\d+)?$/i,
-  /^tauri:\/\/localhost$/,
-  /^asset:\/\/localhost$/,
+  // Upstream worldmonitor.app/eliewm and desktop (tauri) origins removed: we serve neither.
+  /^https:\/\/83s1c-[a-z0-9-]+-dwellchecker\.vercel\.app$/,
   // Only allow bare localhost/127.0.0.1 in non-production (matches server/cors.ts)
   ...(process.env.NODE_ENV === 'production' ? [] : [
     /^https?:\/\/localhost(:\d+)?$/,
@@ -146,7 +142,7 @@ function isAllowedOrigin(origin) {
 
 export function getCorsHeaders(req, methods = 'GET, OPTIONS') {
   const origin = req.headers.get('origin') || '';
-  const allowOrigin = isAllowedOrigin(origin) ? origin : 'https://worldmonitor.app';
+  const allowOrigin = isAllowedOrigin(origin) ? origin : 'https://83s1c.online';
   return {
     'Access-Control-Allow-Origin': allowOrigin,
     'Access-Control-Allow-Credentials': 'true',
@@ -175,7 +171,7 @@ export function getCorsHeaders(req, methods = 'GET, OPTIONS') {
 export function getOriginDeniedCorsHeaders(req, methods = 'GET, OPTIONS') {
   const origin = req.headers.get('origin') || '';
   return {
-    'Access-Control-Allow-Origin': origin || 'https://worldmonitor.app',
+    'Access-Control-Allow-Origin': origin || 'https://83s1c.online',
     'Access-Control-Allow-Credentials': 'true',
     'Access-Control-Allow-Methods': methods,
     'Access-Control-Allow-Headers': ALLOWED_HEADERS,

@@ -11,7 +11,7 @@ import { assembleBootstrapTierPayload } from '../scripts/publish-bootstrap-tiers
 import { sanitizeBootstrapValue as edgeSanitize } from '../api/_bootstrap-public-payload.js';
 import { sanitizeBootstrapValue as workerSanitize } from '../scripts/_bootstrap-public-payload.mjs';
 
-const PATH = 'https://api.worldmonitor.app/api/infrastructure/v1/get-bootstrap-data';
+const PATH = 'https://83s1c.online/api/infrastructure/v1/get-bootstrap-data';
 
 async function setup(t: TestContext) {
   for (const [name, value] of Object.entries({
@@ -45,7 +45,7 @@ async function setup(t: TestContext) {
     }));
   });
   const token = (await issueSessionToken()).token;
-  const request = (query: string) => rpc(new Request(PATH + query, { headers: { 'X-WorldMonitor-Key': token, Origin: 'https://worldmonitor.app' } }));
+  const request = (query: string) => rpc(new Request(PATH + query, { headers: { 'X-WorldMonitor-Key': token, Origin: 'https://83s1c.online' } }));
   return { values, reads, request };
 }
 
@@ -101,7 +101,7 @@ test('RPC, public bootstrap and publisher apply the same transforms and cutover 
     const response = await request('?keys=' + name);
     assert.equal(response.status, 200);
     const actual = JSON.parse((await response.json()).data[name]);
-    const publicResponse = await bootstrap(new Request('https://api.worldmonitor.app/api/bootstrap?tier=slow&public=1'));
+    const publicResponse = await bootstrap(new Request('https://83s1c.online/api/bootstrap?tier=slow&public=1'));
     const publicData = (await publicResponse.json()).data;
     const published = await assembleBootstrapTierPayload({ [name]: BOOTSTRAP_CACHE_KEYS[name] });
     assert.deepEqual(actual, JSON.parse(JSON.stringify(published.data[name])));
@@ -130,7 +130,7 @@ test('public IMF transports retain explicit metric periods and strip the private
       const payload = { countries: { UA: row, ...(dropInvalid ? { XX: { [field]: 'invalid' } } : {}) }, seededAt: '2026-10-16T00:00:00Z' };
       values.set(BOOTSTRAP_CACHE_KEYS[key], { _seed: { fetchedAt: 1792108800000, recordCount: 1, sourceVersion: 'not-a-release', schemaVersion: 1, state: 'OK' }, data: payload });
       const rpcBody = await (await request('?keys=' + key)).json();
-      const publicBody = await (await bootstrap(new Request(`https://api.worldmonitor.app/api/bootstrap?keys=${key}&public=1`))).json();
+      const publicBody = await (await bootstrap(new Request(`https://83s1c.online/api/bootstrap?keys=${key}&public=1`))).json();
       const expected = { ...payload, countries: { UA: row } };
       assert.deepEqual(JSON.parse(rpcBody.data[key]), expected);
       assert.deepEqual(publicBody.data[key], expected);
@@ -196,7 +196,7 @@ test('RPC serves a well-formed IMF dataset exactly as seeded, matching public bo
     const body = await (await request('?keys=' + key)).json();
     assert.deepEqual(JSON.parse(body.data[key]), repaired, key);
     // IMF keys are on-demand, served per key: RPC and public bootstrap agree.
-    const publicBody = await (await bootstrap(new Request(`https://api.worldmonitor.app/api/bootstrap?keys=${key}&public=1`))).json();
+    const publicBody = await (await bootstrap(new Request(`https://83s1c.online/api/bootstrap?keys=${key}&public=1`))).json();
     assert.deepEqual(JSON.parse(body.data[key]), publicBody.data[key], key);
   }
 });

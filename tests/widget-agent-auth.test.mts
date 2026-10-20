@@ -57,10 +57,10 @@ describe('widget-agent unified tester key auth', () => {
   });
 
   it('accepts X-WorldMonitor-Key and upgrades relay request to pro', async () => {
-    const res = await handler(new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const res = await handler(new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
-        Origin: 'https://www.worldmonitor.app',
+        Origin: 'https://www.83s1c.online',
         'Content-Type': 'application/json',
         'X-WorldMonitor-Key': 'browser-test-key',
       },
@@ -87,10 +87,10 @@ describe('widget-agent unified tester key auth', () => {
   });
 
   it('falls back to legacy tester keys when X-WorldMonitor-Key is invalid', async () => {
-    const res = await handler(new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const res = await handler(new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
-        Origin: 'https://www.worldmonitor.app',
+        Origin: 'https://www.83s1c.online',
         'Content-Type': 'application/json',
         'X-WorldMonitor-Key': 'wrong-key',
         'X-Pro-Key': 'server-pro-key',
@@ -123,10 +123,10 @@ describe('widget-agent unified tester key auth', () => {
     ]) {
       for (const sessionHeader of ['', 'wms_automatic-anonymous-session']) {
         fetchMock.mock.resetCalls();
-        const res = await handler(new Request('https://api.worldmonitor.app/api/widget-agent', {
+        const res = await handler(new Request('https://83s1c.online/api/widget-agent', {
           method: 'POST',
           headers: {
-            Origin: 'https://worldmonitor.app',
+            Origin: 'https://83s1c.online',
             'Content-Type': 'application/json',
             ...(sessionHeader ? { 'X-WorldMonitor-Key': sessionHeader } : {}),
             Cookie: `__Host-wm-pro-key=${pro}; __Host-wm-widget-key=${widget}`,
@@ -147,9 +147,9 @@ describe('widget-agent unified tester key auth', () => {
         '__Host-wm-pro-key=stale; __Host-wm-widget-key=browser-test-key',
         '__Host-wm-pro-key=server-pro-key; __Host-wm-widget-key=server-widget-key',
       ]) {
-        const res = await handler(new Request('https://api.worldmonitor.app/api/widget-agent', {
+        const res = await handler(new Request('https://83s1c.online/api/widget-agent', {
           method: 'POST',
-          headers: { Origin: 'https://worldmonitor.app', 'Content-Type': 'application/json', [name]: 'wrong-key', Cookie: cookie },
+          headers: { Origin: 'https://83s1c.online', 'Content-Type': 'application/json', [name]: 'wrong-key', Cookie: cookie },
           body: JSON.stringify({ prompt: 'Build a widget', mode: 'create', tier: 'basic' }),
         }));
         assert.equal(res.status, 403, `${name}/${cookie}`);
@@ -159,10 +159,10 @@ describe('widget-agent unified tester key auth', () => {
   });
 
   it('rejects retired domain cookie names before invoking the paid relay', async () => {
-    const res = await handler(new Request('https://api.worldmonitor.app/api/widget-agent', {
+    const res = await handler(new Request('https://83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
-        Origin: 'https://worldmonitor.app',
+        Origin: 'https://83s1c.online',
         'Content-Type': 'application/json',
         Cookie: 'wm-widget-key=server-widget-key; wm-pro-key=browser-test-key',
       },
@@ -173,10 +173,10 @@ describe('widget-agent unified tester key auth', () => {
   });
 
   it('accepts HttpOnly legacy tester key cookies without JS-readable auth headers', async () => {
-    const res = await handler(new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const res = await handler(new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
-        Origin: 'https://www.worldmonitor.app',
+        Origin: 'https://www.83s1c.online',
         'Content-Type': 'application/json',
         Cookie: `__Host-wm-widget-key=${encodeURIComponent('server-widget-key')}; __Host-wm-pro-key=${encodeURIComponent('server-pro-key')}`,
       },
@@ -199,10 +199,10 @@ describe('widget-agent unified tester key auth', () => {
   });
 
   it('keeps an enterprise tester cookie authoritative over the automatic wms_ header', async () => {
-    const res = await handler(new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const res = await handler(new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
-        Origin: 'https://www.worldmonitor.app',
+        Origin: 'https://www.83s1c.online',
         'Content-Type': 'application/json',
         'X-WorldMonitor-Key': 'wms_automatic-anonymous-session',
         Cookie: `__Host-wm-pro-key=${encodeURIComponent('browser-test-key')}`,
@@ -224,7 +224,7 @@ describe('widget-agent unified tester key auth', () => {
   });
 
   it('rejects disallowed origins before cookie-backed auth reaches the relay', async () => {
-    const res = await handler(new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const res = await handler(new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
         Origin: 'https://evil.example.com',
@@ -242,10 +242,10 @@ describe('widget-agent unified tester key auth', () => {
   });
 
   it('rejects invalid X-WorldMonitor-Key before relay fetch', async () => {
-    const res = await handler(new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const res = await handler(new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
-        Origin: 'https://www.worldmonitor.app',
+        Origin: 'https://www.83s1c.online',
         'Content-Type': 'application/json',
         'X-WorldMonitor-Key': 'wrong-key',
       },
@@ -260,10 +260,10 @@ describe('widget-agent unified tester key auth', () => {
   });
 
   it('rejects prefix and length mismatches for browser and legacy tester keys', async () => {
-    const browserPrefix = await handler(new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const browserPrefix = await handler(new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
-        Origin: 'https://www.worldmonitor.app',
+        Origin: 'https://www.83s1c.online',
         'Content-Type': 'application/json',
         'X-WorldMonitor-Key': 'browser-test',
       },
@@ -271,10 +271,10 @@ describe('widget-agent unified tester key auth', () => {
     }));
     assert.equal(browserPrefix.status, 403);
 
-    const proLonger = await handler(new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const proLonger = await handler(new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
-        Origin: 'https://www.worldmonitor.app',
+        Origin: 'https://www.83s1c.online',
         'Content-Type': 'application/json',
         'X-Pro-Key': 'server-pro-key-extra',
       },
@@ -282,10 +282,10 @@ describe('widget-agent unified tester key auth', () => {
     }));
     assert.equal(proLonger.status, 403);
 
-    const widgetLonger = await handler(new Request('https://www.worldmonitor.app/api/widget-agent', {
+    const widgetLonger = await handler(new Request('https://www.83s1c.online/api/widget-agent', {
       method: 'POST',
       headers: {
-        Origin: 'https://www.worldmonitor.app',
+        Origin: 'https://www.83s1c.online',
         'Content-Type': 'application/json',
         'X-Widget-Key': 'server-widget-key-extra',
       },

@@ -60,5 +60,5 @@ export const SITE_VARIANT: string = (() => {
     return buildVariant;
   }
 
-  return 'full';
+  return buildVariant; // 83s1c fork: was 'full', which ignored VITE_VARIANT on non-upstream hosts
 })();
