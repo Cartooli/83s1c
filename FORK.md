@@ -137,6 +137,15 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
 - Branch protection on `main` (PR required, required checks, no force-push or deletion).
 - Evidence: `docs/fork/SECURITY-EVIDENCE.md`; tests: `tests/fork-fail-closed.test.mts`.
 
+### 2026-10-19 — M4: Vercel deploy
+
+- `.github/workflows/fork-seed.yml` (fork-owned): open-data seeders on GitHub Actions cron,
+  one job per Actions environment (`preview`, `production`); fails when more than 30% of
+  seeders fail. Quote seeders (Finnhub/Alpha Vantage/Yahoo/TradingView) are desk-only.
+- `ARCHITECTURE.md`: CI table lists `fork-seed.yml`.
+- `middleware.ts`: `runtime: 'edge'`. New Vercel projects default Routing Middleware to Node.js,
+  where upstream's extensionless imports fail (`MIDDLEWARE_INVOCATION_FAILED`).
+
 ## Merge procedure
 
 See `docs/fork/ENV-AND-INFRA.md` §8. In short:
