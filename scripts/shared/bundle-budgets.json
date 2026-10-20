@@ -7,15 +7,19 @@
   "totalTolerancePct": 0.25,
   "totalToleranceBytes": 16384,
   "total": {
-    "raw": 454215
+    "raw": 455432
   },
   "chunks": {
     "analytics": {
-      "raw": 47660,
+      "raw": 47662,
+      "files": 1
+    },
+    "brand": {
+      "raw": 427,
       "files": 1
     },
     "convex-client": {
-      "raw": 5346,
+      "raw": 5345,
       "files": 1
     },
     "debugbear-rum": {
@@ -27,19 +31,27 @@
       "files": 1
     },
     "entitlements": {
-      "raw": 2652,
+      "raw": 2715,
+      "files": 1
+    },
+    "finance-panels": {
+      "raw": 667,
       "files": 1
     },
     "font-settings": {
       "raw": 574,
       "files": 1
     },
+    "geo": {
+      "raw": 28356,
+      "files": 1
+    },
     "geo-convergence": {
-      "raw": 5044,
+      "raw": 5075,
       "files": 1
     },
     "geo-distance": {
-      "raw": 28576,
+      "raw": 328,
       "files": 1
     },
     "globe-marker-probe": {
@@ -51,7 +63,7 @@
       "files": 1
     },
     "main": {
-      "raw": 122907,
+      "raw": 123265,
       "files": 1
     },
     "map-layer-definitions": {
@@ -59,11 +71,15 @@
       "files": 1
     },
     "panels": {
-      "raw": 38196,
+      "raw": 37734,
       "files": 1
     },
     "runtime-config": {
-      "raw": 10131,
+      "raw": 10194,
+      "files": 1
+    },
+    "safe-storage": {
+      "raw": 1912,
       "files": 1
     },
     "tab-store": {
@@ -75,7 +91,7 @@
       "files": 1
     },
     "theme-colors": {
-      "raw": 92738,
+      "raw": 92582,
       "files": 1
     },
     "theme-manager": {
@@ -83,25 +99,25 @@
       "files": 1
     },
     "web-origin": {
-      "raw": 1952,
+      "raw": 157,
       "files": 1
     }
   },
   "deferred": {
     "total": {
-      "raw": 1451630
+      "raw": 1455492
     },
     "chunks": {
       "App": {
-        "raw": 917487,
+        "raw": 919698,
         "files": 1
       },
       "ai-flow-settings": {
-        "raw": 2092,
+        "raw": 2155,
         "files": 1
       },
       "analysis-framework-store": {
-        "raw": 9612,
+        "raw": 9675,
         "files": 1
       },
       "base": {
@@ -113,11 +129,11 @@
         "files": 1
       },
       "checkout": {
-        "raw": 13636,
+        "raw": 13820,
         "files": 1
       },
       "cloud-prefs-sync": {
-        "raw": 6925,
+        "raw": 6927,
         "files": 1
       },
       "continuous": {
@@ -129,19 +145,23 @@
         "files": 1
       },
       "cross-domain-storage": {
-        "raw": 531,
+        "raw": 533,
         "files": 1
       },
       "feeds": {
         "raw": 97009,
         "files": 1
       },
+      "footer": {
+        "raw": 816,
+        "files": 1
+      },
       "gdelt-intel": {
-        "raw": 121243,
+        "raw": 121322,
         "files": 1
       },
       "index": {
-        "raw": 38986,
+        "raw": 39062,
         "files": 2
       },
       "layout-batch": {
@@ -149,7 +169,7 @@
         "files": 1
       },
       "markets": {
-        "raw": 9518,
+        "raw": 2574,
         "files": 1
       },
       "news-credibility": {
@@ -165,7 +185,7 @@
         "files": 1
       },
       "persistent-cache": {
-        "raw": 3873,
+        "raw": 3936,
         "files": 1
       },
       "pinned-webcams": {
@@ -177,11 +197,15 @@
         "files": 1
       },
       "settings-persistence": {
-        "raw": 7738,
+        "raw": 7874,
         "files": 1
       },
       "source-provenance": {
         "raw": 88495,
+        "files": 1
+      },
+      "stocks": {
+        "raw": 7109,
         "files": 1
       },
       "storage-facility-registry-store": {
@@ -201,7 +225,7 @@
         "files": 1
       },
       "widget-store": {
-        "raw": 22982,
+        "raw": 22984,
         "files": 1
       }
     }
