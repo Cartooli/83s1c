@@ -163,6 +163,14 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
 - `vercel.json`: `/terminal` → `/terminal.html` rewrite (no header/CSP change).
 - `src/config/fork/views/routes.ts` (fork-owned): `/terminal` added to the middleware passthrough.
 
+### 2026-10-19 — Quick-read views: Simple mode and dashboard switcher
+
+- Fork-owned: `src/config/fork/views/simple-mode.ts`, `tests/fork-views-simple.test.mts`,
+  `docs/fork/evidence/simple-*`, `dashboard-*`; styles appended to `src/config/fork/fork.css`.
+- `src/app/panel-layout.ts`: finance variant only — view switcher + Simple toggle in the header
+  and the mobile menu, and one `initForkViewControls()` call before `createPanels()`.
+  Simple mode is CSS + relabeling only; saved panel settings are never modified.
+
 ## Merge procedure
 
 See `docs/fork/ENV-AND-INFRA.md` §8. In short:
