@@ -185,6 +185,19 @@ subject was removed, with the reason. Never add a suite there to hide a regressi
   founder line and the press links stay because tests assert them (brand-identity,
   geo-content-credibility).
 
+### 2026-10-21 — Restore AGPL Appropriate Legal Notices
+
+- `src/config/fork/footer.ts`, `src/config/fork/views/shell.ts`,
+  `src/config/fork/vite-brand-plugin.ts`, `src/config/fork/fork.css`,
+  `src/config/fork/views/views.css` (fork-owned): interactive UI and noscript block show
+  one-line AGPL Appropriate Legal Notices (© 2024-2026 Elie Habib and World Monitor
+  contributors; Modified by Cartooli; Based on World Monitor; AGPL-3.0 linked; Source linked).
+  Does not restore map author badges, `<meta name="author">`, or founder social links
+  (no AGPL §7(b) additional attribution terms in upstream LICENSE / no NOTICE file).
+- `README.md`: short note that this is a Cartooli-modified fork (2026-10-19–present).
+- `docs/fork/SPEC.md`: footer line updated to match the legal notice.
+- `tests/fork-footer-legal-notice.test.mts`, `tests/fork-vite-brand-plugin.test.mts`.
+
 ## Merge procedure
 
 See `docs/fork/ENV-AND-INFRA.md` §8. In short:

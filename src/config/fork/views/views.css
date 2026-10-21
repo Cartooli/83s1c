@@ -33,6 +33,7 @@ a { color: inherit; }
 .v83-meta { margin: 4px 0 0; font-size: 12px; color: var(--v-muted); }
 .v83-empty { color: var(--v-muted); font-size: 14px; font-style: italic; }
 .v83-footer { display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; padding: 16px; border-top: 1px solid var(--v-rule); font-size: 12px; color: var(--v-muted); }
+.v83-footer .v83-legal { line-height: 1.45; max-width: 52rem; }
 
 /* Brief */
 .brief { max-width: 1120px; margin: 0 auto; padding: 0 16px 32px; }

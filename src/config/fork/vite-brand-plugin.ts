@@ -35,8 +35,10 @@ const SUMMARY = `${BRAND.name} is a real-time markets and world-events dashboard
   + 'economic calendar, news and official live video beside a world map of conflicts, sanctions, '
   + 'chokepoints, weather and outages. Every number links to its source.';
 
-const ATTRIBUTION = `<a href="${BRAND.upstreamUrl}">Based on ${BRAND.upstreamName}</a> (AGPL-3.0) · `
-  + '<a href="/source">Source</a>';
+const ATTRIBUTION = `© 2024-2026 Elie Habib and World Monitor contributors. Modified by Cartooli. `
+  + `<a href="${BRAND.upstreamUrl}">Based on ${BRAND.upstreamName}</a>. `
+  + `Licensed under <a href="${BRAND.licenseUrl}">AGPL-3.0</a>, with no warranty. `
+  + `<a href="/source">Source</a>: ${BRAND.sourceUrl}`;
 
 /**
  * Outside <script> blocks only: links to upstream pages go to the upstream repository
