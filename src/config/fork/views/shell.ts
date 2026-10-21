@@ -18,9 +18,9 @@ export function viewSwitcherHtml(current: string): string {
   return `<nav class="v83-switcher" aria-label="Views">${links}</nav>`;
 }
 
-/** Fork footer links shown on every view. */
+/** AGPL Appropriate Legal Notices on every quick-read view. */
 export function viewFooterHtml(): string {
-  return `<footer class="v83-footer"><nav>${forkAttributionLinksHtml()}</nav></footer>`;
+  return `<footer class="v83-footer"><nav class="v83-legal" aria-label="Copyright and license">${forkAttributionLinksHtml()}</nav></footer>`;
 }
 
 export function escapeHtml(s: string): string {

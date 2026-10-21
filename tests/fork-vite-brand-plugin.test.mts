@@ -28,11 +28,15 @@ describe('fork HTML rebrand', () => {
     let rest = out;
     for (const script of executableScripts(out)) rest = rest.replace(script, '');
     rest = rest.replace('<a href="https://github.com/koala73/worldmonitor">Based on World Monitor</a>', '');
+    rest = rest.replace(/Elie Habib and World Monitor contributors/g, '');
     assert.doesNotMatch(rest, /World ?Monitor|worldmonitor\.app/i);
   });
 
-  it('keeps attribution and the source link in the noscript block', () => {
-    assert.match(out, /Based on World Monitor<\/a> \(AGPL-3\.0\)/);
-    assert.match(out, /<a href="\/source">Source<\/a>/);
+  it('keeps AGPL Appropriate Legal Notices in the noscript block', () => {
+    assert.match(out, /© 2024-2026 Elie Habib and World Monitor contributors/);
+    assert.match(out, /Modified by Cartooli/);
+    assert.match(out, /Based on World Monitor<\/a>\./);
+    assert.match(out, /AGPL-3\.0<\/a>, with no warranty/);
+    assert.match(out, /<a href="\/source">Source<\/a>: https:\/\/github\.com\/Cartooli\/83s1c/);
   });
 });
