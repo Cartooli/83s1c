@@ -43,7 +43,9 @@ Route every user-visible name, title, OG/meta, manifest, and favicon through it.
 
 - Remove the World Monitor name, logo, and visual identity from primary branding, as the
   trademark policy requires [V]. Keep factual attribution.
-- Footer on every page: "83s1c · Based on World Monitor (AGPL-3.0) · Source · License".
+- Footer on every page: AGPL Appropriate Legal Notices — "© 2024-2026 Elie Habib and World
+  Monitor contributors. Modified by Cartooli. Based on World Monitor. Licensed under AGPL-3.0,
+  with no warranty. Source: https://github.com/Cartooli/83s1c" (AGPL-3.0 and Source linked).
 - About 595 non-docs files reference `worldmonitor.app` [V]. Don't mass-replace. Change
   only runtime hosts, redirects, canonicals, and emails, and delete the surfaces in §4.
   Leave attribution and notices intact.

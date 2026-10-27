@@ -25,3 +25,19 @@
 .v83-dash-views a[aria-current='page'] { color: var(--text, inherit); border-color: var(--border, currentColor); }
 .v83-simple-toggle[aria-pressed='true'] { color: var(--bg, #000); background: var(--accent, #5fb8c2); }
 .v83-simple-note { margin: 0; padding: 6px 10px; font-size: 12px; line-height: 1.4; color: var(--text-dim, inherit); border-bottom: 1px solid var(--border, transparent); }
+
+/* AGPL Appropriate Legal Notices: one prose line, not a flex link row. */
+.site-footer nav.site-footer-legal {
+  display: block;
+  flex: 1 1 280px;
+  max-width: 52rem;
+  line-height: 1.45;
+  font-family: var(--font-mono, monospace);
+  font-size: calc(10px * var(--wm-panel-effective-scale, 1));
+}
+.mobile-menu-footer-links {
+  display: block;
+  line-height: 1.45;
+  font-size: calc(11px * var(--wm-panel-effective-scale, 1));
+  color: var(--text-faint, inherit);
+}

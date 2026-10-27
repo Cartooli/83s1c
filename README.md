@@ -2,6 +2,8 @@
 
 [简体中文](README.zh-CN.md) | [日本語](README.ja-JP.md) | [Русский](README.ru.md)
 
+**About this fork:** This repository is a modified fork of [World Monitor](https://github.com/koala73/worldmonitor) by Elie Habib. It has been modified by Cartooli (2026-10-19–present) and is deployed as **83s1c**. See [FORK.md](FORK.md) for the change log. Upstream copyright remains Copyright (C) 2024-2026 Elie Habib.
+
 **Real-time global intelligence dashboard** — AI-powered news aggregation, geopolitical monitoring, and infrastructure tracking in a unified situational awareness interface.
 
 [![GitHub stars](https://img.shields.io/github/stars/koala73/worldmonitor?style=social)](https://github.com/koala73/worldmonitor/stargazers)
