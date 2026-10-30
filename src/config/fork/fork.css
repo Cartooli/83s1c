@@ -26,14 +26,21 @@
 .v83-simple-toggle[aria-pressed='true'] { color: var(--bg, #000); background: var(--accent, #5fb8c2); }
 .v83-simple-note { margin: 0; padding: 6px 10px; font-size: 12px; line-height: 1.4; color: var(--text-dim, inherit); border-bottom: 1px solid var(--border, transparent); }
 
-/* AGPL Appropriate Legal Notices: one prose line, not a flex link row. */
+/* AGPL Appropriate Legal Notices: one scrollable line so the block stays readable
+   without wrapping into a multi-line LCP candidate (PR #15 prose footer regressed
+   e2e/dashboard-lcp-attribution.spec.ts once Playwright smoke ran again). */
 .site-footer nav.site-footer-legal {
   display: block;
-  flex: 1 1 280px;
-  max-width: 52rem;
-  line-height: 1.45;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
   font-family: var(--font-mono, monospace);
-  font-size: calc(10px * var(--wm-panel-effective-scale, 1));
+  font-size: calc(9px * var(--wm-panel-effective-scale, 1));
 }
 .mobile-menu-footer-links {
   display: block;
