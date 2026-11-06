@@ -44,7 +44,7 @@ Provision it via the Vercel Marketplace integration in `dwellchecker`, as two da
 | `EIA_API_KEY` | Actions | optional | Energy and economy panel [V] |
 | `OPENROUTER_API_KEY` or `ANTHROPIC_API_KEY` | server | optional | AI news briefs. Set a provider-side spend cap |
 | `WORLDMONITOR_VALID_KEYS` | server | **leave unset** | Unset means MCP returns 401 (the security gate) |
-| `SEC_USER_AGENT` (M6) | Actions | M6 | e.g. `83s1c rob@cartooli.com` (SEC fair access) [A] |
+| `SEC_USER_AGENT` (M6) | Actions | M6 | e.g. `83s1c <ROLE_INBOX@your-domain>` (SEC fair access — non-personal role inbox only; never a personal mailbox; set via secret) [A] |
 | `VITE_PRIVATE_MARKETS` (M6) | all | M6 | `1` to show the panel |
 | `VITE_MARKET_QUOTES` | prod `0`, desk `1` | yes | Gates the Finnhub, Alpha Vantage, and Yahoo panels; the public site never shows them |
 
