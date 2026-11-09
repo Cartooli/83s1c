@@ -15,7 +15,7 @@ Read these first, in full, before any command: `fork-packet/SPEC.md`,
 `fork-packet/SECURITY-AND-LICENSE.md`, `fork-packet/ENV-AND-INFRA.md`, `fork-packet/CLAUDE.md`.
 They are the contract. Where this prompt and those files disagree, stop and ask.
 
-## Decisions already made (Rob, 2026-10-19)
+## Decisions already made (the owner, 2026-10-19)
 
 1. **Source access:** `Cartooli/83s1c` goes **public at M5**. It stays private, with the
    site behind Vercel Authentication, through M0–M4. Before making the repo public, gitleaks
@@ -27,7 +27,7 @@ They are the contract. Where this prompt and those files disagree, stop and ask.
      calendar, news (headline plus link only), live video (official embeds), and the map
      layers. Hide every panel fed by Finnhub, Alpha Vantage, or Yahoo: equity, ETF,
      commodity, and earnings quotes.
-   - **Private desk `desk.83s1c.online`:** Vercel Authentication always on, with Rob as the
+   - **Private desk `desk.83s1c.online`:** Vercel Authentication always on, with the owner as the
      only viewer and `VITE_MARKET_QUOTES=1`. Use a separate Vercel project or a protected
      custom environment, and give it its own Upstash DB.
    - Before M5, audit every remaining public panel's provider against upstream's
@@ -69,7 +69,7 @@ Gate: the preview URL loads and `/api/health` returns OK. Run the data seeders v
 Actions (ENV-AND-INFRA.md §5) and confirm that at least the Markets, FX, Macro/FRED,
 Economic Calendar, News, and Live Video panels show data.
 
-**M5 — Domain and production.** STOP before this milestone and ask Rob to confirm two
+**M5 — Domain and production.** STOP before this milestone and ask the owner to confirm two
 irreversible items:
 (a) make `Cartooli/83s1c` public, or approve a public source mirror (the AGPL source offer);
 (b) change the GoDaddy DNS records.
@@ -90,6 +90,6 @@ preview, and the SEC User-Agent and rate limit are enforced.
   comment. Never delete a test to make CI green.
 - Prove each gate at runtime (run it, open it, read the logs), not by reading source.
 - Exit condition: M0–M4 green, then stop and ask before M5. Do M6 only after M5 is live,
-  or if Rob says so.
-- End with a one-line status: done / done-but-one-step-left / blocked-on-Rob. Also give the
+  or if the owner says so.
+- End with a one-line status: done / done-but-one-step-left / blocked-on-owner. Also give the
   exact `git push` commands if you couldn't push yourself.
