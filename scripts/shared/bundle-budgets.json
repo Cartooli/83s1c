@@ -7,7 +7,7 @@
   "totalTolerancePct": 0.25,
   "totalToleranceBytes": 16384,
   "total": {
-    "raw": 466343
+    "raw": 466349
   },
   "chunks": {
     "analytics": {
@@ -63,7 +63,7 @@
       "files": 1
     },
     "main": {
-      "raw": 134179,
+      "raw": 134182,
       "files": 1
     },
     "map-layer-definitions": {
@@ -91,7 +91,7 @@
       "files": 1
     },
     "theme-colors": {
-      "raw": 92579,
+      "raw": 92582,
       "files": 1
     },
     "theme-manager": {
