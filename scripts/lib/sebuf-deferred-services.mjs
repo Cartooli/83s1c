@@ -20,7 +20,9 @@ export const DEFERRED_GENERATED_SERVICES = new Map([
       owner: '@koala73',
       // Re-affirm or remove by this date. Chosen as ~3 months from the contract landing
       // (2026-08-05); shorten it if #6003 is scheduled sooner.
-      reviewBy: '2026-11-05',
+      // Re-affirmed 2026-11-20 for another ~3 months: the generated service still
+      // ships with no api/ gateway and #6003 has not landed, so the deferral stands.
+      reviewBy: '2027-02-05',
     },
   ],
 ]);
