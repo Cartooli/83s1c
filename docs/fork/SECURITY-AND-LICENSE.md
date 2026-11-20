@@ -13,7 +13,7 @@ This is not legal advice; the AGPL text in `LICENSE` controls. Tags: [V] means v
 | Document the changes you made | `FORK.md`: upstream SHA, dated change log, merge procedure |
 | Commercial use | Permitted under AGPL; private-source use needs a separate commercial license from the maintainer |
 
-**What this means for Rob:**
+**What this means for the owner:**
 
 - A forked AGPL codebase can't be "owned" proprietarily. You own your additions'
   copyright, but they ship under AGPL.
@@ -23,7 +23,7 @@ This is not legal advice; the AGPL text in `LICENSE` controls. Tags: [V] means v
   - **(a)** make `Cartooli/83s1c` public (recommended; simplest, and secrets are never in
     the repo anyway); or
   - **(b)** keep the repo private and publish each deployed commit to a public mirror.
-- If the site stays behind Vercel Authentication for Rob only, there are no outside users to
+- If the site stays behind Vercel Authentication for the owner only, there are no outside users to
   offer source to, but notices still stay.
 - **A rebuild** (new code that merely reads the upstream design) carries no AGPL obligation.
   It does cost you the 8.5k commits of hardening, so the fork is the right call for "build
@@ -59,7 +59,7 @@ don't own.
 1. **Fail-closed secrets.** For every route under `api/` that reads a secret:
    - with the env var unset, the request is refused (401, 403, or 503), never allowed;
    - write a test per route class (premium, MCP, admin `/api/local-*`, rss-proxy, bootstrap).
-   This is Rob's top recurring bug class, so prove it by test, not by inspection.
+   This is the owner's top recurring bug class, so prove it by test, not by inspection.
 2. **MCP:** with `WORLDMONITOR_VALID_KEYS` unset, `POST /api/mcp tools/call` returns 401
    [behavior per upstream SELF_HOSTING; verify on preview].
 3. **No client secrets:**

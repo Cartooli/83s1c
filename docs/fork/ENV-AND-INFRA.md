@@ -44,7 +44,7 @@ Provision it via the Vercel Marketplace integration in `dwellchecker`, as two da
 | `EIA_API_KEY` | Actions | optional | Energy and economy panel [V] |
 | `OPENROUTER_API_KEY` or `ANTHROPIC_API_KEY` | server | optional | AI news briefs. Set a provider-side spend cap |
 | `WORLDMONITOR_VALID_KEYS` | server | **leave unset** | Unset means MCP returns 401 (the security gate) |
-| `SEC_USER_AGENT` (M6) | Actions | M6 | e.g. `83s1c rob@cartooli.com` (SEC fair access) [A] |
+| `SEC_USER_AGENT` (M6) | Actions | M6 | e.g. `83s1c <ops contact address>` (SEC fair access) [A] |
 | `VITE_PRIVATE_MARKETS` (M6) | all | M6 | `1` to show the panel |
 | `VITE_MARKET_QUOTES` | prod `0`, desk `1` | yes | Gates the Finnhub, Alpha Vantage, and Yahoo panels; the public site never shows them |
 
@@ -83,7 +83,7 @@ Before scheduling, compute the run budget. 30-minute runs during market hours co
 150 runs a week; check the Actions minutes on the Cartooli plan [A]. Keep the Yahoo-only
 symbol set disabled on public deploys (see SPEC §9).
 
-## 6. Domain cutover (M5; requires Rob's explicit yes)
+## 6. Domain cutover (M5; requires the owner's explicit yes)
 
 1. In Vercel, add `83s1c.online` and `www.83s1c.online` to project `83s1c`. Make the apex
    primary and redirect www to the apex.

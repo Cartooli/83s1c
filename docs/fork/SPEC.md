@@ -29,7 +29,7 @@ It is read-only for viewers.
 
 ## 2. Users and jobs
 
-The primary user is Rob, an operator watching markets and world events together. The
+The primary user is the owner, an operator watching markets and world events together. The
 secondary audience is public read-only visitors. The one job: see what moved, why it moved
 (news and events), and where it happened on the map, on one screen, with every number
 sourced.
