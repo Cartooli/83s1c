@@ -6,7 +6,7 @@ Tags: [V] means verified 2026-10-19; [I] means inferred; [A] means assumed.
 
 - **Repo:** `Cartooli/83s1c` is private, default branch `main`, and has one commit (the
   placeholder file `rsrr`).
-- **Vercel team `dwellchecker`** (`team_Lup2S4TMzoobQyxDrAis44xL`): no project matching
+- **Vercel team `dwellchecker`**: no project matching
   "83s1c", and the domain is not added to the team.
 - **DNS for 83s1c.online:** nameservers are GoDaddy (`ns29/ns30.domaincontrol.com`), and the
   A records `3.33.130.190` and `15.197.148.33` are parking IPs. Vercel reports it as
