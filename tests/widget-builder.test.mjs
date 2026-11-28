@@ -223,7 +223,7 @@ describe('widget-agent relay — model, caching and usage', () => {
   it('keeps basic on Haiku, with loop caching but no Sonnet-only fields', async () => {
     const result = await runWidgetAgent([widgetResponse('end_turn')]);
     const [request] = result.requests;
-    assert.equal(request.model, 'claude-haiku-4-5-20251001');
+    assert.equal(request.model, 'claude-haiku-5-5');
     assert.deepEqual(request.cache_control, { type: 'ephemeral' });
     assert.equal(request.thinking, undefined);
     assert.equal(request.fallbacks, undefined);

@@ -22,7 +22,7 @@
  *   ... --adopt-baseline   # FIRST adoption of a root only; records the current
  *                          # translations as correct without checking them
  *
- * Cost: ~8.3K strings × 20 locales backfill ≈ ~$3 on claude-haiku-4-5.
+ * Cost: ~8.3K strings × 20 locales backfill ≈ ~$3 on claude-haiku-5-5.
  */
 
 import { existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
@@ -58,7 +58,7 @@ const LANG_NAMES = {
   // No zh-TW: it is in GENERATED_LOCALES, so it never reaches a translate call.
 };
 const BATCH_SIZE = 50;
-const MODEL = 'claude-haiku-4-5-20251001';
+const MODEL = 'claude-haiku-5-5';
 
 export function localesRootFor(proTest) {
   return proTest ? 'pro-test/src/locales' : 'src/locales';
