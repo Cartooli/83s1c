@@ -14470,7 +14470,7 @@ async function handleWidgetAgentRequest(req, res) {
   }
 
   // Tier-specific settings
-  const model = isPro ? WIDGET_SONNET_PARAMS.model : 'claude-haiku-4-5-20251001';
+  const model = isPro ? WIDGET_SONNET_PARAMS.model : 'claude-haiku-5-5';
   const maxTokens = isPro ? 8192 : 4096;
   let maxTurns = isPro ? 10 : 6;
   const maxHtml = isPro ? WIDGET_PRO_MAX_HTML : WIDGET_MAX_HTML;
